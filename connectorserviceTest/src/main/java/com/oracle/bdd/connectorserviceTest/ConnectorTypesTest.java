@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.oracle.bdd.util.Contants;
+import com.oracle.bdd.util.Constants;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 
@@ -39,7 +39,7 @@ public class ConnectorTypesTest {
 	public void testConnectorTypes() {
 
 		//String conn=Contants.getConnectorserviceUrl()+"connectorTypes";
-		String conn=Contants.connectorUrl+"connectorTypes";
+		String conn=Constants.connectorUrl+"connectorTypes";
 		System.out.println(conn);
 		
         Client client = Client.create();

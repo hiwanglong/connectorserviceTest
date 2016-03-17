@@ -18,7 +18,7 @@ package com.oracle.bdd.util;
  *
  */
 
-public class Contants {
+public class Constants {
 	public static final String connectorUrl="http://busgf1515.us.oracle.com:7205/bdd.connectorservice/v1/";
 	public static final String connectorTypes="connectorTypes";
 	public static final String connectors="connectors";

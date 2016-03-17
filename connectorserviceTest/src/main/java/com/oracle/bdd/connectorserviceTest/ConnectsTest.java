@@ -30,15 +30,16 @@ public class ConnectsTest {
 	}
 
 	public static void main(String[] args) {
-		Map<String, String> reqMap1 = GetResourceXML.parseXml("GETconnectorTypes");
-		Map<String, String> reqMap = GetResourceXML.parseXml("POSTconnectors");
+		Map<String, String> xmlMap = GetResourceXML.parseXml("GETconnectorTypes");
 
-		System.out.println(reqMap1.get("REQUESTJSON"));
-		System.out.println(reqMap1.get("r"));
+		System.out.println(xmlMap.get("REQUESTJSON"));
 
-		System.out.println(reqMap.get("REQUESTJSON"));
-		System.out.println(reqMap.get("r"));
-
+//		Client client = Client.create(); String reqUrl =+reqMap
+//				 .get("xmlRequestUrl"); String reqJson = reqMap.get("xmlRequestJson");
+//				 WebResource webRes = client.resource(reqUrl);
+		
+		
+		
 		/*
 		 * Client client = Client.create(); String reqUrl =
 		 * "http://busgf1515.us.oracle.com:7205/bdd.connectorservice/v1/"+reqMap
