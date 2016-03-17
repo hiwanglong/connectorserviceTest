@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RESULT>
+	<TEST testname="GETconnectorTypes">
+		<REQUESTJSON>get</REQUESTJSON>
+		<r></r>
+	</TEST>
+	<TEST testname="POSTconnectors">
+		<REQUESTJSON>
+			{
+				"connectorType": "CloudStorage",
+				"connectorName": "storage 1",
+				"description": "storage 1 description",
+				"visibility": ["import","export"],
+				"parameters": {
+					"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+					"username" : "dfisher.Storageadmin",
+					"password" : "welcome1",
+					"whiteList": "rules456"
+				}
+			}
+		</REQUESTJSON>
+		<r>abc</r>
+	</TEST>
+</RESULT>
