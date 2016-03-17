@@ -19,7 +19,7 @@ import com.sun.jersey.api.client.WebResource;
  * @author stellaw
  *
  */
-public class connectorTypesTest {
+public class ConnectorTypesTest {
 
 	/**
 	 * @throws java.lang.Exception
@@ -53,14 +53,17 @@ public class connectorTypesTest {
 	@Test
 	public void testConnectorTypes() {
 
-		String conn=Contants.getConnectorserviceUrl()+"connectorTypes";
+		//String conn=Contants.getConnectorserviceUrl()+"connectorTypes";
+		String conn=Contants.connectorUrl+"connectorTypes";
 		System.out.println(conn);
 		
         Client client = Client.create();
         WebResource webRes = client.resource(conn);
         
         // check status 200
-        assertEquals("200", webRes.head().getStatus());
+        int status=webRes.head().getStatus();
+        System.out.println(status);
+        assertEquals(200, status);
         
         // check response "cloud" "HDFS"
         String res = webRes.acceptLanguage("en-US").get(String.class);
