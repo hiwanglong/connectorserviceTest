@@ -1,5 +1,23 @@
 package com.oracle.bdd.util;
 
+/**
+ *  GET /v1/connectorTypes (sync)
+ *  POST /v1/connectors (sync)
+ *  GET /v1/connectors (sync)
+ *  GET /v1/connectors/{connectorId} (sync)
+ *  PUT /v1/connectors/{connectorId} (sync)
+ *  DELETE /v1/connectors/{connectorId} (sync)
+ *  POST /v1/connectors/{connectorId}/auth (sync)
+ *  GET /v1/connectors/{connectorId}/containers/{containerId}?filter="abc"&orderBy=name&limit=10&offset=0&ascending=true (sync)
+ *  GET /v1/connectors/{connectorId}/containers?searchByPath="<URL-encoded path>" (sync)
+ *  POST /v1/connectors/{connectorId}/previewData  (sync)
+ *  GET /v1/parsingOptionMetas (sync)
+ *  POST /v1/snapshot/  (async)
+ *  GET /v1/health (sync)
+ * @author stellaw
+ *
+ */
+
 public class Contants {
 	public static final String connectorUrl="http://busgf1515.us.oracle.com:7205/bdd.connectorservice/v1/";
 	public static final String connectorTypes="connectorTypes";
@@ -15,20 +33,6 @@ public class Contants {
 
 	
 	
-/*	GET /v1/connectorTypes (sync)
-	POST /v1/connectors (sync)
-	GET /v1/connectors (sync)
-	GET /v1/connectors/{connectorId} (sync)
-	PUT /v1/connectors/{connectorId} (sync)
-	DELETE /v1/connectors/{connectorId} (sync)
-	POST /v1/connectors/{connectorId}/auth (sync)
-	GET /v1/connectors/{connectorId}/containers/{containerId}?filter="abc"&orderBy=name&limit=10&offset=0&ascending=true (sync)
-	GET /v1/connectors/{connectorId}/containers?searchByPath="<URL-encoded path>" (sync)
-	POST /v1/connectors/{connectorId}/previewData  (sync)
-	GET /v1/parsingOptionMetas (sync)
-	POST /v1/snapshot/  (async)
-	GET /v1/health (sync)*/
+
 	
 }
-
-
