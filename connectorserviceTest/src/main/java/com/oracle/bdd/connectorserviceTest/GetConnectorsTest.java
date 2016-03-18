@@ -2,6 +2,9 @@ package com.oracle.bdd.connectorserviceTest;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.After;
@@ -15,19 +18,25 @@ import com.oracle.bdd.util.GetResourceXML;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 
-public class ConnectorTypesTest {
+public class GetConnectorsTest {
 	
 	static WebResource webRes;
 	static String res;
+	static int count;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		String conn=Constants.connectorUrl+"connectorTypes";
+		String conn=Constants.connectorUrl+"connectors";
 		System.out.println(conn);	
         Client client = Client.create();
         webRes = client.resource(conn);
         res = webRes.accept("application/json").get(String.class);
         System.out.println(res);
+
+        count=res.split("id").length-1;
+        if (count!=0){
+        	//delete all connectors
+        }
 	}
 
 	@AfterClass
@@ -36,26 +45,49 @@ public class ConnectorTypesTest {
 
 	@Before
 	public void setUp() throws Exception {
-
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		
+		//delete all connectors
 	}
-
+	
 
 	@Test
-	public void testGetConnectorTypes() {              
-        int status=webRes.head().getStatus();
-        if(status!=200){ 
-        	fail("Fail since status is "+status);
-        }
-        System.out.println(status);
-        Map<String, String> res_map=GetResourceXML.parseXml("ConnectorTypesTest.xml", "testGetConnectorTypes");
-        String res_expected=res_map.get("RESPONSEJSON").trim();
-      	assertTrue("ConnectorTypes response is NOT as expected",res.equals(res_expected));
-            
+	public void testGetConnectorsTest1() {
+		
+		// post a connector
+		
+        // check count=1
+		int count=res.split("id").length-1;
+		System.out.println(count);
+	   
+	}
+	
+	@Test
+	public void testGetConnectorsTest2() {
+		
+		// post two connectors
+		
+        // check count=2
+		int count=res.split("id").length-1;
+		System.out.println(count);
+	   
+	}
+	
+	@Test
+	public void testGetConnectorsTest3() {
+		
+		// no connector 
+		
+        // check count=0
+		int count=res.split("id").length-1;
+		System.out.println(count);
+	   
 	}
 	
 	
+
+
 }
