@@ -1,0 +1,125 @@
+{
+    "items": [
+        {
+            "name": "HDFS",
+            "displayName": "HDFS",
+            "description": "Connector to HDFS file systems",
+            "icon": "base 64 encoded binary",
+            "parameters": {
+                "directoryPath": {
+                    "displayName": "Directory Path",
+                    "description": "Path to the default directory of the connection",
+                    "type": {
+                        "id": "String",
+                        "maxLength": 256
+                    }
+                    "required": true
+                },
+                "blackList": {
+                    "displayName": "Black List",
+                    "description": "A black list for filtering objects returned by the connector",
+                    "type": {
+                        "id": "String",
+                        "maxLength": 256
+                    }
+                    "required": false,
+                },
+                "whiteList": {
+                    "displayName": "White List",
+                    "description": "A white list for filtering objects returned by the connector",
+                    "type": {
+                        "id": "String",
+                        "maxLength": 256
+                    }
+                    "required": false,
+                },
+             },
+          },
+        {
+            "name": "OracleCloudStorage",
+            "displayName": "Oracle Storage Cloud Service",
+            "description": "Connector to the Oracle Storage Cloud Service",
+            "icon": "base 64 encoded binary",
+            "parameters": {
+                "storageServiceUrl": {
+                    "displayName": "Oracle Storage Cloud Service URL",
+                    "description": "The URL for connecting to Oracle Storage Cloud Service",
+                    "type": {
+                        "id": "String",
+                        "maxLength": 256
+                    }
+                    "required": true
+                },
+                "username": {
+                    "displayName": "User Name",
+                    "description": "User Name for connecting to Oracle Storage Cloud Service",
+                    "type": {
+                        "id": "String",
+                        "maxLength": 30
+                    }
+                    "required": true
+                },
+                "password": {
+                    "displayName": "User Password",
+                    "description": "User Password for connecting to Oracle Storage Cloud Service",
+                    "type": {
+                        "id": "Password",
+                        "maxLength": 30,
+                        "minLength": 6
+                    }
+                    "required": true
+                },
+                "blackList": {
+                    "displayName": "Black List",
+                    "description": "A black list for filtering objects returned by the connector",
+                    "type": {
+                        "id": "String",
+                        "maxLength": 256
+                    }
+                    "required": false
+                },
+                "whiteList": {
+                    "displayName": "White List",
+                    "description": "A white list for filtering objects returned by the connector",
+                    "type": {
+                        "id": "String",
+                        "maxLength": 256
+                    }
+                    "required": false
+                }
+            },
+            "userAuthParameters": {
+               "username": {
+                    "displayName": "User Name",
+                    "description": "User Name for connecting to Oracle Storage Cloud Service",
+                    "type": {
+                        "id": "String",
+                        "maxLength": 30
+                    }
+                    "required": true
+                },
+                "password": {
+                    "displayName": "User Password",
+                    "description": "User Password for connecting to Oracle Storage Cloud Service",
+                    "type": {
+                        "id": "Password",
+                        "maxLength": 30,
+                        "minLength": 6
+                    }
+                    "required": true
+                }
+            },
+            "containerAttributes": {
+                "fileSize": {
+                    "type": "ByteSize",
+                    "displayName" : "File Size" 
+                },
+ 
+               "lastModifiedDate": {
+                    "type": "Timestamp",
+                    "displayName" : "Last Modified Date" ,
+                },
+            }
+        }
+    ]
+    }
