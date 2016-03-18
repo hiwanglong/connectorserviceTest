@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RESULT>
+	<TEST testname="testConnectorTypes">
+		<REQUESTJSON>
+		</REQUESTJSON>
+		<RESPONSEJSON>
+		{
+  "items" : [ {
+    "name" : "CloudStorage",
+    "displayName" : "Cloud Storage",
+    "description" : "Cloud Storage Service",
+    "icon" : "base 64 encoded binary",
+    "parameters" : {
+      "blackList" : {
+        "displayName" : "Black List",
+        "description" : "Black list for the connector",
+        "type" : {
+          "id" : "String",
+          "maxLength" : 256
+        },
+        "required" : false
+      },
+      "whiteList" : {
+        "displayName" : "White List",
+        "description" : "White list for the connector",
+        "type" : {
+          "id" : "String",
+          "maxLength" : 256
+        },
+        "required" : false
+      },
+      "password" : {
+        "displayName" : "Storage Service password",
+        "description" : "Password for Storage Service",
+        "type" : {
+          "id" : "Password",
+          "maxLength" : 30,
+          "minLength" : 6
+        },
+        "required" : true
+      },
+      "storageServiceUrl" : {
+        "displayName" : "Storage Service URL",
+        "description" : "Storage Service URL",
+        "type" : {
+          "id" : "String",
+          "maxLength" : 256
+        },
+        "required" : true
+      },
+      "username" : {
+        "displayName" : "Storage Service User Name",
+        "description" : "User Name for Storage Service",
+        "type" : {
+          "id" : "String",
+          "maxLength" : 256
+        },
+        "required" : true
+      }
+    },
+    "userAuthParameters" : {
+      "password" : {
+        "displayName" : "Storage Service password",
+        "description" : "Password for Storage Service",
+        "type" : {
+          "id" : "Password",
+          "maxLength" : 30,
+          "minLength" : 6
+        },
+        "required" : true
+      },
+      "username" : {
+        "displayName" : "Storage Service User Name",
+        "description" : "User Name for Storage Service",
+        "type" : {
+          "id" : "String",
+          "maxLength" : 256
+        },
+        "required" : true
+      }
+    },
+    "containerAttributes" : {
+      "fileSize" : {
+        "displayName" : "File size",
+        "type" : "ByteSize"
+      },
+      "lastModifiedDate" : {
+        "displayName" : "Last modified date",
+        "type" : "Timestamp"
+      }
+    }
+  } ]
+}
+		</RESPONSEJSON>
+		<r>abc</r>
+	</TEST>
+</RESULT>
