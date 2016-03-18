@@ -3,6 +3,8 @@ package com.oracle.bdd.connectorserviceTest;
 import java.util.Map;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
+
+import com.oracle.bdd.util.Constants;
 import com.oracle.bdd.util.GetResourceXML;
 
 import com.sun.jersey.api.client.Client;
@@ -30,13 +32,21 @@ public class ConnectsTest {
 	}
 
 	public static void main(String[] args) {
-		Map<String, String> xmlMap = GetResourceXML.parseXml("GETconnectorTypes");
+		Map<String, String> xmlMap = GetResourceXML.parseXml("BDDConnectsAPITest.xml","GETconnectorTypes");
 
 		System.out.println(xmlMap.get("REQUESTJSON"));
 
-//		Client client = Client.create(); String reqUrl =+reqMap
-//				 .get("xmlRequestUrl"); String reqJson = reqMap.get("xmlRequestJson");
-//				 WebResource webRes = client.resource(reqUrl);
+		Client client = Client.create(); 
+		String reqUrl =Constants.connectorUrl+Constants.connectorTypes;
+		System.out.println("reqUrl="+reqUrl);
+		WebResource webRes = client.resource(reqUrl);
+//		String res = webRes.acceptLanguage("en-US").get(String.class);
+//		System.out.println(res);
+				
+		ClientResponse response = webRes.accept("application/json").acceptLanguage("en-US").get(ClientResponse.class);
+		System.out.println("status == " + response.getStatus());
+		String output = response.getEntity(String.class);
+		System.out.println(output);
 		
 		
 		
