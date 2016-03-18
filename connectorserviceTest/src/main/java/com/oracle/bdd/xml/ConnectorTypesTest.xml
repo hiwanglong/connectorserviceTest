@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RESULT>
-	<TEST testname="testConnectorTypes">
+	<TEST testname="testGetConnectorTypes">
 		<REQUESTJSON>
 		</REQUESTJSON>
 		<RESPONSEJSON>
-		{
+{
   "items" : [ {
-    "name" : "CloudStorage",
-    "displayName" : "Cloud Storage",
-    "description" : "Cloud Storage Service",
+    "name" : "OracleCloudStorage",
+    "displayName" : "Oracle Storage Cloud Service",
+    "description" : "Connector to the Oracle Storage Cloud Service",
     "icon" : "base 64 encoded binary",
     "parameters" : {
       "blackList" : {
         "displayName" : "Black List",
-        "description" : "Black list for the connector",
+        "description" : "A black list for filtering objects returned by the connector",
         "type" : {
           "id" : "String",
           "maxLength" : 256
@@ -22,7 +22,7 @@
       },
       "whiteList" : {
         "displayName" : "White List",
-        "description" : "White list for the connector",
+        "description" : "A white list for filtering objects returned by the connector",
         "type" : {
           "id" : "String",
           "maxLength" : 256
@@ -30,8 +30,8 @@
         "required" : false
       },
       "password" : {
-        "displayName" : "Storage Service password",
-        "description" : "Password for Storage Service",
+        "displayName" : "User Password",
+        "description" : "User Password for connecting to Oracle Storage Cloud Service",
         "type" : {
           "id" : "Password",
           "maxLength" : 30,
@@ -40,8 +40,8 @@
         "required" : true
       },
       "storageServiceUrl" : {
-        "displayName" : "Storage Service URL",
-        "description" : "Storage Service URL",
+        "displayName" : "Oracle Storage Cloud Service URL",
+        "description" : "The URL for connecting to Oracle Storage Cloud Service",
         "type" : {
           "id" : "String",
           "maxLength" : 256
@@ -49,8 +49,8 @@
         "required" : true
       },
       "username" : {
-        "displayName" : "Storage Service User Name",
-        "description" : "User Name for Storage Service",
+        "displayName" : "User Name",
+        "description" : "User Name for connecting to Oracle Storage Cloud Service",
         "type" : {
           "id" : "String",
           "maxLength" : 256
@@ -60,8 +60,8 @@
     },
     "userAuthParameters" : {
       "password" : {
-        "displayName" : "Storage Service password",
-        "description" : "Password for Storage Service",
+        "displayName" : "User Password",
+        "description" : "User Password for connecting to Oracle Storage Cloud Service",
         "type" : {
           "id" : "Password",
           "maxLength" : 30,
@@ -70,8 +70,8 @@
         "required" : true
       },
       "username" : {
-        "displayName" : "Storage Service User Name",
-        "description" : "User Name for Storage Service",
+        "displayName" : "User Name",
+        "description" : "User Name for connecting to Oracle Storage Cloud Service",
         "type" : {
           "id" : "String",
           "maxLength" : 256
@@ -81,17 +81,16 @@
     },
     "containerAttributes" : {
       "fileSize" : {
-        "displayName" : "File size",
+        "displayName" : "File Size",
         "type" : "ByteSize"
       },
       "lastModifiedDate" : {
-        "displayName" : "Last modified date",
+        "displayName" : "Last Modified Date",
         "type" : "Timestamp"
       }
     }
   } ]
 }
-		</RESPONSEJSON>
-		<r>abc</r>
+</RESPONSEJSON>
 	</TEST>
 </RESULT>
