@@ -11,12 +11,12 @@ import org.dom4j.io.*;
 
 public class GetResourceXML {
 	
-	public static Map<String, String> parseXml(String testName) {
+	public static Map<String, String> parseXml(String xmlName,String testName) {
 		Map<String, String> requestMap = new HashMap<String, String>();
 		
 		SAXReader reader = new SAXReader();
 		try {
-			InputStream f = GetResourceXML.class.getResourceAsStream("../xml/BDDConnectsAPITest.xml"); 
+			InputStream f = GetResourceXML.class.getResourceAsStream("../xml/"+xmlName); 
 			Document doc = reader.read(f);
 			Element root = doc.getRootElement(); 								//get xml root ,getName() get root names
 			
