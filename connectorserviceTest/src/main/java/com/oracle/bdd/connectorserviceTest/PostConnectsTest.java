@@ -1,7 +1,6 @@
 package com.oracle.bdd.connectorserviceTest;
 
-import java.util.Map;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -11,20 +10,18 @@ import org.junit.Test;
 
 import com.oracle.bdd.util.CommonUtil;
 import com.oracle.bdd.util.Constants;
-import com.oracle.bdd.util.GetResourceXML;
-
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
-import net.sf.json.JSONObject;
 
 public class PostConnectsTest {
 	private static Client client ;
 	private static WebResource webRes; 
 	private ClientResponse response;
-	private Map<String, String> xmlMap;
 	private String reqUrl =Constants.connectorUrl+Constants.connectors;
+	private String testname;
+	CommonUtil comUtil = new CommonUtil();
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -41,32 +38,18 @@ public class PostConnectsTest {
 
 	@After
 	public void tearDown() throws Exception {
+		//delete connector by id
+		response = comUtil.executeDelete(client, reqUrl+"/"+comUtil.getConnectorId(response));
 	}
 	
 	@Test
 	public void testPOSTconnectors1() {
-		//post connector
-
-		xmlMap = GetResourceXML.parseXml("PostConnectsTest.xml","testPOSTconnectors");
-		response = new CommonUtil().executePost(client, reqUrl, xmlMap);
+		testname = "testPOSTconnectors1";
 		
-		JSONObject jsStr = JSONObject.fromObject(response.getEntity(String.class)); 			 
-		String connectorId =jsStr.getString("id");										//get connectorId from response
+		//post connector		
 		
-		//get connector by id
-		response = new CommonUtil().executeGet(client, reqUrl+"/"+connectorId, xmlMap);
-		
-		//delete connector by id
-		webRes = client.resource(reqUrl+"/"+connectorId);	
-		response = webRes.acceptLanguage("en-US").delete(ClientResponse.class);
-		assertEquals("204", response.getStatus());
-		
-	}
-
-	@Test
-	public void test_firstC1() {
-		String first = "First";
-		assertTrue("sab".contains("s"));
+		response = comUtil.executePost(client, reqUrl, "PostConnectsTest.xml",testname);
+		comUtil.checkResponse(response, "PostConnectsTest.xml",testname);
 		
 	}
 
@@ -75,4 +58,7 @@ public class PostConnectsTest {
 		String first = "First";
 		assertEquals("First", first);
 	}
+	
+	
+	
 }
