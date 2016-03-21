@@ -39,7 +39,7 @@ public class PostConnectsTest {
 	@After
 	public void tearDown() throws Exception {
 		//delete connector by id
-		response = comUtil.executeDelete(client, reqUrl+"/"+comUtil.getConnectorId(response));
+		//response = comUtil.executeDelete(client, reqUrl+"/"+comUtil.getConnectorId(response));
 	}
 	
 	@Test

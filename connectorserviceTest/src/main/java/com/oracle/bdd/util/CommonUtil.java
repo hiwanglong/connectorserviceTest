@@ -76,7 +76,7 @@ public class CommonUtil {
 	
 	
 	/**
-	 * check response status and response json (optional)
+	 * check response status and response json (optional) replace %ConnectorId%
 	 * @param response	ClientResponse
 	 * @param xmlName	String
 	 * @param testName	String
@@ -85,11 +85,21 @@ public class CommonUtil {
 		xmlMap = GetResourceXML.parseXml(xmlName,testName);
 		String testname = xmlMap.get("testname");
 		String status = xmlMap.get("STATUS");
+		System.out.println("status======="+response.getStatus());
 		
 		assertEquals(testname+" response status is not "+status,Integer.parseInt(status), response.getStatus());	//check stauts 
 		
 		if(xmlMap.containsKey("RESPONSEJSON")){			//check response match
-			String expectedResponse = xmlMap.get("RESPONSEJSON").trim().replace("%ConnectorId%", getConnectorId(response));	
+			String expectedResponse = xmlMap.get("RESPONSEJSON").trim();	
+			
+			if(expectedResponse.contains("%ConnectorId%")){
+				expectedResponse = expectedResponse.replace("%ConnectorId%", getConnectorId(response));
+			}
+			
+			output = response.getEntity(String.class);
+			System.out.println(expectedResponse);
+			System.out.println("=======================");
+			System.out.println(output);
 			assertEquals(testname+" response and expectation are different",expectedResponse,output);
 		}
 	} 
