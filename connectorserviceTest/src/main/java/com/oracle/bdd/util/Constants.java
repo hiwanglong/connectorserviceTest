@@ -18,7 +18,10 @@ package com.oracle.bdd.util;
  *
  */
 
-public class Constants {
+public final class Constants {
+	
+	private Constants(){}
+	
 	public static final String connectorUrl="http://busgf1515.us.oracle.com:7205/bdd.connectorservice/v1/";
 	public static final String connectorTypes="connectorTypes";
 	public static final String connectors="connectors";
@@ -30,9 +33,4 @@ public class Constants {
 	public static final String parsingOptionMetas="parsingOptionMetas";
 	public static final String snapshot="snapshot";
 	public static final String health="health";
-
-	
-	
-
-	
 }
