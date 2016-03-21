@@ -1,6 +1,6 @@
 package com.oracle.bdd.util;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,11 +37,9 @@ public class CommonUtil {
 	
 	/**
 	 * execute POST API
-	 * @param client 		Client
 	 * @param requestUrl	String
-	 * @param xmlName		String
 	 * @param testName		String
-	 * @return
+	 * @return	Map<String, String> responseMap
 	 */
 	public Map<String, String> executePost(String requestUrl,String testName){		
 		webRes = client.resource(requestUrl);
@@ -55,9 +53,8 @@ public class CommonUtil {
 	
 	/**
 	 * execute GET API
-	 * @param client Client
 	 * @param requestUrl	String
-	 * @return
+	 * @return Map<String, String> responseMap
 	 */
 	public Map<String, String> executeGet(String requestUrl){
 		webRes = client.resource(requestUrl);
@@ -72,9 +69,8 @@ public class CommonUtil {
 	
 	/**
 	 * execute DELETE API
-	 * @param client	Client
 	 * @param requestUrl	String
-	 * @return
+	 * @return Map<String, String> responseMap
 	 */
 	public Map<String, String>  executeDelete(String requestUrl){
 		webRes = client.resource(requestUrl);	
@@ -88,9 +84,6 @@ public class CommonUtil {
 
 	/**
 	 * delete all posted connectors
-	 * @param client	Client
-	 * @param getUrl	String, eg:Constants.connectors
-	 * @param delUrl	String, eg:Constants.connectorId
 	 */
 	public void cleanConnectors(){ 
 	
@@ -104,7 +97,11 @@ public class CommonUtil {
 		}	
 	}
 	
-	
+	/**
+	 * execute POST batch
+	 * @param requestUrl	String
+	 * @param testName	String
+	 */
 	public void executePostBatch(String requestUrl,String testName){		
 		webRes = client.resource(requestUrl);
 		xmlMap = GetResourceXML.parseXml(xmlName,testName);
@@ -113,42 +110,59 @@ public class CommonUtil {
 			//execute POST
 			webRes.type("application/json").acceptLanguage(language).post(ClientResponse.class, reqJson);
 		}
-		
-	
 	}
 	
 	
 	/**
-	 * check response status and response json (optional) replace %ConnectorId%
-	 * @param response	ClientResponse
-	 * @param xmlName	String
+	 * check response json with replace %ConnectorId% RESPONSEJSON of xml
+	 * @param responseMap	Map<String,String>
 	 * @param testName	String
 	 */
 	public void checkResponse(Map<String,String> responseMap,String testName){
 		xmlMap = GetResourceXML.parseXml(xmlName,testName);
-		String testname = xmlMap.get("testname");
-		String status = xmlMap.get("STATUS");
 		
-			
-		assertEquals(testname+" response status is not "+status, status,responseMap.get("status"));	//check status 
+		output = responseMap.get("jsonRes");
+		String expectedResponse = GetResourceXML.trimAllSpaces(xmlMap.get("RESPONSEJSON"));	
 		
-		if(xmlMap.containsKey("RESPONSEJSON")){			//check response match
-			output = responseMap.get("jsonRes");
-			String expectedResponse = GetResourceXML.trimAllSpaces(xmlMap.get("RESPONSEJSON"));	
-			
-			if(expectedResponse.contains("%connectorId%")){
-				expectedResponse = expectedResponse.replace("%connectorId%", getConnectorId(output).get(0));
-			}
-			assertEquals(testname+" response and expectation are different",expectedResponse,GetResourceXML.trimAllSpaces(output));
+		if(expectedResponse.contains("%connectorId%")){
+			expectedResponse = expectedResponse.replace("%connectorId%", getConnectorId(output).get(0));
 		}
+		assertEquals(testName+" response and expectation are different",expectedResponse,GetResourceXML.trimAllSpaces(output));
+		
 	} 
 	
+	/**
+	 * check response status with STATUS of xml
+	 * @param responseMap	Map<String,String>
+	 * @param testName	String
+	 */
+	public void checkStatus(Map<String,String> responseMap,String testName){
+		xmlMap = GetResourceXML.parseXml(xmlName,testName);
+		String status = xmlMap.get("STATUS");
+		assertEquals(testName+" response status is not "+status, status,responseMap.get("status"));	//check status 
+	}
+	
+	/**
+	 * check if response contains node element of xml
+	 * @param responseMap	Map<String,String>
+	 * @param testName	String
+	 * @param nodeName	String	xml node
+	 */
+	public void checkResponseNode(Map<String,String> responseMap,String testName,String nodeName){
+		xmlMap = GetResourceXML.parseXml(xmlName,testName);
+		
+		output = responseMap.get("jsonRes");
+		String nodeElement = xmlMap.get(nodeName);	
+		
+		assertTrue(testName+" response doesn't contains "+ nodeElement,output.contains(nodeElement));	
+		
+	}
 	
 
 	/**
 	 * get connectors' id from response
 	 * @param response String, a Json String Response
-	 * @return connectorsIds
+	 * @return List<String> connectorsIds
 	 */
 
 	public List<String> getConnectorId(String response){
@@ -168,7 +182,11 @@ public class CommonUtil {
 		return connectorIds;
 	}
 	
-	
+	/**
+	 * encapsulate response
+	 * @param response
+	 * @return Map<String, String> status,jsonRes
+	 */
 	public Map<String, String> getResponseMap(ClientResponse response){
 		responseMap.put("status", response.getStatus()+"");
 		responseMap.put("jsonRes", response.getEntity(String.class));
