@@ -1,9 +1,5 @@
 package com.oracle.bdd.connectorserviceTest;
 
-import static org.junit.Assert.*;
-
-import java.util.Map;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -12,16 +8,16 @@ import org.junit.Test;
 
 import com.oracle.bdd.util.CommonUtil;
 import com.oracle.bdd.util.Constants;
-import com.oracle.bdd.util.GetResourceXML;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
+
 
 public class GetConnectorTypesTest {
 	
 	CommonUtil util=new CommonUtil();
 	Client client = Client.create();
 	String testFile="GetConnectorTypesTest.xml";
+	String reqUrl=Constants.connectorUrl+Constants.connectorTypes;
 	
 
 	@BeforeClass
@@ -42,8 +38,8 @@ public class GetConnectorTypesTest {
 	public void tearDown() throws Exception {
 	}
 
-/*
-	@Test
+
+/*	@Test
 	public void testGetConnectorTypes() {    
 		
 		String conn=Constants.connectorUrl+"connectorTypes";
@@ -65,14 +61,13 @@ public class GetConnectorTypesTest {
 	
 	@Test
 	public void testGetConnectorTypes(){
-		//execute get request
-		String testCase="connectorTypes";
-		String reqUrl=Constants.connectorUrl+testCase;
-	    Map<String, String> reqMap=GetResourceXML.parseXml(testFile, testCase);
-	    ClientResponse response=util.executeGet(client, reqUrl, reqMap);
-	    
 		
+		//get connector types
+		String testCase="testGetConnectorTypes";
+	    ClientResponse response=util.executeGet(client, reqUrl);
+	   		
 		//check get response
+	    util.checkResponse(response, testFile, testCase); 
 	}
 	
 	
