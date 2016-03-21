@@ -3,6 +3,7 @@
 	<TEST testname="testGetConnectorTypes">
 		<REQUESTJSON>
 		</REQUESTJSON>
+		<STATUS>200</STATUS>
 		<RESPONSEJSON>
 {
   "items" : [ {

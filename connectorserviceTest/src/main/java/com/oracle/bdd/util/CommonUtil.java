@@ -2,22 +2,30 @@ package com.oracle.bdd.util;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
-import net.sf.json.JSONObject;
-
 
 
 public class CommonUtil {
 	private WebResource webRes; 
 	private ClientResponse response;
-	private String output;
+	private Client client;
 	private Map<String, String> xmlMap;
+	private String output;
+	private String xmlName;
+	private String language;
 	
+	public CommonUtil(Client client,String xmlName,String language) {
+		this.client = client;
+		this.xmlName = xmlName;
+		this.language = language;
+	}
 	
 	/**
 	 * execute POST API
@@ -27,14 +35,13 @@ public class CommonUtil {
 	 * @param testName		String
 	 * @return
 	 */
-	public ClientResponse executePost(Client client,String requestUrl,String xmlName,String testName,String language){
-		
+	public ClientResponse executePost(String requestUrl,String testName){		
 		webRes = client.resource(requestUrl);
 		
 		xmlMap = GetResourceXML.parseXml(xmlName,testName);
 		String[] reqJsonArr = xmlMap.get("REQUESTJSON").split(";");	
-		//System.out.println(reqJson);
-		
+//		System.out.println("1============"+reqJsonArr[0]);
+//		System.out.println("2==================="+language);
 		for(String reqJson : reqJsonArr){
 			//execute POST
 			response =webRes.type("application/json").acceptLanguage(language).post(ClientResponse.class, reqJson);
@@ -50,7 +57,7 @@ public class CommonUtil {
 	 * @param requestUrl	String
 	 * @return
 	 */
-	public ClientResponse executeGet(Client client,String requestUrl,String language){
+	public ClientResponse executeGet(String requestUrl){
 		webRes = client.resource(requestUrl);
 		//System.out.println(reqJson);				
 		
@@ -67,13 +74,32 @@ public class CommonUtil {
 	 * @param requestUrl	String
 	 * @return
 	 */
-	public ClientResponse executeDelete(Client client,String requestUrl,String language){
+	public ClientResponse executeDelete(String requestUrl){
 		webRes = client.resource(requestUrl);	
 		
 		//execute DELETE
 		response = webRes.acceptLanguage(language).delete(ClientResponse.class);
 		
 		return response;
+	}
+	
+
+	/**
+	 * delete all posted connectors
+	 * @param client	Client
+	 * @param getUrl	String, eg:Constants.connectors
+	 * @param delUrl	String, eg:Constants.connectorId
+	 */
+	public void cleanConnectors(String getUrl, String delUrl){ 
+	
+		//get all connectors' id
+		List <String> connectotIds=getConnectorId(executeGet(getUrl).getEntity(String.class));
+		
+		//delete all connectors one by one
+		for (int i=0; i<connectotIds.size();i++){
+			delUrl=delUrl.replace("{connectorId}",connectotIds.get(i) );
+			executeDelete(delUrl);
+		}	
 	}
 	
 	
@@ -83,45 +109,47 @@ public class CommonUtil {
 	 * @param xmlName	String
 	 * @param testName	String
 	 */
-	public void checkResponse(ClientResponse response,String xmlName,String testName){
+	public void checkResponse(ClientResponse response,String testName){
 		xmlMap = GetResourceXML.parseXml(xmlName,testName);
 		String testname = xmlMap.get("testname");
 		String status = xmlMap.get("STATUS");
-		//System.out.println("status======="+response.getStatus());
 		
 		assertEquals(testname+" response status is not "+status,Integer.parseInt(status), response.getStatus());	//check stauts 
 		
 		if(xmlMap.containsKey("RESPONSEJSON")){			//check response match
 			output = response.getEntity(String.class);
-			
 			String expectedResponse = GetResourceXML.trimAllSpaces(xmlMap.get("RESPONSEJSON"));	
 			
 			if(expectedResponse.contains("%connectorId%")){
-				expectedResponse = expectedResponse.replace("%connectorId%", getConnectorId(output));
+				expectedResponse = expectedResponse.replace("%connectorId%", getConnectorId(output).get(0));
 			}
-			
-			/*System.out.println(expectedResponse);
-			System.out.println("=======================");
-			System.out.println(output);*/
 			assertEquals(testname+" response and expectation are different",expectedResponse,GetResourceXML.trimAllSpaces(output));
 		}
 	} 
 	
 	
+
 	/**
-	 * get connectorId from response json
-	 * @param response	ClientResponse
-	 * @return
+	 * get connectors' id from response
+	 * @param response
+	 * @return connectorsIds
 	 */
-	public String getConnectorId(String responseJson){
-		JSONObject jsStr = JSONObject.fromObject(responseJson); 			 
-		String connectorId =jsStr.getString("id");	
-		return connectorId;
-	}
+
+	public List<String> getConnectorId(String jsonResponse){
+
+		List<String> connectorIds=new ArrayList<String>();
 	
-	/**
-	 * delete all connecters
-	 */
-	public void cleanConnectors(){}
+		JsonParser parser = new JsonParser(jsonResponse);
+		if (jsonResponse.contains("items")){ 
+			int num=parser.arrayElemSize(parser.jsonObject, "items");
+			for (int i=0; i<num; i++){
+				connectorIds.add(parser.parser(parser.jsonObject, "items["+i+"].connectorId").toString());
+			}
+		}
+		else{
+			connectorIds.add(parser.parser(parser.jsonObject, "id").toString());
+		}
+		return connectorIds;
+	}
 	
 }

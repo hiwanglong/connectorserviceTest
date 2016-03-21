@@ -15,16 +15,16 @@ import com.sun.jersey.api.client.ClientResponse;
 
 
 public class PostConnectsTest {
-	private static Client client ;
+	private static Client client = Client.create();;
 	private ClientResponse response;
 	private String reqUrl =Constants.connectorUrl+Constants.connectors;
-	private String testname;
+	private String xmlName = "PostConnectsTest.xml";
 	private String language = "en-US";
-	CommonUtil comUtil = new CommonUtil();
+	private String testname;
+	CommonUtil comUtil = new CommonUtil(client, xmlName, language);
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		client = Client.create(); 
 	}
 
 	@AfterClass
@@ -47,8 +47,8 @@ public class PostConnectsTest {
 		
 		//post connector		
 		
-		response = comUtil.executePost(client, reqUrl, "PostConnectsTest.xml",testname,language);
-		comUtil.checkResponse(response, "PostConnectsTest.xml",testname);
+		response = comUtil.executePost(reqUrl,testname);
+		comUtil.checkResponse(response,testname);
 		
 	}
 

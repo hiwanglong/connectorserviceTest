@@ -23,14 +23,14 @@ public final class Constants {
 	private Constants(){}
 	
 	public static final String connectorUrl="http://busgf1515.us.oracle.com:7205/bdd.connectorservice/v1/";
-	public static final String connectorTypes="connectorTypes";
-	public static final String connectors="connectors";
-	public static final String connectorId="connectors/{connectorId}";
-	public static final String connectorAuth=connectorId+"/auth";
-	public static final String browseByContainerId=connectorId+"/containers/{containerId}?";
-	public static final String browseByPath=connectorId+"/containers?searchByPath={URL-encoded path}";
-	public static final String previewData=connectorId+"/previewData";
-	public static final String parsingOptionMetas="parsingOptionMetas";
-	public static final String snapshot="snapshot";
-	public static final String health="health";
+	public static final String connectorTypes=connectorUrl+"connectorTypes";
+	public static final String connectors=connectorUrl+"connectors";
+	public static final String connectorId=connectorUrl+"connectors/{connectorId}";
+	public static final String connectorAuth=connectorUrl+connectorId+"/auth";
+	public static final String browseByContainerId=connectorUrl+connectorId+"/containers/{containerId}?";
+	public static final String browseByPath=connectorUrl+connectorId+"/containers?searchByPath={URL-encoded path}";
+	public static final String previewData=connectorUrl+connectorId+"/previewData";
+	public static final String parsingOptionMetas=connectorUrl+"parsingOptionMetas";
+	public static final String snapshot=connectorUrl+"snapshot";
+	public static final String health=connectorUrl+"health";
 }
