@@ -2,6 +2,8 @@ package com.oracle.bdd.util;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import com.sun.jersey.api.client.Client;
@@ -79,17 +81,14 @@ public class CommonUtil {
 	 */
 	public void cleanConnectors(Client client, String getUrl, String delUrl){ //getUrl=connectorUrl+connectors; delUrl=connectorUrl+connectorId
 	
-		//get all connectors
-		String allConnectors=executeGet(client, getUrl).getEntity(String.class);
+		//get all connectors' id
+		List <String> connectotIds=getConnectorId(executeGet(client, getUrl));
 		
 		//delete all connectors one by one
-		int numConnectors=allConnectors.split("id").length-1;
-		for (int i=0; i<numConnectors; i++){
-			String id="";
-			delUrl=delUrl.replace("{connectorId}", id);
+		for (int i=0; i<connectotIds.size();i++){
+			delUrl=delUrl.replace("{connectorId}",connectotIds.get(i) );
 			executeDelete(client,delUrl);
-		}
-		
+		}	
 	}
 	
 	
@@ -107,7 +106,7 @@ public class CommonUtil {
 		assertEquals(testname+" response status is not "+status,Integer.parseInt(status), response.getStatus());	//check stauts 
 		
 		if(xmlMap.containsKey("RESPONSEJSON")){			//check response match
-			String expectedResponse = xmlMap.get("RESPONSEJSON").trim().replace("%ConnectorId%", getConnectorId(response));	
+			String expectedResponse = xmlMap.get("RESPONSEJSON").trim().replace("%ConnectorId%", getConnectorId(response).get(0));	
 			assertEquals(testname+" response and expectation are different",expectedResponse,output);
 		}
 	} 
@@ -118,10 +117,25 @@ public class CommonUtil {
 	 * @param response	ClientResponse
 	 * @return
 	 */
-	public String getConnectorId(ClientResponse response){
-		JSONObject jsStr = JSONObject.fromObject(response.getEntity(String.class)); 			 
-		String connectorId =jsStr.getString("id");	
-		return connectorId;
+	public List<String> getConnectorId(ClientResponse response){
+
+		List<String> connectorIds=new ArrayList<String>();
+		String res=response.getEntity(String.class);
+		JsonParser parser = new JsonParser(res);
+		if (res.contains("items")){
+			int num=parser.arrayElemSize(parser.jsonObject, "items");
+			for (int i=0; i<num; i++){
+				connectorIds.add(parser.parser(parser.jsonObject, "items["+i+"].connectorId").toString());
+			}
+					
+		}
+		else{
+			connectorIds.add(parser.parser(parser.jsonObject, "id").toString());
+		}
+		return connectorIds;
+		
+		
+		
 	}
 	
 

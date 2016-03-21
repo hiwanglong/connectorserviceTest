@@ -3,6 +3,8 @@ package com.oracle.bdd.util;
 
 import java.io.*;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.dom4j.*;
 import org.dom4j.io.*;
@@ -11,6 +13,12 @@ import org.dom4j.io.*;
 
 public class GetResourceXML {
 	
+	/**
+	 * parser input(s) and output(s) to a map
+	 * @param xmlName xml file store input(s) and expected output(s)
+	 * @param testName test name to identify
+	 * @return hash map include input(s) and output(s)
+	 */
 	public static Map<String, String> parseXml(String xmlName,String testName) {
 		Map<String, String> requestMap = new HashMap<String, String>();
 		
@@ -43,9 +51,25 @@ public class GetResourceXML {
 
 		return requestMap;
 	}
+	
+	/**
+	 * replace character of \s*|\t|\r|\n in a json string  to ""
+	 * @param json json string
+	 * @return json string without \s*|\t|\r|\n
+	 */
+	public static String trimAllSpaces(String json){
+		if(json == null || json.length() == 0)
+			return null;
+		Pattern p = Pattern.compile("\\s*|\t|\r|\n");
+		Matcher m = p.matcher(json);
+		return m.replaceAll("");
+	}
 
 	public static void main(String arge[]) {
 		
-        
+		Map<String, String> res_map=GetResourceXML.parseXml("GetConnectorTypesTest.xml", "testGetConnectorTypes");
+		String res_expected=res_map.get("RESPONSEJSON").trim();
+		String result = GetResourceXML.trimAllSpaces(res_expected);
+		System.out.println(result);
 	}
 }

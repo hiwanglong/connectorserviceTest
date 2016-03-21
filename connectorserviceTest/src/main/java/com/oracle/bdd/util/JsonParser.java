@@ -1,6 +1,5 @@
 package com.oracle.bdd.util;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -11,12 +10,27 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+/**
+ * Usage:
+ * <li>
+ * InputStream f = JsonParser.class.getResourceAsStream("../xml/json.txt"); 
+ * JsonParser parser= new JsonParser(f);
+ * parser.parser(parser.jsonObject, "items[1].userAuthParameters.username.type.maxLength");
+ * <li>
+ * String json = "...";
+ * parser = new JsonParser(json);
+ * parser.parser(parser.jsonObject, "parameters.username");
+ * @author zxie
+ *
+ */
 public class JsonParser {
 
-	public File jfile;
-	public String jStr;
 	public Object jsonObject;
 
+	/**
+	 * Construct with file stream
+	 * @param io
+	 */
 	public JsonParser(InputStream io) {
 		InputStreamReader reader = new InputStreamReader(io);
 		JSONParser jsonParser = new JSONParser();
@@ -27,19 +41,27 @@ public class JsonParser {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-
 	}
 
+	/**
+	 * Construct with json string
+	 * @param json json string
+	 */
 	public JsonParser(String json) {
-		this.jStr = json;
 		JSONParser jsonParser = new JSONParser();
 		try {
-			this.jsonObject = jsonParser.parse(jStr);
+			this.jsonObject = jsonParser.parse(json);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * internal function
+	 * @param parser
+	 * @param item
+	 * @return
+	 */
 	private Object parserJSONArray(JSONArray parser, String item){
 		int start = item.indexOf("[");
 		int end = item.indexOf("]");
@@ -48,10 +70,22 @@ public class JsonParser {
 		return parser.get(index);
 	}
 
+	/**
+	 * internal function
+	 * @param parser
+	 * @param item
+	 * @return
+	 */
 	private Object parserJSONObject(JSONObject parser,String item ){
 		return parser.get(item);
 	}
 
+	/**
+	 * internal function
+	 * @param parser
+	 * @param item
+	 * @return
+	 */
 	private Object parserJson(Object parser, String item){
 		if(item.indexOf("[")!=-1 && item.indexOf("]")!=-1){
 			int start = item.indexOf("[");
@@ -61,7 +95,13 @@ public class JsonParser {
 			return parserJSONObject((JSONObject)parser, item);
 	}
 
-	public Object parser(Object parser, String[] items){
+	/**
+	 * internal function
+	 * @param parser
+	 * @param items
+	 * @return
+	 */
+	private Object parserJson(Object parser, String[] items){
 		if(items == null || items.length == 0)
 			return null;
 
@@ -77,28 +117,27 @@ public class JsonParser {
 
 		items = Arrays.copyOfRange(items, 1, items.length);
 
-		return parser(parser, items);
+		return parserJson(parser, items);
 	}
 
-
-	public static void main(String[] args){
-
-		//			String path = "items[0].parameters.directoryPath.type.maxLength";
-		//			String path = "items[1]";
-		String path = "items[1].userAuthParameters.username.type";
+	/**
+	 * Get the json object value of path
+	 * @param parser JSONObject
+	 * @param path path from json tree root to some element
+	 * @return element object value
+	 */
+	public Object parser(Object parser, String path){
 		String[] elements =  path.split("\\.");
-
-		InputStream f = JsonParser.class.getResourceAsStream("../xml/json.txt"); 
-		JsonParser parser1= new JsonParser(f);
-
-		System.out.println(parser1.parser(parser1.jsonObject, elements));
-
-		JSONArray connectorTyps = (JSONArray)((JSONObject)parser1.jsonObject).get("items");
-		JSONObject item = (JSONObject)connectorTyps.get(0);
-		JSONObject param = (JSONObject)item.get("parameters");
-		JSONObject directoryPath = (JSONObject)param.get("directoryPath");
-		JSONObject type = (JSONObject)directoryPath.get("type");
-		//			System.out.println(type.get("maxLength"));
-
+		return parserJson(parser, elements);
+	}
+	
+	/**
+	 * Get the JSONArray object size
+	 * @param parser object
+	 * @param path path to the JSONArray object
+	 * @return the number of elements
+	 */
+	public int arrayElemSize(Object parser, String path){
+		return ((JSONArray)parser(parser, path)).size();
 	}
 }

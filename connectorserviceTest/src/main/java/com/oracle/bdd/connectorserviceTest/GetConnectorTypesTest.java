@@ -58,6 +58,7 @@ public class GetConnectorTypesTest {
         String res_expected=res_map.get("RESPONSEJSON").trim();
       	assertTrue("ConnectorTypes response is NOT as expected",res.equals(res_expected));            
 	}*/
+
 	
 	@Test
 	public void testGetConnectorTypes(){
