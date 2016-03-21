@@ -22,12 +22,11 @@ import com.sun.jersey.api.client.WebResource;
 
 public class GetConnectorsTest {
 	
-
-	CommonUtil util=new CommonUtil();
+	
 	Client client = Client.create();
-	String testFile=".xml";
+	String testFile="GetConnectorsTest.xml";
+	CommonUtil util=new CommonUtil(client, testFile);
 	String reqUrl=Constants.connectors;
-	String delUrl=Constants.connectorId;
 	int count;
 	String res;
 
@@ -41,12 +40,12 @@ public class GetConnectorsTest {
 
 	@Before
 	public void setUp() throws Exception {
-		ClientResponse response=util.executeGet(client,reqUrl);
-		res = response.getEntity(String.class);
+		Map<String, String> response=util.executeGet(reqUrl);
+		res = response.get("jsonRes");
 		count=res.split("id").length-1;
         if (count!=0){
         	//delete all connectors
-        	util.cleanConnectors(client, reqUrl, delUrl);
+        	util.cleanConnectors();
         }
 	}
 
@@ -61,10 +60,10 @@ public class GetConnectorsTest {
 		String testCase="testGetConnectorsTest1";
 		
 		// post a connector
-		util.executePost(client, reqUrl, testFile, testCase);
+		util.executePost(reqUrl,testCase);
 		
 		// get connectors
-		util.executeGet(client, reqUrl);
+		util.executeGet(reqUrl);
 		
         // check count=1
 		count=res.split("id").length-1;
@@ -78,10 +77,10 @@ public class GetConnectorsTest {
 		String testCase="testGetConnectorsTest2";
 		
 		// post two connectors
-		util.executePost(client, reqUrl, testFile, testCase);
+		util.executePost(reqUrl,testCase);
 		
 		// get connectors
-		util.executeGet(client, reqUrl);
+		util.executeGet(reqUrl);
 		
         // check count=2
 		count=res.split("id").length-1;
@@ -95,7 +94,7 @@ public class GetConnectorsTest {
 		// no connectors have been posted
 		
 		// get connectors
-		util.executeGet(client, reqUrl);
+		util.executeGet(reqUrl);
 		
         // check count=0
 		count=res.split("id").length-1;
