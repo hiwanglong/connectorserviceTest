@@ -1,91 +1,114 @@
 package com.oracle.bdd.util;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertTrue;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
+import net.sf.json.JSONObject;
+
+
+
 public class CommonUtil {
 	private WebResource webRes; 
 	private ClientResponse response;
 	private String output;
+	private Map<String, String> xmlMap;
+	
 	
 	/**
-	 * execute POST API ,check if response status 200, 
-	 * check response contains <RESPONSECONTAINS> if this tag exist in the xml
-	 * <RESPONSECONTAINS> can contains multiple checks, separated by &
-	 * @param client Client
-	 * @param reqUrl String
-	 * @param xmlMap	Map
-	 * @return ClientResponse 
+	 * execute POST API
+	 * @param client 		Client
+	 * @param requestUrl	String
+	 * @param xmlName		String
+	 * @param testName		String
+	 * @return
 	 */
-	public ClientResponse executePost(Client client,String reqUrl,Map<String, String> xmlMap){
+	public ClientResponse executePost(Client client,String requestUrl,String xmlName,String testName){
 		
-		webRes = client.resource(reqUrl);	
-		String reqJson = xmlMap.get("REQUESTJSON");		
+		webRes = client.resource(requestUrl);
+		
+		xmlMap = GetResourceXML.parseXml(xmlName,testName);
+		String reqJson = xmlMap.get("REQUESTJSON");	
 		//System.out.println(reqJson);
-				
-		response =webRes.type("application/json").acceptLanguage("en-US").post(ClientResponse.class, reqJson);		//post api
-	
-		assertEquals("200", response.getStatus());																	//check stauts 200
-		output = response.getEntity(String.class);
-		//System.out.println(output);	
 		
-		assertNotSame("response is empty","",output);																//check response is not empty
-		
-		if(xmlMap.containsKey("EXPECTRESPONSECONTS")){																//check response contains
-			String[] expectContainsArr = xmlMap.get("EXPECTRESPONSECONTS").split("&");	
-			for(String expectContains : expectContainsArr){
-				assertTrue("response doesn't contains "+ expectContains,output.contains(expectContains));				
-			}
-		}
+		//execute POST
+		response =webRes.type("application/json").acceptLanguage("en-US").post(ClientResponse.class, reqJson);
 		
 		return response;
 	}
 	
-	/**
-	 * execute GET API ,check if response status 200, 
-	 * check response contains <RESPONSECONTAINS> if this tag exist in the xml
-	 * <RESPONSECONTAINS> can contains multiple checks, separated by &
-	 * check response match <RESPONSEJSON> if this tag exist in the xml
-	 * <RESPONSEJSON> need to keep format without whiteSpace
-	 * @param client 
-	 * @param requestUrl String
-	 * @param xmlMap	Map
-	 * @return ClientResponse
-	 */
-	public ClientResponse executeGet(Client client,String reqUrl,Map<String, String> xmlMap){
-		webRes = client.resource(reqUrl);	
-		//System.out.println(reqJson);
-				
-		response = webRes.acceptLanguage("en-US").get(ClientResponse.class);	//get api
 	
-		assertEquals("200", response.getStatus());								//check stauts 200
-		output = response.getEntity(String.class);
-		//System.out.println(output);	
+	/**
+	 * execute GET API
+	 * @param client Client
+	 * @param requestUrl	String
+	 * @return
+	 */
+	public ClientResponse executeGet(Client client,String requestUrl){
+		webRes = client.resource(requestUrl);
+		//System.out.println(reqJson);				
 		
-		assertNotSame("response is empty","",output);							//check response is not empty
+		//execute GET
+		response = webRes.acceptLanguage("en-US").get(ClientResponse.class);
+	
+		return response;
+	}
+	
+	
+	/**
+	 * execute DELETE API
+	 * @param client	Client
+	 * @param requestUrl	String
+	 * @return
+	 */
+	public ClientResponse executeDelete(Client client,String requestUrl){
+		webRes = client.resource(requestUrl);	
 		
-		if(xmlMap.containsKey("RESPONSECONTAINS")){		// check response contains
-			String[] expectContainsArr = xmlMap.get("RESPONSECONTAINS").split("&");	
-			for(String expectContains : expectContainsArr){
-				assertTrue("response doesn't contains "+ expectContains,output.contains(expectContains));				
-			}
-		}
+		//execute DELETE
+		response = webRes.acceptLanguage("en-US").delete(ClientResponse.class);
+		
+		return response;
+	}
+	
+	
+	/**
+	 * check response status and response json (optional)
+	 * @param response	ClientResponse
+	 * @param xmlName	String
+	 * @param testName	String
+	 */
+	public void checkResponse(ClientResponse response,String xmlName,String testName){
+		xmlMap = GetResourceXML.parseXml(xmlName,testName);
+		String testname = xmlMap.get("testname");
+		String status = xmlMap.get("STATUS");
+		
+		assertEquals(testname+" response status is not "+status,Integer.parseInt(status), response.getStatus());	//check stauts 
 		
 		if(xmlMap.containsKey("RESPONSEJSON")){			//check response match
-			String expectedResponse = xmlMap.get("RESPONSEJSON").trim();	
-			assertEquals("response and expectation are different",expectedResponse,output);
+			String expectedResponse = xmlMap.get("RESPONSEJSON").trim().replace("%ConnectorId%", getConnectorId(response));	
+			assertEquals(testname+" response and expectation are different",expectedResponse,output);
 		}
-		
-		return response;
+	} 
+	
+	
+	/**
+	 * get connectorId from response json
+	 * @param response	ClientResponse
+	 * @return
+	 */
+	public String getConnectorId(ClientResponse response){
+		JSONObject jsStr = JSONObject.fromObject(response.getEntity(String.class)); 			 
+		String connectorId =jsStr.getString("id");	
+		return connectorId;
 	}
 	
+	/**
+	 * delete all connecters
+	 */
+	public void cleanConnectors(){}
 	
 }

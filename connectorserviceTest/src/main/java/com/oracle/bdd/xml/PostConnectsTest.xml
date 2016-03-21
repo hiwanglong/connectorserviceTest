@@ -1,10 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RESULT>
-	<TEST testname="testGetconnectorsById">
-		<REQUESTJSON>get</REQUESTJSON>
-		<r></r>
+	<TEST testname="testPOSTconnectors1">  <!-- create a new connector ,connectorType : CloudStorage,visibility : import,blackList: rule123 -->
+		<REQUESTJSON>
+		{
+			"connectorType": "OracleCloudStorage",
+			"connectorName": "storage 1",
+			"description": "storage 1 description",
+			"visibility": ["import"],
+			"parameters": {
+				"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+				"username" : "dfisher.Storageadmin",
+				"password" : "welcome1",
+				"blackList": "rule123"
+			}
+		}
+		</REQUESTJSON>
+		<STATUS>200</STATUS>
+		<RESPONSEJSON><!--keep format without whiteSpace -->
+{
+    "connectorType": "OracleCloudStorage",
+    "connectorId": "%ConnectorId%",
+    "connectorName": "storage 1",
+    "description": "storage desc 1",
+    "visibility": ["import","export"],
+    "parameters": {
+        "storageServiceUrl": "StorageServiceUrl",
+        "blackList": "rule123"
+     }
+}
+		</RESPONSEJSON>
 	</TEST>
-	<TEST testname="testPOSTconnectors">
+	<TEST testname="testPOSTconnectors2">  <!-- create a new connector,connectorType : CloudStorage,visibility : export,whiteList: rules456 -->
+		<REQUESTJSON>
+		{
+			"connectorType": "OracleCloudStorage",
+			"connectorName": "storage 1",
+			"description": "storage 1 description",
+			"visibility": ["export"],
+			"parameters": {
+				"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+				"username" : "dfisher.Storageadmin",
+				"password" : "welcome1",
+				"whiteList": "rules456"
+			}
+		}
+		</REQUESTJSON>
+		<STATUS>200</STATUS>
+		<RESPONSECONTAINS>"id" :</RESPONSECONTAINS>
+		<RESPONSEJSON><!--keep format without whiteSpace -->
+		</RESPONSEJSON>
+	</TEST>
+	<TEST testname="testPOSTconnectors3">  <!-- create a new connector ,connectorType : CloudStorage,visibility : import,export,whiteList: rules456",blackList: rule123 -->
 		<REQUESTJSON>
 		{
 			"connectorType": "OracleCloudStorage",
@@ -15,24 +61,110 @@
 				"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
 				"username" : "dfisher.Storageadmin",
 				"password" : "welcome1",
-				"whiteList": "rules456"
+				"whiteList": "rules456",
+				"blackList": "rule123"
+			}
+		}
+		</REQUESTJSON>
+		<STATUS>200</STATUS>
+		<RESPONSECONTAINS>"id" :</RESPONSECONTAINS>
+		<RESPONSEJSON><!--keep format without whiteSpace -->
+		</RESPONSEJSON>
+	</TEST>
+	<TEST testname="testPOSTconnectors4">	<!-- create a new connector with wrong connectorType format -->
+		<REQUESTJSON>
+		{
+			"connectorType": "OracleCloudStorageTEST",
+			"connectorName": "storage 1",
+			"description": "storage 1 description",
+			"visibility": ["import","export"],
+			"parameters": {
+				"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+				"username" : "dfisher.Storageadmin",
+				"password" : "welcome1",
+				"whiteList": "rules456",
+				"blackList": "rule123"
 			}
 		}
 		</REQUESTJSON>
 		<RESPONSECONTAINS>"id" :</RESPONSECONTAINS>
 		<RESPONSEJSON><!--keep format without whiteSpace -->
-{
-    "connectorType": "OracleCloudStorage",
-    "connectorId": "d2907780-37f9-4e9a-8a81-af173ddc2926",
-    "connectorName": "storage 1",
-    "description": "storage desc 1",
-    "visibility": ["import","export"],
-    "parameters": {
-        "storageServiceUrl": "StorageServiceUrl",
-        "blackList": "rule1",
-        "whiteList": "rule2"
-     }
-}
+		</RESPONSEJSON>
+	</TEST>
+	<TEST testname="testPOSTconnectors5">	<!-- create a new connector with incorrect json format -->
+		<REQUESTJSON>
+		{
+			"connectorType": "OracleCloudStorage",
+			"connectorName": "storage 1",
+			"description": "storage 1 description",
+			"visibility": ["import","export"],
+			"parameters": {
+				"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+				"username" : "dfisher.Storageadmin",
+				"password" : "welcome1",
+				"whiteList": "rules456",
+				"blackList": "rule123"		
+		</REQUESTJSON>
+		<RESPONSECONTAINS>"id" :</RESPONSECONTAINS>
+		<RESPONSEJSON><!--keep format without whiteSpace -->
+		</RESPONSEJSON>
+	</TEST>
+	<TEST testname="testPOSTconnectors6">	<!-- create a new connector with missing parameter,missing visibility? -->
+		<REQUESTJSON>
+		{
+			"connectorType": "OracleCloudStorage",
+			"connectorName": "storage 1",
+			"description": "storage 1 description",
+			"visibility": ["import","export"],
+			"parameters": {
+				"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+				"whiteList": "rules456",
+				"blackList": "rule123"
+			}
+		}
+		</REQUESTJSON>
+		<RESPONSECONTAINS>"id" :</RESPONSECONTAINS>
+		<RESPONSEJSON><!--keep format without whiteSpace -->
+		</RESPONSEJSON>
+	</TEST>
+	<TEST testname="testPOSTconnectors7">	<!-- create a new connector with incorrect storageServiceUrl format /wrong username?-->
+		<REQUESTJSON>
+		{
+			"connectorType": "OracleCloudStorage",
+			"connectorName": "storage 1",
+			"description": "storage 1 description",
+			"visibility": ["import","export"],
+			"parameters": {
+				"storageServiceUrl": "storage.oraclecorp.com/v1/Storage-dfisher",
+				"username" : "dfisher.Storageadmin",
+				"password" : "welcome1",
+				"whiteList": "rules456",
+				"blackList": "rule123"
+			}
+		}
+		</REQUESTJSON>
+		<RESPONSECONTAINS>"id" :</RESPONSECONTAINS>
+		<RESPONSEJSON><!--keep format without whiteSpace -->
+		</RESPONSEJSON>
+	</TEST>
+	<TEST testname="testPOSTconnectors8">	<!-- create a new connector with too long parameter /username? -->
+		<REQUESTJSON>
+		{
+			"connectorType": "OracleCloudStorage",
+			"connectorName": "storage 1",
+			"description": "storage 1 description",
+			"visibility": ["import","export"],
+			"parameters": {
+				"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+				"username" : "dfisher.Storageadmin",
+				"password" : "welcome1",
+				"whiteList": "rules456",
+				"blackList": "123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789"
+			}
+		}
+		</REQUESTJSON>
+		<RESPONSECONTAINS>"id" :</RESPONSECONTAINS>
+		<RESPONSEJSON><!--keep format without whiteSpace -->
 		</RESPONSEJSON>
 	</TEST>
 </RESULT>

@@ -26,10 +26,11 @@ public class GetResourceXML {
 				String xmlTestName = foo.attributeValue("testname");			//get testname
 				
 				if (testName.equals(xmlTestName)){								// get test element
+					requestMap.put("testname", xmlTestName);
+					
 					for(Object o :foo.elements()){
-						Element e = (Element)o;
-						
-						requestMap.put(e.getName(), e.getText());
+						Element e = (Element)o;						
+						requestMap.put(e.getName(), e.getText());	
 						
 						//System.out.println(e.getName());
 						//System.out.println(e.getText());
