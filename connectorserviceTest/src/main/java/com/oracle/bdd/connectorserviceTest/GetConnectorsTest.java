@@ -2,9 +2,6 @@ package com.oracle.bdd.connectorserviceTest;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.After;
@@ -15,10 +12,8 @@ import org.junit.Test;
 
 import com.oracle.bdd.util.CommonUtil;
 import com.oracle.bdd.util.Constants;
-import com.oracle.bdd.util.GetResourceXML;
 import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
+
 
 public class GetConnectorsTest {
 	
@@ -28,7 +23,7 @@ public class GetConnectorsTest {
 	CommonUtil util=new CommonUtil(client, testFile);
 	String reqUrl=Constants.connectors;
 	int count;
-	String res;
+	String res, testCase;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {		
@@ -55,9 +50,9 @@ public class GetConnectorsTest {
 	
 
 	@Test
-	public void testGetConnectorsTest1() {
+	public void testGetConnectorsTest1() { // check get connectors with item=1
 		
-		String testCase="testGetConnectorsTest1";
+		testCase="testGetConnectorsTest1";
 		
 		// post a connector
 		util.executePost(reqUrl,testCase);
@@ -72,9 +67,9 @@ public class GetConnectorsTest {
 	}
 	
 	@Test
-	public void testGetConnectorsTest2() { 
+	public void testGetConnectorsTest2() { // check get connectors with item=2 
 		
-		String testCase="testGetConnectorsTest2";
+		testCase="testGetConnectorsTest2";
 		
 		// post two connectors
 		util.executePost(reqUrl,testCase);
@@ -89,7 +84,7 @@ public class GetConnectorsTest {
 	}
 	
 	@Test
-	public void testGetConnectorsTest3() {
+	public void testGetConnectorsTest3() { // check get connectors with item=0
 		
 		// no connectors have been posted
 		

@@ -89,8 +89,8 @@ public class CommonUtil {
 	/**
 	 * delete all posted connectors
 	 * @param client	Client
-	 * @param getUrl	String, eg:Constants.connectors
-	 * @param delUrl	String, eg:Constants.connectorId
+	 * @param getUrl	String
+	 * @param delUrl	String
 	 */
 	public void cleanConnectors(){ 
 	
@@ -105,6 +105,11 @@ public class CommonUtil {
 	}
 	
 	
+	/**
+	 * post a batch of request
+	 * @param requestUrl	String
+	 * @param testName	String
+	 */
 	public void executePostBatch(String requestUrl,String testName){		
 		webRes = client.resource(requestUrl);
 		xmlMap = GetResourceXML.parseXml(xmlName,testName);
@@ -147,7 +152,7 @@ public class CommonUtil {
 
 	/**
 	 * get connectors' id from response
-	 * @param response String, a Json String Response
+	 * @param response 	String, a JSON String Response
 	 * @return connectorsIds
 	 */
 
@@ -168,7 +173,21 @@ public class CommonUtil {
 		return connectorIds;
 	}
 	
+	/**
+	 * get token from response
+	 * @param response	String, a JSON String Response
+	 * @return
+	 */
+	public String getToken(String response){
+		JsonParser parser = new JsonParser(response);
+		return parser.parser(parser.jsonObject, "token").toString();
+	}
 	
+	/**
+	 * format ClientResponse to Map
+	 * @param response 	ClientResponse
+	 * @return responseMap 	Map<String, String>
+	 */
 	public Map<String, String> getResponseMap(ClientResponse response){
 		responseMap.put("status", response.getStatus()+"");
 		responseMap.put("jsonRes", response.getEntity(String.class));
