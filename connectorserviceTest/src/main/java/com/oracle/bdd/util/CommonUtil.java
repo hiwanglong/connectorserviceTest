@@ -3,6 +3,7 @@ package com.oracle.bdd.util;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,11 +21,18 @@ public class CommonUtil {
 	private String output;
 	private String xmlName;
 	private String language;
+	private Map<String, String> responseMap = new HashMap<String, String>();;
 	
 	public CommonUtil(Client client,String xmlName,String language) {
 		this.client = client;
 		this.xmlName = xmlName;
 		this.language = language;
+	}
+	
+	public CommonUtil(Client client,String xmlName) {
+		this.client = client;
+		this.xmlName = xmlName;
+		this.language = "en-US";		 
 	}
 	
 	/**
@@ -35,20 +43,14 @@ public class CommonUtil {
 	 * @param testName		String
 	 * @return
 	 */
-	public ClientResponse executePost(String requestUrl,String testName){		
+	public Map<String, String> executePost(String requestUrl,String testName){		
 		webRes = client.resource(requestUrl);
-		
 		xmlMap = GetResourceXML.parseXml(xmlName,testName);
-		String[] reqJsonArr = xmlMap.get("REQUESTJSON").split(";");	
-//		System.out.println("1============"+reqJsonArr[0]);
-//		System.out.println("2==================="+language);
-		for(String reqJson : reqJsonArr){
-			//execute POST
-			response =webRes.type("application/json").acceptLanguage(language).post(ClientResponse.class, reqJson);
-		}
-		
-		return response;
+		String reqJson = xmlMap.get("REQUESTJSON");	
+		response =webRes.type("application/json").acceptLanguage(language).post(ClientResponse.class, reqJson);
+		return getResponseMap(response);
 	}
+	
 	
 	
 	/**
@@ -57,14 +59,14 @@ public class CommonUtil {
 	 * @param requestUrl	String
 	 * @return
 	 */
-	public ClientResponse executeGet(String requestUrl){
+	public Map<String, String> executeGet(String requestUrl){
 		webRes = client.resource(requestUrl);
 		//System.out.println(reqJson);				
 		
 		//execute GET
 		response = webRes.acceptLanguage(language).get(ClientResponse.class);
 	
-		return response;
+		return getResponseMap(response);
 	}
 	
 	
@@ -74,13 +76,13 @@ public class CommonUtil {
 	 * @param requestUrl	String
 	 * @return
 	 */
-	public ClientResponse executeDelete(String requestUrl){
+	public Map<String, String>  executeDelete(String requestUrl){
 		webRes = client.resource(requestUrl);	
 		
 		//execute DELETE
 		response = webRes.acceptLanguage(language).delete(ClientResponse.class);
 		
-		return response;
+		return getResponseMap(response);
 	}
 	
 
@@ -90,16 +92,29 @@ public class CommonUtil {
 	 * @param getUrl	String, eg:Constants.connectors
 	 * @param delUrl	String, eg:Constants.connectorId
 	 */
-	public void cleanConnectors(String getUrl, String delUrl){ 
+	public void cleanConnectors(){ 
 	
-		//get all connectors' id
-		List <String> connectotIds=getConnectorId(executeGet(getUrl).getEntity(String.class));
+		//get all connectors' id	
+		List <String> connectotIds=getConnectorId(executeGet(Constants.connectors).get("jsonRes"));
 		
 		//delete all connectors one by one
 		for (int i=0; i<connectotIds.size();i++){
-			delUrl=delUrl.replace("{connectorId}",connectotIds.get(i) );
+			String delUrl=Constants.connectorId.replace("{connectorId}",connectotIds.get(i) );
 			executeDelete(delUrl);
 		}	
+	}
+	
+	
+	public void executePostBatch(String requestUrl,String testName){		
+		webRes = client.resource(requestUrl);
+		xmlMap = GetResourceXML.parseXml(xmlName,testName);
+		String[] reqJsonArr = xmlMap.get("REQUESTJSON").split(";");	
+		for(String reqJson : reqJsonArr){
+			//execute POST
+			webRes.type("application/json").acceptLanguage(language).post(ClientResponse.class, reqJson);
+		}
+		
+	
 	}
 	
 	
@@ -109,15 +124,16 @@ public class CommonUtil {
 	 * @param xmlName	String
 	 * @param testName	String
 	 */
-	public void checkResponse(ClientResponse response,String testName){
+	public void checkResponse(Map<String,String> responseMap,String testName){
 		xmlMap = GetResourceXML.parseXml(xmlName,testName);
 		String testname = xmlMap.get("testname");
 		String status = xmlMap.get("STATUS");
 		
-		assertEquals(testname+" response status is not "+status,Integer.parseInt(status), response.getStatus());	//check stauts 
+			
+		assertEquals(testname+" response status is not "+status, status,responseMap.get("status"));	//check status 
 		
 		if(xmlMap.containsKey("RESPONSEJSON")){			//check response match
-			output = response.getEntity(String.class);
+			output = responseMap.get("jsonRes");
 			String expectedResponse = GetResourceXML.trimAllSpaces(xmlMap.get("RESPONSEJSON"));	
 			
 			if(expectedResponse.contains("%connectorId%")){
@@ -131,16 +147,16 @@ public class CommonUtil {
 
 	/**
 	 * get connectors' id from response
-	 * @param response
+	 * @param response String, a Json String Response
 	 * @return connectorsIds
 	 */
 
-	public List<String> getConnectorId(String jsonResponse){
+	public List<String> getConnectorId(String response){
 
 		List<String> connectorIds=new ArrayList<String>();
 	
-		JsonParser parser = new JsonParser(jsonResponse);
-		if (jsonResponse.contains("items")){ 
+		JsonParser parser = new JsonParser(response);
+		if (response.contains("items")){ 
 			int num=parser.arrayElemSize(parser.jsonObject, "items");
 			for (int i=0; i<num; i++){
 				connectorIds.add(parser.parser(parser.jsonObject, "items["+i+"].connectorId").toString());
@@ -152,4 +168,10 @@ public class CommonUtil {
 		return connectorIds;
 	}
 	
+	
+	public Map<String, String> getResponseMap(ClientResponse response){
+		responseMap.put("status", response.getStatus()+"");
+		responseMap.put("jsonRes", response.getEntity(String.class));
+		return responseMap;
+	}
 }

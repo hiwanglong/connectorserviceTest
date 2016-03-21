@@ -1,5 +1,7 @@
 package com.oracle.bdd.connectorserviceTest;
 
+import java.util.Map;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -9,15 +11,15 @@ import org.junit.Test;
 import com.oracle.bdd.util.CommonUtil;
 import com.oracle.bdd.util.Constants;
 import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
+
 
 
 public class GetConnectorTypesTest {
 	
-	CommonUtil util=new CommonUtil();
+	
 	Client client = Client.create();
 	String testFile="GetConnectorTypesTest.xml";
-	String reqUrl=Constants.connectorUrl+Constants.connectorTypes;
+	CommonUtil util=new CommonUtil(client, testFile);
 	
 
 	@BeforeClass
@@ -38,43 +40,19 @@ public class GetConnectorTypesTest {
 	public void tearDown() throws Exception {
 	}
 
-
-/*	@Test
-	public void testGetConnectorTypes() {    
-		
-		String conn=Constants.connectorUrl+"connectorTypes";
-		System.out.println(conn);	
-        Client client = Client.create();
-        WebResource webRes = client.resource(conn);
-        String res = webRes.accept("application/json").get(String.class);
-        System.out.println(res);
-        
-        int status=webRes.head().getStatus();
-        if(status!=200){ 
-        	fail("Fail since status is "+status);
-        }
-        System.out.println(status);
-        Map<String, String> res_map=GetResourceXML.parseXml("GetConnectorTypesTest.xml", "testGetConnectorTypes");
-        String res_expected=res_map.get("RESPONSEJSON").trim();
-<<<<<<< HEAD
-      	assertTrue("ConnectorTypes response is NOT as expected",res.equals(res_expected));            
-	}*/
-//=======
-//      	assertTrue("ConnectorTypes response is NOT as expected",GetResourceXML.trimAllSpaces(res).equals(GetResourceXML.trimAllSpaces(res_expected)));
-//   	
-//            
-//	}
-//>>>>>>> branch 'master' of https://github.com/hiwanglong/connectorserviceTest.git
 	
 	@Test
 	public void testGetConnectorTypes(){
 		
-		//get connector types
+		String reqUrl=Constants.connectorTypes;
 		String testCase="testGetConnectorTypes";
-	    ClientResponse response=util.executeGet(client, reqUrl);
+		
+		//get connector types
+	    Map<String, String>response=util.executeGet(reqUrl);
 	   		
 		//check get response
-	    util.checkResponse(response, testFile, testCase); 
+	    util.checkResponse(response, testCase); 
+	   
 	}
 	
 	

@@ -2,51 +2,51 @@
 <RESULT>
 	<TEST testname="testGetConnectorsTest1">
 		<REQUESTJSON>
-{
-    "connectorType": "OracleCloudStorage",
-    "connectorName": "testGetConnectorsTest 1",
-    "description": "testGetConnectorsTest 1 description",
-    "visibility": ["import","export"],
-    "parameters": {
-        "storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
-        "username" : "dfisher.Storageadmin",
-        "password" : "welcome1",
-        "blackList": "rule123",
-        "whiteList": "rules456"
-     }
-}
+		{
+		    "connectorType": "OracleCloudStorage",
+		    "connectorName": "testGetConnectorsTest 1",
+		    "description": "testGetConnectorsTest 1 description",
+		    "visibility": ["import","export"],
+		    "parameters": {
+		        "storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+		        "username" : "dfisher.Storageadmin",
+		        "password" : "welcome1",
+		        "blackList": "rule123",
+		        "whiteList": "rules456"
+		     }
+		}
 		</REQUESTJSON>
 		<STATUS>200</STATUS>
 		<RESPONSEJSON></RESPONSEJSON>
 	</TEST>
 	<TEST testname="testGetConnectorsTest2">
 		<REQUESTJSON>
-{
-    "connectorType": "OracleCloudStorage",
-    "connectorName": "testGetConnectorsTest 2-1",
-    "description": "testGetConnectorsTest 2-1 description",
-    "visibility": ["import","export"],
-    "parameters": {
-        "storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
-        "username" : "dfisher.Storageadmin",
-        "password" : "welcome1",
-        "blackList": "rule123",
-        "whiteList": "rules456"
-     }
-};
-{
-    "connectorType": "OracleCloudStorage",
-    "connectorName": "testGetConnectorsTest 2-2",
-    "description": "testGetConnectorsTest 2-2 description",
-    "visibility": ["import","export"],
-    "parameters": {
-        "storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
-        "username" : "dfisher.Storageadmin",
-        "password" : "welcome1",
-        "blackList": "rule123",
-        "whiteList": "rules456"
-     }
-}
+		{
+		    "connectorType": "OracleCloudStorage",
+		    "connectorName": "testGetConnectorsTest 2-1",
+		    "description": "testGetConnectorsTest 2-1 description",
+		    "visibility": ["import","export"],
+		    "parameters": {
+		        "storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+		        "username" : "dfisher.Storageadmin",
+		        "password" : "welcome1",
+		        "blackList": "rule123",
+		        "whiteList": "rules456"
+		     }
+		};
+		{
+		    "connectorType": "OracleCloudStorage",
+		    "connectorName": "testGetConnectorsTest 2-2",
+		    "description": "testGetConnectorsTest 2-2 description",
+		    "visibility": ["import","export"],
+		    "parameters": {
+		        "storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+		        "username" : "dfisher.Storageadmin",
+		        "password" : "welcome1",
+		        "blackList": "rule123",
+		        "whiteList": "rules456"
+		     }
+		}
 		</REQUESTJSON>
 		<STATUS>200</STATUS>
 		<RESPONSEJSON></RESPONSEJSON>
