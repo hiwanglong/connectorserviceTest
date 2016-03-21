@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RESULT>
-	<TEST testname="testPOSTconnectors1">  <!-- create a new connector ,connectorType : CloudStorage,visibility : import,blackList: rule123 -->
+	<TEST testname="testPostconnectors1">  <!-- create a new connector ,connectorType : CloudStorage,visibility : import,blackList: rule123 -->
 		<REQUESTJSON>
 		{
 			"connectorType": "OracleCloudStorage",
@@ -17,18 +17,18 @@
 		</REQUESTJSON>
 		<STATUS>200</STATUS>
 		<RESPONSEJSON><!--keep format without whiteSpace -->
-{
-  "connectorType" : "OracleCloudStorage",
-  "id" : "%connectorId%",
-  "connectorName" : "storage 1",
-  "description" : "storage 1 description",
-  "visibility" : [ "import" ],
-  "parameters" : {
-    "blackList" : "rule123",
-    "storageServiceUrl" : "https://storage.oraclecorp.com/v1/Storage-dfisher",
-    "username" : "dfisher.Storageadmin"
-  }
-}
+		{
+		  "connectorType" : "OracleCloudStorage",
+		  "id" : "%connectorId%",
+		  "connectorName" : "storage 1",
+		  "description" : "storage 1 description",
+		  "visibility" : [ "import" ],
+		  "parameters" : {
+		    "blackList" : "rule123",
+		    "storageServiceUrl" : "https://storage.oraclecorp.com/v1/Storage-dfisher",
+		    "username" : "dfisher.Storageadmin"
+		  }
+		}
 		</RESPONSEJSON>
 	</TEST>
 	<TEST testname="testPOSTconnectors2">  <!-- create a new connector,connectorType : CloudStorage,visibility : export,whiteList: rules456 -->

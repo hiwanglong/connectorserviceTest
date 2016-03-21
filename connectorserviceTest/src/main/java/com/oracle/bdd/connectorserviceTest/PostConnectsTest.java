@@ -12,15 +12,14 @@ import com.oracle.bdd.util.CommonUtil;
 import com.oracle.bdd.util.Constants;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
 
 
 public class PostConnectsTest {
 	private static Client client ;
-	private static WebResource webRes; 
 	private ClientResponse response;
 	private String reqUrl =Constants.connectorUrl+Constants.connectors;
 	private String testname;
+	private String language = "en-US";
 	CommonUtil comUtil = new CommonUtil();
 	
 	@BeforeClass
@@ -44,11 +43,11 @@ public class PostConnectsTest {
 	
 	@Test
 	public void testPOSTconnectors1() {
-		testname = "testPOSTconnectors1";
+		testname = "testPostconnectors1";
 		
 		//post connector		
 		
-		response = comUtil.executePost(client, reqUrl, "PostConnectsTest.xml",testname);
+		response = comUtil.executePost(client, reqUrl, "PostConnectsTest.xml",testname,language);
 		comUtil.checkResponse(response, "PostConnectsTest.xml",testname);
 		
 	}

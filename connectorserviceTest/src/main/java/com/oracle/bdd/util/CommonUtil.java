@@ -27,16 +27,18 @@ public class CommonUtil {
 	 * @param testName		String
 	 * @return
 	 */
-	public ClientResponse executePost(Client client,String requestUrl,String xmlName,String testName){
+	public ClientResponse executePost(Client client,String requestUrl,String xmlName,String testName,String language){
 		
 		webRes = client.resource(requestUrl);
 		
 		xmlMap = GetResourceXML.parseXml(xmlName,testName);
-		String reqJson = xmlMap.get("REQUESTJSON");	
+		String[] reqJsonArr = xmlMap.get("REQUESTJSON").split(";");	
 		//System.out.println(reqJson);
 		
-		//execute POST
-		response =webRes.type("application/json").acceptLanguage("en-US").post(ClientResponse.class, reqJson);
+		for(String reqJson : reqJsonArr){
+			//execute POST
+			response =webRes.type("application/json").acceptLanguage(language).post(ClientResponse.class, reqJson);
+		}
 		
 		return response;
 	}
@@ -48,12 +50,12 @@ public class CommonUtil {
 	 * @param requestUrl	String
 	 * @return
 	 */
-	public ClientResponse executeGet(Client client,String requestUrl){
+	public ClientResponse executeGet(Client client,String requestUrl,String language){
 		webRes = client.resource(requestUrl);
 		//System.out.println(reqJson);				
 		
 		//execute GET
-		response = webRes.acceptLanguage("en-US").get(ClientResponse.class);
+		response = webRes.acceptLanguage(language).get(ClientResponse.class);
 	
 		return response;
 	}
@@ -65,11 +67,11 @@ public class CommonUtil {
 	 * @param requestUrl	String
 	 * @return
 	 */
-	public ClientResponse executeDelete(Client client,String requestUrl){
+	public ClientResponse executeDelete(Client client,String requestUrl,String language){
 		webRes = client.resource(requestUrl);	
 		
 		//execute DELETE
-		response = webRes.acceptLanguage("en-US").delete(ClientResponse.class);
+		response = webRes.acceptLanguage(language).delete(ClientResponse.class);
 		
 		return response;
 	}
@@ -85,22 +87,23 @@ public class CommonUtil {
 		xmlMap = GetResourceXML.parseXml(xmlName,testName);
 		String testname = xmlMap.get("testname");
 		String status = xmlMap.get("STATUS");
-		System.out.println("status======="+response.getStatus());
+		//System.out.println("status======="+response.getStatus());
 		
 		assertEquals(testname+" response status is not "+status,Integer.parseInt(status), response.getStatus());	//check stauts 
 		
 		if(xmlMap.containsKey("RESPONSEJSON")){			//check response match
-			String expectedResponse = xmlMap.get("RESPONSEJSON").trim();	
+			output = response.getEntity(String.class);
 			
-			if(expectedResponse.contains("%ConnectorId%")){
-				expectedResponse = expectedResponse.replace("%ConnectorId%", getConnectorId(response));
+			String expectedResponse = GetResourceXML.trimAllSpaces(xmlMap.get("RESPONSEJSON"));	
+			
+			if(expectedResponse.contains("%connectorId%")){
+				expectedResponse = expectedResponse.replace("%connectorId%", getConnectorId(output));
 			}
 			
-			output = response.getEntity(String.class);
-			System.out.println(expectedResponse);
+			/*System.out.println(expectedResponse);
 			System.out.println("=======================");
-			System.out.println(output);
-			assertEquals(testname+" response and expectation are different",expectedResponse,output);
+			System.out.println(output);*/
+			assertEquals(testname+" response and expectation are different",expectedResponse,GetResourceXML.trimAllSpaces(output));
 		}
 	} 
 	
@@ -110,8 +113,8 @@ public class CommonUtil {
 	 * @param response	ClientResponse
 	 * @return
 	 */
-	public String getConnectorId(ClientResponse response){
-		JSONObject jsStr = JSONObject.fromObject(response.getEntity(String.class)); 			 
+	public String getConnectorId(String responseJson){
+		JSONObject jsStr = JSONObject.fromObject(responseJson); 			 
 		String connectorId =jsStr.getString("id");	
 		return connectorId;
 	}
