@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RESULT>
-	<TEST testname="testPostconnectors1">  <!-- create a new connector ,connectorType : CloudStorage,visibility : import,blackList: rule123 -->
+	<TEST testname="testPostconnectors1">  <!-- create a new connector ,connectorType : OracleCloudStorage,visibility : import,blackList: rule123 -->
 		<REQUESTJSON>
 		{
 			"connectorType": "OracleCloudStorage",
@@ -16,13 +16,13 @@
 		}
 		</REQUESTJSON>
 		<STATUS>200</STATUS>
-		<RESPONSEJSON><!--keep format without whiteSpace -->
+		<RESPONSEJSON>
 		{
 		  "connectorType" : "OracleCloudStorage",
 		  "id" : "%connectorId%",
 		  "connectorName" : "storage 1",
 		  "description" : "storage 1 description",
-		  "visibility" : [ "import" ],
+		  "visibility" : ["import"],
 		  "parameters" : {
 		    "blackList" : "rule123",
 		    "storageServiceUrl" : "https://storage.oraclecorp.com/v1/Storage-dfisher",
@@ -31,7 +31,7 @@
 		}
 		</RESPONSEJSON>
 	</TEST>
-	<TEST testname="testPOSTconnectors2">  <!-- create a new connector,connectorType : CloudStorage,visibility : export,whiteList: rules456 -->
+	<TEST testname="testPostconnectors">  <!-- create a new connector,connectorType : OracleCloudStorage,visibility : export,whiteList: rules456 -->
 		<REQUESTJSON>
 		{
 			"connectorType": "OracleCloudStorage",
@@ -47,11 +47,22 @@
 		}
 		</REQUESTJSON>
 		<STATUS>200</STATUS>
-		<RESPONSECONTAINS>"id" :</RESPONSECONTAINS>
-		<RESPONSEJSON><!--keep format without whiteSpace -->
+		<RESPONSEJSON>
+		{
+		  "connectorType" : "OracleCloudStorage",
+		  "id" : "%connectorId%",
+		  "connectorName" : "storage 1",
+		  "description" : "storage 1 description",
+		  "visibility" : [ "export" ],
+		  "parameters" : {
+		    "whiteList" : "rules456",
+		    "storageServiceUrl" : "https://storage.oraclecorp.com/v1/Storage-dfisher",
+		    "username" : "dfisher.Storageadmin"
+		  }
+		}
 		</RESPONSEJSON>
 	</TEST>
-	<TEST testname="testPOSTconnectors3">  <!-- create a new connector ,connectorType : CloudStorage,visibility : import,export,whiteList: rules456",blackList: rule123 -->
+	<TEST testname="testPostconnectors3">  <!-- create a new connector ,connectorType : OracleCloudStorage,visibility : import,export,whiteList: rules456",blackList: rule123 -->
 		<REQUESTJSON>
 		{
 			"connectorType": "OracleCloudStorage",
@@ -62,17 +73,120 @@
 				"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
 				"username" : "dfisher.Storageadmin",
 				"password" : "welcome1",
-				"whiteList": "rules456",
-				"blackList": "rule123"
+				"blackList": "rule123",
+				"whiteList": "rules456"
 			}
 		}
 		</REQUESTJSON>
 		<STATUS>200</STATUS>
-		<RESPONSECONTAINS>"id" :</RESPONSECONTAINS>
-		<RESPONSEJSON><!--keep format without whiteSpace -->
+		<RESPONSEJSON>
+		{
+		  "connectorType" : "OracleCloudStorage",
+		  "id" : "%connectorId%",
+		  "connectorName" : "storage 1",
+		  "description" : "storage 1 description",
+		  "visibility" : ["import","export"],
+		  "parameters" : {
+			"blackList" : "rule123",
+		    "whiteList" : "rules456",
+		    "storageServiceUrl" : "https://storage.oraclecorp.com/v1/Storage-dfisher",
+		    "username" : "dfisher.Storageadmin"
+		  }
+		}
 		</RESPONSEJSON>
 	</TEST>
-	<TEST testname="testPOSTconnectors4">	<!-- create a new connector with wrong connectorType format -->
+	<TEST testname="testPostconnectors4">  <!-- create a new connector without whitelist and blacklist,connectorType : OracleCloudStorage,visibility : import,export -->
+		<REQUESTJSON>
+		{
+			"connectorType": "OracleCloudStorage",
+			"connectorName": "storage 1",
+			"description": "storage 1 description",
+			"visibility": ["import","export"],
+			"parameters": {
+				"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+				"username" : "dfisher.Storageadmin",
+				"password" : "welcome1"
+			}
+		}
+		</REQUESTJSON>
+		<STATUS>200</STATUS>
+		<RESPONSEJSON>
+		{
+		  "connectorType" : "OracleCloudStorage",
+		  "id" : "%connectorId%",
+		  "connectorName" : "storage 1",
+		  "description" : "storage 1 description",
+		  "visibility" : ["import","export"],
+		  "parameters" : {
+		    "storageServiceUrl" : "https://storage.oraclecorp.com/v1/Storage-dfisher",
+		    "username" : "dfisher.Storageadmin"
+		  }
+		}
+		</RESPONSEJSON>
+	</TEST>
+	<TEST testname="testPostconnectors5">  <!-- create a new connector with "visibility" : [],connectorType : OracleCloudStorage ????-->
+		<REQUESTJSON>
+		{
+			"connectorType": "OracleCloudStorage",
+			"connectorName": "storage 1",
+			"description": "storage 1 description",
+			"visibility": [],
+			"parameters": {
+				"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+				"username" : "dfisher.Storageadmin",
+				"password" : "welcome1"
+			}
+		}
+		</REQUESTJSON>
+		<STATUS>200</STATUS>
+		<RESPONSEJSON>
+		{
+		  "connectorType" : "OracleCloudStorage",
+		  "id" : "%connectorId%",
+		  "connectorName" : "storage 1",
+		  "description" : "storage 1 description",
+		  "visibility" : [],
+		  "parameters" : {
+		    "storageServiceUrl" : "https://storage.oraclecorp.com/v1/Storage-dfisher",
+		    "username" : "dfisher.Storageadmin"
+		  }
+		}
+		</RESPONSEJSON>
+	</TEST>
+	<TEST testname="testPostconnectors6">  <!-- create a new connector with wrong storageServiceUrl & username & password-->
+		<REQUESTJSON>
+		{
+			"connectorType": "OracleCloudStorage",
+			"connectorName": "storage 1",
+			"description": "storage 1 description",
+			"visibility": ["import","export"],
+			"parameters": {
+				"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfishertest",
+				"username" : "dfisher.Storageadmintesttt",
+				"password" : "welcome1test",
+				"blackList": "rule123",
+				"whiteList": "rules456"
+			}
+		}
+		</REQUESTJSON>
+		<STATUS>200</STATUS>
+		<RESPONSEJSON>
+		{
+		  "connectorType" : "OracleCloudStorage",
+		  "id" : "%connectorId%",
+		  "connectorName" : "storage 1",
+		  "description" : "storage 1 description",
+		  "visibility" : ["import","export"],
+		  "parameters" : {
+			"blackList" : "rule123",
+		    "whiteList" : "rules456",
+		    "storageServiceUrl" : "https://storage.oraclecorp.com/v1/Storage-dfisher",
+		    "username" : "dfisher.Storageadmintesttt"
+		  }
+		}
+		</RESPONSEJSON>
+	</TEST>
+	<TEST testname="testPostconnectors7">	<!-- create a new connector with wrong connectorType format -->
 		<REQUESTJSON>
 		{
 			"connectorType": "OracleCloudStorageTEST",
@@ -88,11 +202,10 @@
 			}
 		}
 		</REQUESTJSON>
-		<RESPONSECONTAINS>"id" :</RESPONSECONTAINS>
-		<RESPONSEJSON><!--keep format without whiteSpace -->
-		</RESPONSEJSON>
+		<STATUS>400</STATUS>
+		<ERRORCODE>"o:errorCode": "00105"</ERRORCODE>
 	</TEST>
-	<TEST testname="testPOSTconnectors5">	<!-- create a new connector with incorrect json format -->
+	<TEST testname="testPostconnectors8">	<!-- create a new connector with incorrect json format -->
 		<REQUESTJSON>
 		{
 			"connectorType": "OracleCloudStorage",
@@ -106,11 +219,10 @@
 				"whiteList": "rules456",
 				"blackList": "rule123"		
 		</REQUESTJSON>
-		<RESPONSECONTAINS>"id" :</RESPONSECONTAINS>
-		<RESPONSEJSON><!--keep format without whiteSpace -->
-		</RESPONSEJSON>
+		<STATUS>400</STATUS>
+		<ERRORCODE>"o:errorCode": "00105"</ERRORCODE>
 	</TEST>
-	<TEST testname="testPOSTconnectors6">	<!-- create a new connector with missing parameter,missing visibility? -->
+	<TEST testname="testPostconnectors9">	<!-- create a new connector with missing password parameter-->
 		<REQUESTJSON>
 		{
 			"connectorType": "OracleCloudStorage",
@@ -119,16 +231,52 @@
 			"visibility": ["import","export"],
 			"parameters": {
 				"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+				"username" : "dfisher.Storageadmin",
 				"whiteList": "rules456",
 				"blackList": "rule123"
 			}
 		}
 		</REQUESTJSON>
-		<RESPONSECONTAINS>"id" :</RESPONSECONTAINS>
-		<RESPONSEJSON><!--keep format without whiteSpace -->
-		</RESPONSEJSON>
+		<STATUS>400</STATUS>
+		<ERRORCODE>"o:errorCode": "00108"</ERRORCODE>
 	</TEST>
-	<TEST testname="testPOSTconnectors7">	<!-- create a new connector with incorrect storageServiceUrl format /wrong username?-->
+	<TEST testname="testPostconnectors10">	<!-- create a new connector with missing storageServiceUrl parameter-->
+		<REQUESTJSON>
+		{
+			"connectorType": "OracleCloudStorage",
+			"connectorName": "storage 1",
+			"description": "storage 1 description",
+			"visibility": ["import","export"],
+			"parameters": {
+				"username" : "dfisher.Storageadmin",
+				"password" : "welcome1",
+				"whiteList": "rules456",
+				"blackList": "rule123"
+			}
+		}
+		</REQUESTJSON>
+		<STATUS>400</STATUS>
+		<ERRORCODE>"o:errorCode": "00108"</ERRORCODE>
+	</TEST>
+		<TEST testname="testPostconnectors11">	<!-- create a new connector with missing username parameter -->
+		<REQUESTJSON>
+		{
+			"connectorType": "OracleCloudStorage",
+			"connectorName": "storage 1",
+			"description": "storage 1 description",
+			"visibility": ["import","export"],
+			"parameters": {
+				"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+				"password" : "welcome1",
+				"whiteList": "rules456",
+				"blackList": "rule123"	
+				}
+		}	
+		</REQUESTJSON>
+		<STATUS>400</STATUS>
+		<ERRORCODE>"o:errorCode": "00108"</ERRORCODE>
+	</TEST>
+	<TEST testname="testPostconnectors12">	<!-- create a new connector with incorrect storageServiceUrl format-->
 		<REQUESTJSON>
 		{
 			"connectorType": "OracleCloudStorage",
@@ -144,11 +292,86 @@
 			}
 		}
 		</REQUESTJSON>
-		<RESPONSECONTAINS>"id" :</RESPONSECONTAINS>
-		<RESPONSEJSON><!--keep format without whiteSpace -->
-		</RESPONSEJSON>
+		<STATUS>400</STATUS>
+		<ERRORCODE>"o:errorCode": "00108"</ERRORCODE>
 	</TEST>
-	<TEST testname="testPOSTconnectors8">	<!-- create a new connector with too long parameter /username? -->
+	<TEST testname="testPostconnectors13">	<!-- create a new connector with too long storageServiceUrl parameter-->
+		<REQUESTJSON>
+		{
+			"connectorType": "OracleCloudStorage",
+			"connectorName": "storage 1",
+			"description": "storage 1 description",
+			"visibility": ["import","export"],
+			"parameters": {
+				"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890",
+				"username" : "dfisher.Storageadmin",
+				"password" : "welcome1",
+				"whiteList": "rules456",
+				"blackList": "rule123"
+			}
+		}
+		</REQUESTJSON>
+		<STATUS>400</STATUS>
+		<ERRORCODE>"o:errorCode": "00108"</ERRORCODE>
+	</TEST>
+	<TEST testname="testPostconnectors14">	<!-- create a new connector with too long username parameter-->
+		<REQUESTJSON>
+		{
+			"connectorType": "OracleCloudStorage",
+			"connectorName": "storage 1",
+			"description": "storage 1 description",
+			"visibility": ["import","export"],
+			"parameters": {
+				"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+				"username" : "123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789",
+				"password" : "welcome1",
+				"whiteList": "rules456",
+				"blackList": "rule123"
+			}
+		}
+		</REQUESTJSON>
+		<STATUS>400</STATUS>
+		<ERRORCODE>"o:errorCode": "00108"</ERRORCODE>
+	</TEST>
+	<TEST testname="testPostconnectors15">	<!-- create a new connector with too long password parameter -->
+		<REQUESTJSON>
+		{
+			"connectorType": "OracleCloudStorage",
+			"connectorName": "storage 1",
+			"description": "storage 1 description",
+			"visibility": ["import","export"],
+			"parameters": {
+				"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+				"username" : "dfisher.Storageadmin",
+				"password" : "welcome1234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567",
+				"whiteList": "rules456",
+				"blackList": "rule123"
+			}
+		}
+		</REQUESTJSON>
+		<STATUS>400</STATUS>
+		<ERRORCODE>"o:errorCode": "00108"</ERRORCODE>
+	</TEST>
+	<TEST testname="testPostconnectors16">	<!-- create a new connector with too long whiteList parameter -->
+		<REQUESTJSON>
+		{
+			"connectorType": "OracleCloudStorage",
+			"connectorName": "storage 1",
+			"description": "storage 1 description",
+			"visibility": ["import","export"],
+			"parameters": {
+				"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+				"username" : "dfisher.Storageadmin",
+				"password" : "welcome1",
+				"whiteList": "rules456234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567891234567",
+				"blackList": "rule123"
+			}
+		}
+		</REQUESTJSON>
+		<STATUS>400</STATUS>
+		<ERRORCODE>"o:errorCode": "00108"</ERRORCODE>
+	</TEST>
+	<TEST testname="testPostconnectors17">	<!-- create a new connector with too long blackList parameter -->
 		<REQUESTJSON>
 		{
 			"connectorType": "OracleCloudStorage",
@@ -164,8 +387,44 @@
 			}
 		}
 		</REQUESTJSON>
-		<RESPONSECONTAINS>"id" :</RESPONSECONTAINS>
-		<RESPONSEJSON><!--keep format without whiteSpace -->
-		</RESPONSEJSON>
+		<STATUS>400</STATUS>
+		<ERRORCODE>"o:errorCode": "00108"</ERRORCODE>
+	</TEST>
+	<TEST testname="testPostconnectors18">	<!-- create a new connector without visibility ??? -->
+		<REQUESTJSON>
+		{
+			"connectorType": "OracleCloudStorage",
+			"connectorName": "storage 1",
+			"description": "storage 1 description",
+			"parameters": {
+				"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+				"username" : "dfisher.Storageadmin",
+				"password" : "welcome1",
+				"whiteList": "rules456",
+				"blackList": "rule123"
+			}
+		}
+		</REQUESTJSON>
+		<STATUS>400</STATUS>
+		<ERRORCODE>"o:errorCode": "00108"</ERRORCODE>
+	</TEST>
+	<TEST testname="testPostconnectors19">	<!-- create a new connector with wrong visibility parmeter "visibility": ["importttt","export"], -->
+		<REQUESTJSON>
+		{
+			"connectorType": "OracleCloudStorage",
+			"connectorName": "storage 1",
+			"description": "storage 1 description",
+			"visibility": ["importttt","export"],
+			"parameters": {
+				"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+				"username" : "dfisher.Storageadmin",
+				"password" : "welcome1",
+				"whiteList": "rules456",
+				"blackList": "rule123"
+			}
+		}
+		</REQUESTJSON>
+		<STATUS>400</STATUS>
+		<ERRORCODE>"o:errorCode": "00105"</ERRORCODE>
 	</TEST>
 </RESULT>
