@@ -56,9 +56,15 @@ public class GetConnectorTypesTest {
         System.out.println(status);
         Map<String, String> res_map=GetResourceXML.parseXml("GetConnectorTypesTest.xml", "testGetConnectorTypes");
         String res_expected=res_map.get("RESPONSEJSON").trim();
+<<<<<<< HEAD
       	assertTrue("ConnectorTypes response is NOT as expected",res.equals(res_expected));            
 	}*/
-
+//=======
+//      	assertTrue("ConnectorTypes response is NOT as expected",GetResourceXML.trimAllSpaces(res).equals(GetResourceXML.trimAllSpaces(res_expected)));
+//   	
+//            
+//	}
+//>>>>>>> branch 'master' of https://github.com/hiwanglong/connectorserviceTest.git
 	
 	@Test
 	public void testGetConnectorTypes(){

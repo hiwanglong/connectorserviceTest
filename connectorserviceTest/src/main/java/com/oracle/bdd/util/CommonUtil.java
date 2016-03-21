@@ -76,10 +76,14 @@ public class CommonUtil {
 		return response;
 	}
 	
+
 	/**
-	 * delete all connecters
+	 * delete all posted connectors
+	 * @param client	Client
+	 * @param getUrl	String, eg: Constants.connectorUrl+Constants.connectors
+	 * @param delUrl	String, eg: Constants.connectorUrl+Constants.connectorId
 	 */
-	public void cleanConnectors(Client client, String getUrl, String delUrl){ //getUrl=connectorUrl+connectors; delUrl=connectorUrl+connectorId
+	public void cleanConnectors(Client client, String getUrl, String delUrl){ 
 	
 		//get all connectors' id
 		List <String> connectotIds=getConnectorId(executeGet(client, getUrl));
@@ -112,17 +116,18 @@ public class CommonUtil {
 	} 
 	
 	
+
 	/**
-	 * get connectorId from response json
-	 * @param response	ClientResponse
-	 * @return
+	 * get connectors' id from response
+	 * @param response
+	 * @return connectorsIds
 	 */
 	public List<String> getConnectorId(ClientResponse response){
 
 		List<String> connectorIds=new ArrayList<String>();
 		String res=response.getEntity(String.class);
 		JsonParser parser = new JsonParser(res);
-		if (res.contains("items")){
+		if (res.contains("items")){ 
 			int num=parser.arrayElemSize(parser.jsonObject, "items");
 			for (int i=0; i<num; i++){
 				connectorIds.add(parser.parser(parser.jsonObject, "items["+i+"].connectorId").toString());
