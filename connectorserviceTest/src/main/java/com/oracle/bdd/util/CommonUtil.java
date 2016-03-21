@@ -21,6 +21,7 @@ public class CommonUtil {
 	private Map<String, String> xmlMap;
 	
 	
+	
 	/**
 	 * execute POST API
 	 * @param client 		Client
@@ -80,13 +81,13 @@ public class CommonUtil {
 	/**
 	 * delete all posted connectors
 	 * @param client	Client
-	 * @param getUrl	String, eg: Constants.connectorUrl+Constants.connectors
-	 * @param delUrl	String, eg: Constants.connectorUrl+Constants.connectorId
+	 * @param getUrl	String, eg:Constants.connectors
+	 * @param delUrl	String, eg:Constants.connectorId
 	 */
 	public void cleanConnectors(Client client, String getUrl, String delUrl){ 
 	
 		//get all connectors' id
-		List <String> connectotIds=getConnectorId(executeGet(client, getUrl));
+		List <String> connectotIds=getConnectorId(executeGet(client, getUrl).getEntity(String.class));
 		
 		//delete all connectors one by one
 		for (int i=0; i<connectotIds.size();i++){
@@ -122,12 +123,12 @@ public class CommonUtil {
 	 * @param response
 	 * @return connectorsIds
 	 */
-	public List<String> getConnectorId(ClientResponse response){
+	public List<String> getConnectorId(String jsonResponse){
 
 		List<String> connectorIds=new ArrayList<String>();
-		String res=response.getEntity(String.class);
-		JsonParser parser = new JsonParser(res);
-		if (res.contains("items")){ 
+	
+		JsonParser parser = new JsonParser(jsonResponse);
+		if (jsonResponse.contains("items")){ 
 			int num=parser.arrayElemSize(parser.jsonObject, "items");
 			for (int i=0; i<num; i++){
 				connectorIds.add(parser.parser(parser.jsonObject, "items["+i+"].connectorId").toString());
