@@ -53,7 +53,7 @@ public class GetConnectorTypesTest {
         System.out.println(status);
         Map<String, String> res_map=GetResourceXML.parseXml("GetConnectorTypesTest.xml", "testGetConnectorTypes");
         String res_expected=res_map.get("RESPONSEJSON").trim();
-      	assertTrue("ConnectorTypes response is NOT as expected",res.equals(res_expected));
+      	assertTrue("ConnectorTypes response is NOT as expected",GetResourceXML.trimAllSpaces(res).equals(GetResourceXML.trimAllSpaces(res_expected)));
    	
             
 	}
