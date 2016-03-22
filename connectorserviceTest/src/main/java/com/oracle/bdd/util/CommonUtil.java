@@ -50,6 +50,20 @@ public class CommonUtil {
 		return getResponseMap(response);
 	}
 	
+	/**
+	 * execute PUT API
+	 * @param requestUrl	String
+	 * @param testName		String
+	 * @return	Map<String, String> responseMap status,jsonRes
+	 */
+	public Map<String, String> executePut(String requestUrl,String testName){		
+		webRes = client.resource(requestUrl);
+		xmlMap = GetResourceXML.parseXml(xmlName,testName);
+		String reqJson = xmlMap.get("REQUESTJSON");	
+			
+		response =webRes.type("application/json").acceptLanguage(language).put(ClientResponse.class, reqJson);
+		return getResponseMap(response);
+	}
 	
 	
 	/**

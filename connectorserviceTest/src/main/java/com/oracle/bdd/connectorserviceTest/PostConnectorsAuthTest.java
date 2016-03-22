@@ -33,14 +33,7 @@ public class PostConnectorsAuthTest {
 		connectorId=util.getConnectorId(connectorRes).get(0);
 				
 		//update reqUrl	
-		System.out.println(reqUrl);
-		System.out.println("=============================================================");
-		reqUrl=Constants.connectorAuth;
-		System.out.println(reqUrl);
-		System.out.println("=============================================================");
 		reqUrl=Constants.connectorAuth.replace("{connectorId}",connectorId);
-		System.out.println(reqUrl);
-		System.out.println("=============================================================");
 		
 		
 	}
@@ -48,7 +41,8 @@ public class PostConnectorsAuthTest {
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		//delete connector
-		util.executeDelete(reqUrl);
+		String delUrl=Constants.connectorId.replace("{connectorId}",connectorId);
+		util.executeDelete(delUrl);
 		
 	}
 
@@ -64,15 +58,13 @@ public class PostConnectorsAuthTest {
 	@Test
 	public void testPostConnectorsAuthTest1() {
 		
-//		String testName="testPostConnectorsAuthTest1";
-//		
-//		//post auth
-//		System.out.println(reqUrl+"===========================================");
-//		response=util.executePost(reqUrl, testName);
-//		System.out.println(response.get("status"));
-//		
-//		//check response
-//		util.checkStatus(response, testName);
+		String testName="testPostConnectorsAuth1";
+		
+		//post auth
+		response=util.executePost(reqUrl, testName);
+		
+		//check response
+		util.checkStatus(response, testName);
 		
 	}
 
