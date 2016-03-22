@@ -145,8 +145,4 @@ public class PostConnectsTest {
 		comUtil.checkResponse(responseMap,testName);
 	}
 
-
-	
-	
-	
 }

@@ -87,8 +87,8 @@
 		  "description" : "testPostconnectors3",
 		  "visibility" : ["import","export"],
 		  "parameters" : {
-			"blacklist" : "rule123",
 		    "whiteList" : "rules456",
+			"blacklist" : "rule123",
 		    "storageServiceUrl" : "https://storage.oraclecorp.com/v1/Storage-dfisher",
 		    "username" : "dfisher.Storageadmin"
 		  }
@@ -178,8 +178,8 @@
 		  "description" : "testPostconnectors6",
 		  "visibility" : ["import","export"],
 		  "parameters" : {
-			"blacklist" : "rule123",
 		    "whiteList" : "rules456",
+			"blacklist" : "rule123",
 		    "storageServiceUrl" : "https://test",
 		    "username" : "dfisher.Storageadmintesttt"
 		  }
@@ -209,8 +209,8 @@
 		  "connectorName" : "testPostconnectors7",
 		  "description" : "testPostconnectors7",
 		  "parameters" : {
-			"blacklist" : "rule123",
 		    "whiteList" : "rules456",
+			"blacklist" : "rule123",
 		    "storageServiceUrl" : "https://storage.oraclecorp.com/v1/Storage-dfisher",
 		    "username" : "dfisher.Storageadmin"
 		  }

@@ -204,6 +204,7 @@ public class CommonUtil {
 		if(!"204".equals(responseStatus)){
 			responseMap.put("jsonRes", response.getEntity(String.class));
 		}		
+		response.close();
 		return responseMap;
 	}
 }
