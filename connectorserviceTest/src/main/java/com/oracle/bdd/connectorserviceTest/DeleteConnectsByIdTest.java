@@ -13,13 +13,13 @@ import com.oracle.bdd.util.Constants;
 import com.sun.jersey.api.client.Client;
 
 
-public class GetConnectsByIdTest{
+public class DeleteConnectsByIdTest {
 	
 	private static Client client = Client.create();;
 	private String reqUrl = Constants.connectors;
 	private String testName;
 	private Map<String, String> responseMap ;
-	private String xmlName = "GetConnectsByIdTest.xml";
+	private String xmlName = "DeleteConnectsByIdTest.xml";
 	
 	CommonUtil comUtil = new CommonUtil(client, xmlName);
 	
@@ -37,8 +37,6 @@ public class GetConnectsByIdTest{
 
 	@After
 	public void tearDown() throws Exception {
-		//delete connector by id after each test
-		comUtil.executeDelete(reqUrl+"/"+comUtil.getConnectorId(responseMap.get("jsonRes")).get(0));
 	}
 	
 	/**
@@ -46,14 +44,13 @@ public class GetConnectsByIdTest{
 	 */
 	@Test
 	public void testDeleteConnectorsById1() {
-		testName = "getconnectorsById1";
+		testName = "deleteconnectorsById1";
 		
 		//post connector		
 		responseMap = comUtil.executePost(reqUrl,testName);
 		
-		//get connector by id
-		comUtil.executeGet(reqUrl+"/"+comUtil.getConnectorId(responseMap.get("jsonRes")).get(0));
+		//delete connector by id
+		comUtil.executeDelete(reqUrl+"/"+comUtil.getConnectorId(responseMap.get("jsonRes")).get(0));
 		comUtil.checkStatus(responseMap, testName);
-		comUtil.checkResponse(responseMap, testName);
 	}
 }

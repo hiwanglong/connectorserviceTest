@@ -39,12 +39,14 @@ public class CommonUtil {
 	 * execute POST API
 	 * @param requestUrl	String
 	 * @param testName		String
-	 * @return	Map<String, String> responseMap
+	 * @return	Map<String, String> responseMap status,jsonRes
 	 */
 	public Map<String, String> executePost(String requestUrl,String testName){		
 		webRes = client.resource(requestUrl);
 		xmlMap = GetResourceXML.parseXml(xmlName,testName);
 		String reqJson = xmlMap.get("REQUESTJSON");	
+		System.out.println("execute POST "+requestUrl);
+		
 		response =webRes.type("application/json").acceptLanguage(language).post(ClientResponse.class, reqJson);
 		return getResponseMap(response);
 	}
@@ -54,11 +56,11 @@ public class CommonUtil {
 	/**
 	 * execute GET API
 	 * @param requestUrl	String
-	 * @return Map<String, String> responseMap
+	 * @return Map<String, String> responseMap status,jsonRes
 	 */
 	public Map<String, String> executeGet(String requestUrl){
-		webRes = client.resource(requestUrl);
-		//System.out.println(reqJson);				
+		webRes = client.resource(requestUrl);			
+		System.out.println("execute GET "+requestUrl);
 		
 		//execute GET
 		response = webRes.acceptLanguage(language).get(ClientResponse.class);
@@ -70,10 +72,11 @@ public class CommonUtil {
 	/**
 	 * execute DELETE API
 	 * @param requestUrl	String
-	 * @return Map<String, String> responseMap
+	 * @return Map<String, String> responseMap status,jsonRes
 	 */
 	public Map<String, String>  executeDelete(String requestUrl){
-		webRes = client.resource(requestUrl);	
+		webRes = client.resource(requestUrl);
+		System.out.println("execute DELETE "+requestUrl);
 		
 		//execute DELETE
 		response = webRes.acceptLanguage(language).delete(ClientResponse.class);
@@ -111,6 +114,8 @@ public class CommonUtil {
 		webRes = client.resource(requestUrl);
 		xmlMap = GetResourceXML.parseXml(xmlName,testName);
 		String[] reqJsonArr = xmlMap.get("REQUESTJSON").split(";");	
+		
+		System.out.println("execute POST batch");
 		for(String reqJson : reqJsonArr){
 			//execute POST
 			webRes.type("application/json").acceptLanguage(language).post(ClientResponse.class, reqJson);
@@ -127,6 +132,7 @@ public class CommonUtil {
 		xmlMap = GetResourceXML.parseXml(xmlName,testName);
 		
 		output = responseMap.get("jsonRes");
+		System.out.println(output);
 		
 		String expectedResponse = GetResourceXML.trimAllSpaces(xmlMap.get("RESPONSEJSON"));	
 		
@@ -146,6 +152,8 @@ public class CommonUtil {
 	public void checkStatus(Map<String,String> responseMap,String testName){
 		xmlMap = GetResourceXML.parseXml(xmlName,testName);
 		String status = xmlMap.get("STATUS");
+		System.out.println("status==========="+status);
+		
 		assertEquals(testName+" response status is not "+status, status,responseMap.get("status"));	//check status 
 	}
 	
@@ -159,6 +167,8 @@ public class CommonUtil {
 		xmlMap = GetResourceXML.parseXml(xmlName,testName);
 		
 		output = responseMap.get("jsonRes");
+		System.out.println(output);
+		
 		String nodeElement = xmlMap.get(nodeName);	
 		
 		assertTrue(testName+" response doesn't contains "+ nodeElement,output.contains(nodeElement));	
@@ -204,8 +214,11 @@ public class CommonUtil {
 	 * @return Map<String, String> status,jsonRes
 	 */
 	public Map<String, String> getResponseMap(ClientResponse response){
-		responseMap.put("status", response.getStatus()+"");
-		responseMap.put("jsonRes", response.getEntity(String.class));
+		String responseStatus = response.getStatus()+"";
+		responseMap.put("status", responseStatus);
+		if(!"204".equals(responseStatus)){
+			responseMap.put("jsonRes", response.getEntity(String.class));
+		}		
 		return responseMap;
 	}
 }
