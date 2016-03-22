@@ -45,8 +45,7 @@ public class CommonUtil {
 		webRes = client.resource(requestUrl);
 		xmlMap = GetResourceXML.parseXml(xmlName,testName);
 		String reqJson = xmlMap.get("REQUESTJSON");	
-		System.out.println("execute POST "+requestUrl);
-		
+			
 		response =webRes.type("application/json").acceptLanguage(language).post(ClientResponse.class, reqJson);
 		return getResponseMap(response);
 	}
