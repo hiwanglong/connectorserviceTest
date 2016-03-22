@@ -101,6 +101,7 @@ public class CommonUtil {
 			//execute DELETE
 			webRes = client.resource(delUrl);	
 			response = webRes.acceptLanguage(language).delete(ClientResponse.class);
+			response.close();
 		}	
 	}
 	
@@ -222,4 +223,5 @@ public class CommonUtil {
 		response.close();
 		return responseMap;
 	}
+		
 }

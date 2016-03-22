@@ -56,4 +56,5 @@ public class GetConnectsByIdTest{
 		comUtil.checkStatus(responseMap, testName);
 		comUtil.checkResponse(responseMap, testName);
 	}
+
 }

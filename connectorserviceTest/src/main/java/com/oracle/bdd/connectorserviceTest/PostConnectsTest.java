@@ -138,11 +138,10 @@ public class PostConnectsTest {
 	@Test
 	public void testPOSTconnectors8() {
 		testName = "testPostconnectors8";
-		
+			
 		//post connector		
 		responseMap = comUtil.executePost(reqUrl,testName);
 		comUtil.checkStatus(responseMap, testName);
 		comUtil.checkResponse(responseMap,testName);
 	}
-
 }
