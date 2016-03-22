@@ -167,10 +167,10 @@ public class CommonUtil {
 	public void checkResponseNode(Map<String,String> responseMap,String testName,String nodeName){
 		xmlMap = GetResourceXML.parseXml(xmlName,testName);
 		
-		output = responseMap.get("jsonRes");
+		output = GetResourceXML.trimAllSpaces(responseMap.get("jsonRes"));
 		System.out.println(output);
 		
-		String nodeElement = xmlMap.get(nodeName);	
+		String nodeElement = GetResourceXML.trimAllSpaces(xmlMap.get(nodeName));	
 		
 		assertTrue(testName+" response doesn't contains "+ nodeElement,output.contains(nodeElement));	
 		
