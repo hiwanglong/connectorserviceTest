@@ -12,16 +12,7 @@
     "description" : "Connector to the Oracle Storage Cloud Service",
     "icon" : "base 64 encoded binary",
     "parameters" : {
-      "blackList" : {
-        "displayName" : "Black List",
-        "description" : "A black list for filtering objects returned by the connector",
-        "type" : {
-          "id" : "String",
-          "maxLength" : 256
-        },
-        "required" : false
-      },
-      "whiteList" : {
+     "whiteList" : {
         "displayName" : "White List",
         "description" : "A white list for filtering objects returned by the connector",
         "type" : {
@@ -39,6 +30,15 @@
           "minLength" : 6
         },
         "required" : true
+      },
+      "blacklist" : {
+        "displayName" : "Black List",
+        "description" : "A black list for filtering objects returned by the connector",
+        "type" : {
+          "id" : "String",
+          "maxLength" : 256
+        },
+        "required" : false
       },
       "storageServiceUrl" : {
         "displayName" : "Oracle Storage Cloud Service URL",

@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import com.oracle.bdd.util.CommonUtil;
 import com.oracle.bdd.util.Constants;
+import com.oracle.bdd.util.JsonParser;
 import com.sun.jersey.api.client.Client;
 
 
@@ -24,6 +25,7 @@ public class GetConnectorsTest {
 	String reqUrl=Constants.connectors;
 	int count;
 	String res, testCase;
+	JsonParser parser;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {		
@@ -37,7 +39,8 @@ public class GetConnectorsTest {
 	public void setUp() throws Exception {
 		Map<String, String> response=util.executeGet(reqUrl);
 		res = response.get("jsonRes");
-		count=res.split("id").length-1;
+	    parser = new JsonParser(res);
+		count=parser.arrayElemSize(parser.jsonObject, "items");
         if (count!=0){
         	//delete all connectors
         	util.cleanConnectors();
@@ -46,11 +49,12 @@ public class GetConnectorsTest {
 
 	@After
 	public void tearDown() throws Exception {
+		
 	}
 	
 
 	@Test
-	public void testGetConnectorsTest1() { // check get connectors with item=1
+	public void testGetConnectorsTest1() { // check get connectors with items=1
 		
 		testCase="testGetConnectorsTest1";
 		
@@ -58,46 +62,45 @@ public class GetConnectorsTest {
 		util.executePost(reqUrl,testCase);
 		
 		// get connectors
-		util.executeGet(reqUrl);
+		res=util.executeGet(reqUrl).get("jsonRes");
+		parser = new JsonParser(res);
+		count=parser.arrayElemSize(parser.jsonObject, "items");
 		
         // check count=1
-		count=res.split("id").length-1;
 		assertEquals("Connectors' number is NOT 1: ",1,count);
 	   
 	}
 	
 	@Test
-	public void testGetConnectorsTest2() { // check get connectors with item=2 
+	public void testGetConnectorsTest2() { // check get connectors with items=2 
 		
 		testCase="testGetConnectorsTest2";
 		
 		// post two connectors
-		util.executePost(reqUrl,testCase);
+		util.executePostBatch(reqUrl,testCase);
 		
 		// get connectors
-		util.executeGet(reqUrl);
+		res=util.executeGet(reqUrl).get("jsonRes");
+		parser = new JsonParser(res);
+		count=parser.arrayElemSize(parser.jsonObject, "items");
 		
         // check count=2
-		count=res.split("id").length-1;
 		assertEquals("Connectors' number is NOT 2: ",2,count);
 	   
 	}
 	
 	@Test
-	public void testGetConnectorsTest3() { // check get connectors with item=0
+	public void testGetConnectorsTest3() { // check get connectors with items=0
 		
 		// no connectors have been posted
 		
 		// get connectors
-		util.executeGet(reqUrl);
+		res=util.executeGet(reqUrl).get("jsonRes");
+		parser = new JsonParser(res);
+		count=parser.arrayElemSize(parser.jsonObject, "items");
 		
         // check count=0
-		count=res.split("id").length-1;
 		assertEquals("Connectors' number is NOT 0: ",0,count);
 	   
 	}
-	
-	
-
-
 }

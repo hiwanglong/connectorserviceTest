@@ -17,24 +17,24 @@ import com.sun.jersey.api.client.Client;
 public class PostConnectorsAuthTest {
 
 	static Client client = Client.create();
-	static String testFile="GetConnectorsTest.xml";
+	static String testFile="PostConnectorsAuthTest.xml";
 	static CommonUtil util=new CommonUtil(client, testFile);
 	static String reqUrl;
 	static String testCase, connectorId;
 	Map<String, String>response;
 	
 	
-	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		//post connector 
-		String connectorRes=util.executePost(Constants.connectors, "precondition").get("jsonRes");
+		String connectorRes=util.executePost(Constants.connectors, "setUpPostConnectorsAuth").get("jsonRes");
 						
 	    //get connector id
 		connectorId=util.getConnectorId(connectorRes).get(0);
 				
 		//update reqUrl	
 		reqUrl=Constants.connectorAuth.replace("{connectorId}",connectorId);
+		System.out.println(reqUrl);
 		
 		
 	}
@@ -46,14 +46,6 @@ public class PostConnectorsAuthTest {
 
 	@Before
 	public void setUp() throws Exception {
-/*		//post connector 
-		String connectorRes=util.executePost(Constants.connectors, "precondition").get("jsonRes");
-						
-	    //get connector id
-		connectorId=util.getConnectorId(connectorRes).get(0);
-				
-		//update reqUrl	
-		reqUrl=reqUrl.replace("{connectorId}",connectorId);*/
 	}
 
 	@After
@@ -66,8 +58,8 @@ public class PostConnectorsAuthTest {
 	}
 	
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testPostConnectorsAuthTest1() {
+		//fail("Not yet implemented");
 	}
 
 }

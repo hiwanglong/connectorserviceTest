@@ -20,6 +20,7 @@ public class GetConnectorTypesTest {
 	Client client = Client.create();
 	String testFile="GetConnectorTypesTest.xml";
 	CommonUtil util=new CommonUtil(client, testFile);
+	String reqUrl=Constants.connectorTypes;
 	
 
 	@BeforeClass
@@ -43,8 +44,7 @@ public class GetConnectorTypesTest {
 	
 	@Test
 	public void testGetConnectorTypes(){
-		
-		String reqUrl=Constants.connectorTypes;
+	
 		String testCase="testGetConnectorTypes";
 		
 		//get connector types
