@@ -87,6 +87,7 @@ public class CommonUtil {
 
 	/**
 	 * delete all posted connectors
+	 * @param client	Client
 	 */
 	public void cleanConnectors(){ 
 	
@@ -96,12 +97,16 @@ public class CommonUtil {
 		//delete all connectors one by one
 		for (int i=0; i<connectotIds.size();i++){
 			String delUrl=Constants.connectorId.replace("{connectorId}",connectotIds.get(i) );
-			executeDelete(delUrl);
+			
+			//execute DELETE
+			webRes = client.resource(delUrl);	
+			response = webRes.acceptLanguage(language).delete(ClientResponse.class);
 		}	
 	}
 	
+
 	/**
-	 * execute POST batch
+	 *  post a batch of request
 	 * @param requestUrl	String
 	 * @param testName	String
 	 */
@@ -134,6 +139,7 @@ public class CommonUtil {
 		if(expectedResponse.contains("%connectorId%")){
 			expectedResponse = expectedResponse.replace("%connectorId%", getConnectorId(output).get(0));
 		}
+		
 		assertEquals(testName+" response and expectation are different",expectedResponse,GetResourceXML.trimAllSpaces(output));
 		
 	} 
@@ -172,10 +178,9 @@ public class CommonUtil {
 
 	/**
 	 * get connectors' id from response
-	 * @param response String, a Json String Response
+	 * @param response 	String, a JSON String Response
 	 * @return List<String> connectorsIds
 	 */
-
 	public List<String> getConnectorId(String response){
 
 		List<String> connectorIds=new ArrayList<String>();
@@ -184,13 +189,23 @@ public class CommonUtil {
 		if (response.contains("items")){ 
 			int num=parser.arrayElemSize(parser.jsonObject, "items");
 			for (int i=0; i<num; i++){
-				connectorIds.add(parser.parser(parser.jsonObject, "items["+i+"].connectorId").toString());
+				connectorIds.add(parser.parser(parser.jsonObject, "items["+i+"].id").toString());
 			}
 		}
 		else{
 			connectorIds.add(parser.parser(parser.jsonObject, "id").toString());
 		}
 		return connectorIds;
+	}
+	
+	/**
+	 * get token from response
+	 * @param response	String, a JSON String Response
+	 * @return
+	 */
+	public String getToken(String response){
+		JsonParser parser = new JsonParser(response);
+		return parser.parser(parser.jsonObject, "token").toString();
 	}
 	
 	/**
