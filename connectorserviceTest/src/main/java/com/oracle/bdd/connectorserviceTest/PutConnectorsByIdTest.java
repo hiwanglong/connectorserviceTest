@@ -17,8 +17,7 @@ public class PutConnectorsByIdTest {
 	Client client = Client.create();
 	String testFile="PutConnectorsByIdTest.xml";
 	CommonUtil util=new CommonUtil(client, testFile);
-	String reqUrl;
-	String testCase, connectorId;
+	String testName, connectorId, reqUrl;
 	Map<String, String> response;
 	
 
@@ -33,6 +32,7 @@ public class PutConnectorsByIdTest {
 
 	@Before
 	public void setUp() throws Exception {
+		
 		//post connector
 		String connectorRes=util.executePost(Constants.connectors, "setUpPutConnectorsById").get("jsonRes");
 		
@@ -45,14 +45,18 @@ public class PutConnectorsByIdTest {
 
 	@After
 	public void tearDown() throws Exception {
+		
 		//delete connector
 		util.executeDelete(reqUrl);
 	}
 
+	/**
+	 * check all nodes updated without "connectorType" to put
+	 */
 	@Test
-	public void testPutConnectorsById1() {  // check all nodes updated without "connectorType" to put
+	public void testPutConnectorsById1() {  
 		
-		String testName="testPutConnectorsById1";
+		testName="testPutConnectorsById1";
 		
 		//put connector
 		response=util.executePut(reqUrl, testName);
@@ -64,10 +68,13 @@ public class PutConnectorsByIdTest {
 		util.checkResponse(response, testName);	
 	}
 	
+	/**
+	 * check  missing "connectorName" "description" "visibility" to put
+	 */
 	@Test
-	public void testPutConnectorsById2() {  // check  missing "connectorName" "description" "visibility" to put
+	public void testPutConnectorsById2() {  
 		
-		String testName="testPutConnectorsById2";
+		testName="testPutConnectorsById2";
 		
 		//put connector
 		response=util.executePut(reqUrl, testName);
@@ -79,10 +86,13 @@ public class PutConnectorsByIdTest {
 		util.checkResponse(response, testName);	
 	}
 	
+	/**
+	 * check  missing "blackList" "whiteList" to put
+	 */
 	@Test
-	public void testPutConnectorsById3() {  // check  missing "blackList" "whiteList" to put
+	public void testPutConnectorsById3() {  
 		
-		String testName="testPutConnectorsById2";
+		testName="testPutConnectorsById3";
 		
 		//put connector
 		response=util.executePut(reqUrl, testName);

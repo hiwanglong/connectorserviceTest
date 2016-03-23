@@ -17,20 +17,20 @@ public class PostConnectorsAuthTest {
 	static Client client = Client.create();
 	static String testFile="PostConnectorsAuthTest.xml";
 	static CommonUtil util=new CommonUtil(client, testFile);
-	static String reqUrl;
-	static String testCase, connectorId;
+	static String reqUrl, connectorId;
+	String testName;
 	Map<String, String> response;
-	
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		
 		//post connector 
 		String connectorRes=util.executePost(Constants.connectors, "setUpPostConnectorsAuth").get("jsonRes");
 						
 	    //get connector id
 		connectorId=util.getConnectorId(connectorRes).get(0);
 				
-		//update reqUrl	
+		//update connectorAuth reqUrl	
 		reqUrl=Constants.connectorAuth.replace("{connectorId}",connectorId);
 		
 		
@@ -38,6 +38,7 @@ public class PostConnectorsAuthTest {
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
+		
 		//delete connector
 		String delUrl=Constants.connectorId.replace("{connectorId}",connectorId);
 		util.executeDelete(delUrl);
@@ -53,17 +54,19 @@ public class PostConnectorsAuthTest {
 	}
 
 
+	/**
+	 * check request with valid body to post, status:200
+	 */
 	@Test
 	public void testPostConnectorsAuthTest1() {
 		
-		String testName="testPostConnectorsAuth1";
+		testName="testPostConnectorsAuth1";
 		
-		//post auth
+		//post auth request
 		response=util.executePost(reqUrl, testName);
 		
-		//check response
+		//check status
 		util.checkStatus(response, testName);
-		
 	}
 
 }

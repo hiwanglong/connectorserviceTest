@@ -17,13 +17,14 @@ public class PostConnectorsAuthNegTest {
 	static Client client = Client.create();
 	static String testFile="PostConnectorsAuthNegTest.xml";
 	static CommonUtil util=new CommonUtil(client, testFile);
-	static String reqUrl;
-	static String testCase, connectorId;
+	static String reqUrl, connectorId;
+	String testName;
 	Map<String, String> response;
 	
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		
 		//post connector 
 		String connectorRes=util.executePost(Constants.connectors, "setUpPostConnectorsAuthNeg").get("jsonRes");
 						
@@ -38,6 +39,7 @@ public class PostConnectorsAuthNegTest {
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
+		
 		//delete connector
 		String delUrl=Constants.connectorId.replace("{connectorId}",connectorId);
 		util.executeDelete(delUrl);
@@ -52,126 +54,148 @@ public class PostConnectorsAuthNegTest {
 	public void tearDown() throws Exception {
 	}
 
-
+	/**
+	 * check request with invalid connectorId to post, err:00101
+	 */
 	@Test
-	public void testPostConnectorsAuthNeg1() { //check request with invalid connectorId to post, err:00101
+	public void testPostConnectorsAuthNeg1() { 
 		
-		String testName="testPostConnectorsAuthNeg1";
+		testName="testPostConnectorsAuthNeg1";
 		
 		//post auth
 		response=util.executePost(Constants.connectorAuth.replace("{connectorId}", "xxxxxxxxxx"), testName);
 				
-		//check response
+		//check status
 		util.checkStatus(response, testName);
 		
 		//check errCode
 		util.checkResponseNode(response, testName, "ERRORCODE");
 	}
 	
+	/**
+	 * check request with body NULL to post, err:00105
+	 */
 	@Test
-	public void testPostConnectorsAuthNeg2() { //check request with body NULL to post, err:00105
+	public void testPostConnectorsAuthNeg2() { 
 		
-		String testName="testPostConnectorsAuthNeg2";
+		testName="testPostConnectorsAuthNeg2";
 		
 		//post auth
 		response=util.executePost(reqUrl, testName);
 				
-		//check response
+		//check status
 		util.checkStatus(response, testName);
 		
 		//check errCode
 		util.checkResponseNode(response, testName, "ERRORCODE");
 	}
 	
+	/**
+	 * check request with extra nodes to post, err:00105
+	 */
 	@Test
-	public void testPostConnectorsAuthNeg3() { //check request with extra nodes to post, err:00105
+	public void testPostConnectorsAuthNeg3() { 
 		
-		String testName="testPostConnectorsAuthNeg3";
+		testName="testPostConnectorsAuthNeg3";
 		
 		//post auth
 		response=util.executePost(reqUrl, testName);
 				
-		//check response
+		//check status
 		util.checkStatus(response, testName);
 		
 		//check errCode
 		util.checkResponseNode(response, testName, "ERRORCODE");
 	}
 	
+	/**
+	 * check request with extra parameters to post, err:00105
+	 */
 	@Test
-	public void testPostConnectorsAuthNeg4() { //check request with extra parameters to post, err:00105
+	public void testPostConnectorsAuthNeg4() { 
 		
-		String testName="testPostConnectorsAuthNeg4";
+		testName="testPostConnectorsAuthNeg4";
 		
 		//post auth
 		response=util.executePost(reqUrl, testName);
 				
-		//check response
+		//check status
 		util.checkStatus(response, testName);
 		
 		//check errCode
 		util.checkResponseNode(response, testName, "ERRORCODE");
 	}
 	
+	/**
+	 * check request with missing parameters "username" to post, err:00107
+	 */
 	@Test
-	public void testPostConnectorsAuthNeg5() { //check request with missing parameters "username" to post, err:00107
+	public void testPostConnectorsAuthNeg5() { 
 		
-		String testName="testPostConnectorsAuthNeg5";
+		testName="testPostConnectorsAuthNeg5";
 		
 		//post auth
 		response=util.executePost(reqUrl, testName);
 				
-		//check response
+		//check status
 		util.checkStatus(response, testName);
 		
 		//check errCode
 		util.checkResponseNode(response, testName, "ERRORCODE");
 	}
 	
+	/**
+	 * check request with missing parameters "password" to post, err:00107
+	 */
 	@Test
-	public void testPostConnectorsAuthNeg6() { //check request with missing parameters "password" to post, err:00107
+	public void testPostConnectorsAuthNeg6() { 
 		
-		String testName="testPostConnectorsAuthNeg6";
+		testName="testPostConnectorsAuthNeg6";
 		
 		//post auth
 		response=util.executePost(reqUrl, testName);
 				
-		//check response
+		//check status
 		util.checkStatus(response, testName);
 		
 		//check errCode
 		util.checkResponseNode(response, testName, "ERRORCODE");
 	}
 	
+	/**
+	 * check request with invalid parameters "username" to post, err:00104
+	 */
 	@Test
-	public void testPostConnectorsAuthNeg7() { //check request with invalid parameters "username" to post, err:00104
+	public void testPostConnectorsAuthNeg7() { 
 		
-		String testName="testPostConnectorsAuthNeg7";
+		testName="testPostConnectorsAuthNeg7";
 		
 		//post auth
 		response=util.executePost(reqUrl, testName);
 				
-		//check response
+		//check status
 		util.checkStatus(response, testName);
 		
 		//check errCode
 		util.checkResponseNode(response, testName, "ERRORCODE");
 	}
 	
+	/**
+	 * check request with invalid parameters "password" to post, err:00104
+	 */
 	@Test
-	public void testPostConnectorsAuthNeg8() { //check request with invalid parameters "password" to post, err:00104
+	public void testPostConnectorsAuthNeg8() { 
 		
-		String testName="testPostConnectorsAuthNeg8";
+		testName="testPostConnectorsAuthNeg8";
 		
 		//post auth
 		response=util.executePost(reqUrl, testName);
 				
-		//check response
+		//check status
 		util.checkStatus(response, testName);
 		
 		//check errCode
 		util.checkResponseNode(response, testName, "ERRORCODE");
 	}
 	
-
 }

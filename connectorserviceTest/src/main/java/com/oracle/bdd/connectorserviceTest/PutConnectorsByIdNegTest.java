@@ -17,8 +17,7 @@ public class PutConnectorsByIdNegTest {
 	Client client = Client.create();
 	String testFile="PutConnectorsByIdNegTest.xml";
 	CommonUtil util=new CommonUtil(client, testFile);
-	String reqUrl;
-	String testCase, connectorId;
+	String testName, connectorId, reqUrl;
 	Map<String, String> response;
 	
 
@@ -33,6 +32,7 @@ public class PutConnectorsByIdNegTest {
 
 	@Before
 	public void setUp() throws Exception {
+		
 		//post connector
 		String connectorRes=util.executePost(Constants.connectors, "setUpPutConnectorsByIdNeg").get("jsonRes");
 		
@@ -45,14 +45,18 @@ public class PutConnectorsByIdNegTest {
 
 	@After
 	public void tearDown() throws Exception {
+		
 		//delete connector
-		//util.executeDelete(reqUrl);
+		util.executeDelete(reqUrl);
 	}
 
+	/**
+	 * check request with invalid id to put, err:00101
+	 */
 	@Test
-	public void testPutConnectorsByIdNeg1() {  // check request with  invalid id to put, err:00101
+	public void testPutConnectorsByIdNeg1() { 
 		
-		String testName="testPutConnectorsByIdNeg1";
+		testName="testPutConnectorsByIdNeg1";
 		
 		//put connector
 		response=util.executePost(Constants.connectorAuth.replace("{connectorId}", "xxxxxxxxxx"), testName);
@@ -65,10 +69,13 @@ public class PutConnectorsByIdNegTest {
 		util.checkResponseNode(response, testName, "ERRORCODE");
 	}
 	
+	/**
+	 * check request body NULL to put, err:00105
+	 */
 	@Test
-	public void testPutConnectorsByIdNeg2() {  // check request body NULL to put, err:00105
+	public void testPutConnectorsByIdNeg2() { 
 		
-		String testName="testPutConnectorsByIdNeg2";
+		testName="testPutConnectorsByIdNeg2";
 		
 		//put connector
 		response=util.executePut(reqUrl, testName);
@@ -80,10 +87,13 @@ public class PutConnectorsByIdNegTest {
 		util.checkResponseNode(response, testName, "ERRORCODE");
 	}
 	
+	/**
+	 * check request with extra nodes to put, err:00105
+	 */
 	@Test
-	public void testPutConnectorsByIdNeg3() {  // check request with extra nodes to put, err:00105
+	public void testPutConnectorsByIdNeg3() {  
 		
-		String testName="testPutConnectorsByIdNeg3";
+		testName="testPutConnectorsByIdNeg3";
 		
 		//put connector
 		response=util.executePut(reqUrl, testName);
@@ -95,10 +105,13 @@ public class PutConnectorsByIdNegTest {
 		util.checkResponseNode(response, testName, "ERRORCODE");
 	}
 
+	/**
+	 * check request with extra parameter to put, err:00105
+	 */
 	@Test
-	public void testPutConnectorsByIdNeg4() {  // check request with extra parameter to put, err:00105
+	public void testPutConnectorsByIdNeg4() {  
 		
-		String testName="testPutConnectorsByIdNeg4";
+		testName="testPutConnectorsByIdNeg4";
 		
 		//put connector
 		response=util.executePut(reqUrl, testName);
@@ -110,10 +123,13 @@ public class PutConnectorsByIdNegTest {
 		util.checkResponseNode(response, testName, "ERRORCODE");
 	}
 	
+	/**
+	 * check request with missing  parameter node to put, err:00108
+	 */
 	@Test
-	public void testPutConnectorsByIdNeg5() {  // check request with missing  parameter node to put, err:00108
+	public void testPutConnectorsByIdNeg5() {  
 		
-		String testName="testPutConnectorsByIdNeg5";
+		testName="testPutConnectorsByIdNeg5";
 		
 		//put connector
 		response=util.executePut(reqUrl, testName);
@@ -125,10 +141,13 @@ public class PutConnectorsByIdNegTest {
 		util.checkResponseNode(response, testName, "ERRORCODE");
 	}
 	
+	/**
+	 * check request with missing  parameter "storageServiceUrl" to put, err:00108
+	 */
 	@Test
-	public void testPutConnectorsByIdNeg6() {  // check request with missing  parameter "storageServiceUrl" to put, err:00108
+	public void testPutConnectorsByIdNeg6() {  
 		
-		String testName="testPutConnectorsByIdNeg6";
+		testName="testPutConnectorsByIdNeg6";
 		
 		//put connector
 		response=util.executePut(reqUrl, testName);
@@ -140,10 +159,13 @@ public class PutConnectorsByIdNegTest {
 		util.checkResponseNode(response, testName, "ERRORCODE");
 	}
 	
+	/**
+	 * check request with missing  parameter "username" to put, err:00108
+	 */
 	@Test
-	public void testPutConnectorsByIdNeg7() {  // check request with missing  parameter "username" to put, err:00108
+	public void testPutConnectorsByIdNeg7() {  
 		
-		String testName="testPutConnectorsByIdNeg7";
+		testName="testPutConnectorsByIdNeg7";
 		
 		//put connector
 		response=util.executePut(reqUrl, testName);
@@ -155,10 +177,13 @@ public class PutConnectorsByIdNegTest {
 		util.checkResponseNode(response, testName, "ERRORCODE");
 	}
 	
+	/**
+	 *  check request with missing  parameter "password" to put, err:00108
+	 */
 	@Test
-	public void testPutConnectorsByIdNeg8() {  // check request with missing  parameter "password" to put, err:00108
+	public void testPutConnectorsByIdNeg8() { 
 		
-		String testName="testPutConnectorsByIdNeg8";
+		testName="testPutConnectorsByIdNeg8";
 		
 		//put connector
 		response=util.executePut(reqUrl, testName);
@@ -170,10 +195,13 @@ public class PutConnectorsByIdNegTest {
 		util.checkResponseNode(response, testName, "ERRORCODE");
 	}
 	
+	/**
+	 * check request with "connectorType" changed to put, err:00108
+	 */
 	@Test
-	public void testPutConnectorsByIdNeg9() {  // check request with "connectorType" changed to put, err:00108
+	public void testPutConnectorsByIdNeg9() {  
 		
-		String testName="testPutConnectorsByIdNeg9";
+		testName="testPutConnectorsByIdNeg9";
 		
 		//put connector
 		response=util.executePut(reqUrl, testName);

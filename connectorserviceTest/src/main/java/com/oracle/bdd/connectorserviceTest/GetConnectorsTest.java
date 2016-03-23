@@ -37,10 +37,16 @@ public class GetConnectorsTest {
 
 	@Before
 	public void setUp() throws Exception {
+		
+		//get connectors
 		Map<String, String> response=util.executeGet(reqUrl);
 		res = response.get("jsonRes");
 	    parser = new JsonParser(res);
+	    
+	    //count how many connectors
 		count=parser.arrayElemSize(parser.jsonObject, "items");
+		
+		//if connectors>0, clean data
         if (count!=0){
         	//delete all connectors
         	util.cleanConnectors();
@@ -52,9 +58,11 @@ public class GetConnectorsTest {
 		
 	}
 	
-
+	/**
+	 * check get connectors with items=1
+	 */
 	@Test
-	public void testGetConnectorsTest1() { // check get connectors with items=1
+	public void testGetConnectorsTest1() { 
 		
 		testCase="testGetConnectorsTest1";
 		
@@ -71,8 +79,11 @@ public class GetConnectorsTest {
 	   
 	}
 	
+	/**
+	 * check get connectors with items=2 
+	 */
 	@Test
-	public void testGetConnectorsTest2() { // check get connectors with items=2 
+	public void testGetConnectorsTest2() { 
 		
 		testCase="testGetConnectorsTest2";
 		
@@ -89,8 +100,11 @@ public class GetConnectorsTest {
 	   
 	}
 	
+	/**
+	 * check get connectors with items=0
+	 */
 	@Test
-	public void testGetConnectorsTest3() { // check get connectors with items=0
+	public void testGetConnectorsTest3() { 
 		
 		// no connectors have been posted
 		
@@ -101,6 +115,6 @@ public class GetConnectorsTest {
 		
         // check count=0
 		assertEquals("Connectors' number is NOT 0: ",0,count);
-	   
+	  
 	}
 }

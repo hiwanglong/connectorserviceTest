@@ -43,6 +43,8 @@ public class CommonUtil {
 	 */
 	public Map<String, String> executePost(String requestUrl,String testName){		
 		webRes = client.resource(requestUrl);
+		System.out.println("execute POST "+requestUrl);
+		
 		xmlMap = GetResourceXML.parseXml(xmlName,testName);
 		String reqJson = xmlMap.get("REQUESTJSON");	
 			
@@ -58,6 +60,8 @@ public class CommonUtil {
 	 */
 	public Map<String, String> executePut(String requestUrl,String testName){		
 		webRes = client.resource(requestUrl);
+		System.out.println("execute PUT "+requestUrl);
+		
 		xmlMap = GetResourceXML.parseXml(xmlName,testName);
 		String reqJson = xmlMap.get("REQUESTJSON");	
 			
@@ -103,6 +107,8 @@ public class CommonUtil {
 	 * @param client	Client
 	 */
 	public void cleanConnectors(){ 
+		
+		System.out.println("execute DELETE ALL ");
 	
 		//get all connectors' id	
 		List <String> connectotIds=getConnectorId(executeGet(Constants.connectors).get("jsonRes"));
@@ -124,12 +130,11 @@ public class CommonUtil {
 	 * @param requestUrl	String
 	 * @param testName	String
 	 */
-	public void executePostBatch(String requestUrl,String testName){		
+	public void executePostBatch(String requestUrl,String testName){	
+		System.out.println("execute POST batch");
 		webRes = client.resource(requestUrl);
 		xmlMap = GetResourceXML.parseXml(xmlName,testName);
 		String[] reqJsonArr = xmlMap.get("REQUESTJSON").split(";");	
-		
-		System.out.println("execute POST batch");
 		for(String reqJson : reqJsonArr){
 			//execute POST
 			webRes.type("application/json").acceptLanguage(language).post(ClientResponse.class, reqJson);
@@ -144,16 +149,16 @@ public class CommonUtil {
 	 */
 	public void checkResponse(Map<String,String> responseMap,String testName){
 		xmlMap = GetResourceXML.parseXml(xmlName,testName);
-		
 		output = responseMap.get("jsonRes");
-		System.out.println(output);
-		
-		String expectedResponse = GetResourceXML.trimAllSpaces(xmlMap.get("RESPONSEJSON"));	
-		
+		String expectedResponse = GetResourceXML.trimAllSpaces(xmlMap.get("RESPONSEJSON"));			
 		if(expectedResponse.contains("%connectorId%")){
 			expectedResponse = expectedResponse.replace("%connectorId%", getConnectorId(output).get(0));
 		}
 		
+		System.out.println("Actual Response:=====================================================");
+		System.out.println(output);
+		System.out.println("=====================================================================");
+				
 		assertEquals(testName+" response and expectation are different",expectedResponse,GetResourceXML.trimAllSpaces(output));
 		
 	} 
@@ -166,7 +171,9 @@ public class CommonUtil {
 	public void checkStatus(Map<String,String> responseMap,String testName){
 		xmlMap = GetResourceXML.parseXml(xmlName,testName);
 		String status = xmlMap.get("STATUS");
-		System.out.println("status==========="+status);
+		
+		System.out.println("Actual status:"+responseMap.get("status"));
+		System.out.println("Expected status:"+status);
 		
 		assertEquals(testName+" response status is not "+status, status,responseMap.get("status"));	//check status 
 	}
@@ -179,11 +186,12 @@ public class CommonUtil {
 	 */
 	public void checkResponseNode(Map<String,String> responseMap,String testName,String nodeName){
 		xmlMap = GetResourceXML.parseXml(xmlName,testName);
-		
-		output = responseMap.get("jsonRes");
-		System.out.println(output);
-		
+		output = responseMap.get("jsonRes");	
 		String nodeElement = xmlMap.get(nodeName);	
+		
+		System.out.println("Actual Node:=========================================================");
+		System.out.println(output);
+		System.out.println("=====================================================================");
 		
 		assertTrue(testName+" response doesn't contains "+ nodeElement,output.contains(nodeElement));	
 		
