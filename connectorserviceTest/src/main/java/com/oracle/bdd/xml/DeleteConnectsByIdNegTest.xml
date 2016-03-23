@@ -33,8 +33,7 @@
 			}
 		}
 		</REQUESTJSON>
-		<STATUS>400</STATUS>
-		<ERRORCODE>"o:errorCode": "00101"</ERRORCODE>		
+		<STATUS>405</STATUS>	
 	</TEST>
 	
 </RESULT>

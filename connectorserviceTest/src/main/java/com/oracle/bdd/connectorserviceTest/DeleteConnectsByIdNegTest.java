@@ -39,43 +39,29 @@ public class DeleteConnectsByIdNegTest {
 	public void tearDown() throws Exception {
 	}
 	
-	/**
-	 * delete connector via correct connectorId
-	 */
-	@Test
-	public void testDeleteConnectorsById1() {
-		testName = "deleteconnectorsById1";
 		
-		//post connector		
-		responseMap = comUtil.executePost(reqUrl,testName);
-		
-		//delete connector by id
-		comUtil.executeDelete(reqUrl+"/"+comUtil.getConnectorId(responseMap.get("jsonRes")));
-		comUtil.checkStatus(responseMap, testName);
-	}
-	
 	/**
 	 * delete connector via wrong connectorId
 	 */
 	@Test
 	public void testDeleteConnectorsById2() {
-		testName = "testPostconnectors1";
+		testName = "deleteconnectorsById2";
 		
 		//post connector		
 		responseMap = comUtil.executePost(reqUrl,testName);
 		
 		//delete connector by id
-		comUtil.executeDelete(reqUrl+"/"+comUtil.getConnectorId(responseMap.get("jsonRes"))+000000);
+		comUtil.executeDelete(reqUrl+"/"+comUtil.getConnectorId(responseMap.get("jsonRes")).get(0)+000000);
 		comUtil.checkStatus(responseMap, testName);
 		comUtil.checkResponseNode(responseMap, testName, "ERRORCODE");
 	}
 	
 	/**
-	 * delete connector via wrong connectorId
+	 * delete connector via null connectorId
 	 */
 	@Test
 	public void testDeleteConnectorsById3() {
-		testName = "testPostconnectors1";
+		testName = "deleteconnectorsById3";
 		
 		//post connector		
 		responseMap = comUtil.executePost(reqUrl,testName);
@@ -83,7 +69,6 @@ public class DeleteConnectsByIdNegTest {
 		//delete connector by id
 		comUtil.executeDelete(reqUrl+"/");
 		comUtil.checkStatus(responseMap, testName);
-		comUtil.checkResponseNode(responseMap, testName, "ERRORCODE");
 	}
 		
 }
