@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RESULT>
+	<TEST testname="testPostconnectors1">  <!-- create a new connector ,connectorType : OracleCloudStorage,visibility : import,blackList: rule123 -->
+		<REQUESTJSON>
+		{
+			"connectorType": "OracleCloudStorage",
+			"connectorName": "testPostconnectors1",
+			"description": "testPostconnectors1",
+			"visibility": ["import"],
+			"parameters": {
+				"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+				"username" : "dfisher.Storageadmin",
+				"password" : "welcome1",
+				"blackList": "rule123"
+			}
+		}
+		</REQUESTJSON>
+		<STATUS>200</STATUS>
+		<RESPONSEJSON>
+		{
+		  "connectorType" : "OracleCloudStorage",
+		  "id" : "%connectorId%",
+		  "connectorName" : "testPostconnectors1",
+		  "description" : "testPostconnectors1",
+		  "visibility" : ["import"],
+		  "parameters" : {
+		    "blackList" : "rule123",
+		    "storageServiceUrl" : "https://storage.oraclecorp.com/v1/Storage-dfisher",
+		    "username" : "dfisher.Storageadmin"
+		  }
+		}
+		</RESPONSEJSON>
+	</TEST>
+	<TEST testname="testPostconnectors2">  <!-- create a new connector,connectorType : OracleCloudStorage,visibility : export,whiteList: rules456 -->
+		<REQUESTJSON>
+		{
+			"connectorType": "OracleCloudStorage",
+			"connectorName": "testPostconnectors2",
+			"description": "testPostconnectors2",
+			"visibility": ["export"],
+			"parameters": {
+				"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+				"username" : "dfisher.Storageadmin",
+				"password" : "welcome1",
+				"whiteList": "rules456"
+			}
+		}
+		</REQUESTJSON>
+		<STATUS>200</STATUS>
+		<RESPONSEJSON>
+		{
+		  "connectorType" : "OracleCloudStorage",
+		  "id" : "%connectorId%",
+		  "connectorName" : "testPostconnectors2",
+		  "description" : "testPostconnectors2",
+		  "visibility" : [ "export" ],
+		  "parameters" : {
+		    "whiteList" : "rules456",
+		    "storageServiceUrl" : "https://storage.oraclecorp.com/v1/Storage-dfisher",
+		    "username" : "dfisher.Storageadmin"
+		  }
+		}
+		</RESPONSEJSON>
+	</TEST>
+	<TEST testname="testPostconnectors3">  <!-- create a new connector ,connectorType : OracleCloudStorage,visibility : import,export,whiteList: rules456",blackList: rule123 -->
+		<REQUESTJSON>
+		{
+			"connectorType": "OracleCloudStorage",
+			"connectorName": "testPostconnectors3",
+			"description": "testPostconnectors3",
+			"visibility": ["import","export"],
+			"parameters": {
+				"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+				"username" : "dfisher.Storageadmin",
+				"password" : "welcome1",
+				"blackList": "rule123",
+				"whiteList": "rules456"
+			}
+		}
+		</REQUESTJSON>
+		<STATUS>200</STATUS>
+		<RESPONSEJSON>
+		{
+		  "connectorType" : "OracleCloudStorage",
+		  "id" : "%connectorId%",
+		  "connectorName" : "testPostconnectors3",
+		  "description" : "testPostconnectors3",
+		  "visibility" : ["import","export"],
+		  "parameters" : {
+			"blackList" : "rule123",
+		    "whiteList" : "rules456",
+		    "storageServiceUrl" : "https://storage.oraclecorp.com/v1/Storage-dfisher",
+		    "username" : "dfisher.Storageadmin"
+		  }
+		}
+		</RESPONSEJSON>
+	</TEST>
+	<TEST testname="testPostconnectors4">  <!-- create a new connector without whitelist and blackList,connectorType : OracleCloudStorage,visibility : import,export -->
+		<REQUESTJSON>
+		{
+			"connectorType": "OracleCloudStorage",
+			"connectorName": "testPostconnectors4",
+			"description": "testPostconnectors4",
+			"visibility": ["import","export"],
+			"parameters": {
+				"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+				"username" : "dfisher.Storageadmin",
+				"password" : "welcome1"
+			}
+		}
+		</REQUESTJSON>
+		<STATUS>200</STATUS>
+		<RESPONSEJSON>
+		{
+		  "connectorType" : "OracleCloudStorage",
+		  "id" : "%connectorId%",
+		  "connectorName" : "testPostconnectors4",
+		  "description" : "testPostconnectors4",
+		  "visibility" : ["import","export"],
+		  "parameters" : {
+		    "storageServiceUrl" : "https://storage.oraclecorp.com/v1/Storage-dfisher",
+		    "username" : "dfisher.Storageadmin"
+		  }
+		}
+		</RESPONSEJSON>
+	</TEST>
+	<TEST testname="testPostconnectors5">  <!-- create a new connector with "visibility" : [],connectorType : OracleCloudStorage ????-->
+		<REQUESTJSON>
+		{
+			"connectorType": "OracleCloudStorage",
+			"connectorName": "testPostconnectors5",
+			"description": "testPostconnectors5",
+			"visibility": [],
+			"parameters": {
+				"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+				"username" : "dfisher.Storageadmin",
+				"password" : "welcome1"
+			}
+		}
+		</REQUESTJSON>
+		<STATUS>200</STATUS>
+		<RESPONSEJSON>
+		{
+		  "connectorType" : "OracleCloudStorage",
+		  "id" : "%connectorId%",
+		  "connectorName" : "testPostconnectors5",
+		  "description" : "testPostconnectors5",
+		  "visibility" : [],
+		  "parameters" : {
+		    "storageServiceUrl" : "https://storage.oraclecorp.com/v1/Storage-dfisher",
+		    "username" : "dfisher.Storageadmin"
+		  }
+		}
+		</RESPONSEJSON>
+	</TEST>
+	<TEST testname="testPostconnectors6">  <!-- create a new connector with wrong storageServiceUrl & username & password-->
+		<REQUESTJSON>
+		{
+			"connectorType": "OracleCloudStorage",
+			"connectorName": "testPostconnectors6",
+			"description": "testPostconnectors6",
+			"visibility": ["import","export"],
+			"parameters": {
+				"storageServiceUrl": "https://test",
+				"username" : "dfisher.Storageadmintesttt",
+				"password" : "welcome1test",
+				"blackList": "rule123",
+				"whiteList": "rules456"
+			}
+		}
+		</REQUESTJSON>
+		<STATUS>200</STATUS>
+		<RESPONSEJSON>
+		{
+		  "connectorType" : "OracleCloudStorage",
+		  "id" : "%connectorId%",
+		  "connectorName" : "testPostconnectors6",
+		  "description" : "testPostconnectors6",
+		  "visibility" : ["import","export"],
+		  "parameters" : {
+			"blackList" : "rule123",
+		    "whiteList" : "rules456",
+		    "storageServiceUrl" : "https://test",
+		    "username" : "dfisher.Storageadmintesttt"
+		  }
+		}
+		</RESPONSEJSON>
+	</TEST>	
+	<TEST testname="testPostconnectors7">	<!-- create a new connector without visibility -->
+		<REQUESTJSON>
+		{
+			"connectorType": "OracleCloudStorage",
+			"connectorName": "testPostconnectors7",
+			"description": "testPostconnectors7",
+			"parameters": {
+				"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+				"username" : "dfisher.Storageadmin",
+				"password" : "welcome1",
+				"whiteList": "rules456",
+				"blackList": "rule123"
+			}
+		}
+		</REQUESTJSON>
+		<STATUS>200</STATUS>
+		<RESPONSEJSON>
+		{
+		  "connectorType" : "OracleCloudStorage",
+		  "id" : "%connectorId%",
+		  "connectorName" : "testPostconnectors7",
+		  "description" : "testPostconnectors7",
+		  "parameters" : {
+			"blackList" : "rule123",
+		    "whiteList" : "rules456",
+		    "storageServiceUrl" : "https://storage.oraclecorp.com/v1/Storage-dfisher",
+		    "username" : "dfisher.Storageadmin"
+		  }
+		}
+		</RESPONSEJSON>
+	</TEST>
+	<TEST testname="testPostconnectors8">	<!-- create a new connector with required parameter -->
+		<REQUESTJSON>
+		{
+			"connectorType": "OracleCloudStorage",
+			"parameters": {
+				"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+				"username" : "dfisher.Storageadmin",
+				"password" : "welcome1"
+			}
+		}
+		</REQUESTJSON>
+		<STATUS>200</STATUS>
+		<RESPONSEJSON>
+		{
+		  "connectorType" : "OracleCloudStorage",
+		  "id" : "%connectorId%",
+		  "parameters" : {
+		    "storageServiceUrl" : "https://storage.oraclecorp.com/v1/Storage-dfisher",
+		    "username" : "dfisher.Storageadmin"
+		  }
+		}
+		</RESPONSEJSON>
+	</TEST>
+</RESULT>

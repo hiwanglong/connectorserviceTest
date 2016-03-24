@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RESULT>
+	<TEST testname="setUpPutConnectorsByIdNeg">
+		<REQUESTJSON>
+		{
+		    "connectorType": "OracleCloudStorage",
+		    "connectorName": "setUpPutConnectorsById",
+		    "description": "setUpPutConnectorsById",
+		    "visibility": ["import","export"],
+		    "parameters": {
+		        "storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+		        "username" : "dfisher.Storageadmin",
+		        "password" : "welcome1",
+		        "blackList": "rule123",
+		        "whiteList": "rules456"
+		     }
+		}
+		</REQUESTJSON>
+		<STATUS>200</STATUS>
+		<RESPONSEJSON></RESPONSEJSON>
+	</TEST>
+	<TEST testname="testPutConnectorsByIdNeg1">
+		<REQUESTJSON>
+		</REQUESTJSON>
+		<STATUS>400</STATUS>
+		<ERRORCODE>00101</ERRORCODE>
+		<RESPONSEJSON>
+		</RESPONSEJSON>
+	</TEST>
+	<TEST testname="testPutConnectorsByIdNeg2">
+		<REQUESTJSON>
+		{
+
+		}
+		</REQUESTJSON>
+		<STATUS>400</STATUS>
+		<ERRORCODE>00105</ERRORCODE>
+		<RESPONSEJSON>
+		</RESPONSEJSON>
+	</TEST>
+	<TEST testname="testPutConnectorsByIdNeg3">
+		<REQUESTJSON>
+		{
+			    "connectorType": "OracleCloudStorage",
+			    "connectorName": "setUpPutConnectorsById",
+			    "description": "setUpPutConnectorsById",
+			    "visibility": ["import","export"],
+			    "parameters": {
+			        "storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+			        "username" : "dfisher.Storageadmin",
+			        "password" : "welcome1",
+			        "blackList": "rule123",
+			        "whiteList": "rules456"
+			     },
+			     "extraNodes": "extraNodes"
+			}
+		</REQUESTJSON>
+		<STATUS>400</STATUS>
+		<ERRORCODE>00105</ERRORCODE>
+		<RESPONSEJSON>
+		</RESPONSEJSON>
+	</TEST>
+	<TEST testname="testPutConnectorsByIdNeg4">
+		<REQUESTJSON>
+		{
+			    "connectorType": "OracleCloudStorage",
+			    "connectorName": "setUpPutConnectorsById",
+			    "description": "setUpPutConnectorsById",
+			    "visibility": ["import","export"],
+			    "parameters": {
+			        "storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+			        "username" : "dfisher.Storageadmin",
+			        "password" : "welcome1",
+			        "blackList": "rule123",
+			        "whiteList": "rules456",
+			     	"extraParameters": "extraParameters"
+			     }
+			}
+		</REQUESTJSON>
+		<STATUS>400</STATUS>
+		<ERRORCODE>00105</ERRORCODE>
+		<RESPONSEJSON>
+		</RESPONSEJSON>
+	</TEST>
+	<TEST testname="testPutConnectorsByIdNeg5">
+		<REQUESTJSON>
+		{
+			    "connectorType": "OracleCloudStorage",
+			    "connectorName": "setUpPutConnectorsById",
+			    "description": "setUpPutConnectorsById",
+			    "visibility": ["import","export"]
+			}
+		</REQUESTJSON>
+		<STATUS>400</STATUS>
+		<ERRORCODE>00108</ERRORCODE>
+		<RESPONSEJSON>
+		</RESPONSEJSON>
+	</TEST>
+	<TEST testname="testPutConnectorsByIdNeg6">
+		<REQUESTJSON>
+		{
+			    "connectorType": "OracleCloudStorage",
+			    "connectorName": "setUpPutConnectorsById",
+			    "description": "setUpPutConnectorsById",
+			    "visibility": ["import","export"],
+			    "parameters": {
+			        "username" : "dfisher.Storageadmin",
+			        "password" : "welcome1",
+			     }
+			}
+		</REQUESTJSON>
+		<STATUS>400</STATUS>
+		<ERRORCODE>00108</ERRORCODE>
+		<RESPONSEJSON>
+		</RESPONSEJSON>
+	</TEST>
+	<TEST testname="testPutConnectorsByIdNeg7">
+		<REQUESTJSON>
+		{
+			    "connectorType": "OracleCloudStorage",
+			    "connectorName": "setUpPutConnectorsById",
+			    "description": "setUpPutConnectorsById",
+			    "visibility": ["import","export"],
+			    "parameters": {
+			    	"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+			         "password" : "welcome1"
+			     }
+			}
+		</REQUESTJSON>
+		<STATUS>400</STATUS>
+		<ERRORCODE>00108</ERRORCODE>
+		<RESPONSEJSON>
+		</RESPONSEJSON>
+	</TEST>
+	<TEST testname="testPutConnectorsByIdNeg8">
+		<REQUESTJSON>
+		{
+			    "connectorType": "OracleCloudStorage",
+			    "connectorName": "setUpPutConnectorsById",
+			    "description": "setUpPutConnectorsById",
+			    "visibility": ["import","export"],
+			    "parameters": {
+			     	"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+			        "username" : "dfisher.Storageadmin"
+			     }
+			}
+		</REQUESTJSON>
+		<STATUS>400</STATUS>
+		<ERRORCODE>00108</ERRORCODE>
+		<RESPONSEJSON>
+		</RESPONSEJSON>
+	</TEST>
+		<TEST testname="testPutConnectorsByIdNeg9">
+		<REQUESTJSON>
+		{
+			    "connectorType": "OracleCloudStorage NEW",
+			    "connectorName": "setUpPutConnectorsById",
+			    "description": "setUpPutConnectorsById",
+			    "visibility": ["import","export"],
+			    "parameters": {
+			     	"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+			        "username" : "dfisher.Storageadmin",
+			        "password" : "welcome1"
+			     }
+			}
+		</REQUESTJSON>
+		<STATUS>400</STATUS>
+		<ERRORCODE>00105</ERRORCODE>
+		<RESPONSEJSON>
+		</RESPONSEJSON>
+	</TEST>
+	
+		
+</RESULT>

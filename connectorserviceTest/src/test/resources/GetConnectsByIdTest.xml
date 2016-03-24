@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RESULT>
+	<TEST testname="getconnectorsById1">  <!--delete connector via correct connectorId-->
+		<REQUESTJSON>
+		{
+			"connectorType": "OracleCloudStorage",
+			"connectorName": "getconnectorsById1",
+			"description": "getconnectorsById1",
+			"visibility": ["import","export"],
+			"parameters": {
+				"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+				"username" : "dfisher.Storageadmin",
+				"password" : "welcome1",
+				"blackList": "rule123",
+				"whiteList": "rules456"
+			}
+		}
+		</REQUESTJSON>
+		<STATUS>200</STATUS>
+		<RESPONSEJSON>		
+		{
+		    "connectorType": "OracleCloudStorage",
+		    "id": "%connectorId%",
+		    "connectorName" : "getconnectorsById1",
+		    "description" : "getconnectorsById1",
+		    "visibility" : [ "import", "export" ],
+		    "parameters" : {
+			    "blackList" : "rule123",
+			    "whiteList" : "rules456",
+			    "storageServiceUrl" : "https://storage.oraclecorp.com/v1/Storage-dfisher",
+			    "username" : "dfisher.Storageadmin"
+		  	 }
+		}
+		</RESPONSEJSON>		
+	</TEST>		
+</RESULT>
