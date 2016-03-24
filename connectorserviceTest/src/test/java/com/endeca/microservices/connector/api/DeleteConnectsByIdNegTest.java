@@ -25,12 +25,9 @@ public class DeleteConnectsByIdNegTest {
 	@Test
 	public void testDeleteConnectorsById2() {
 		testName = "deleteconnectorsById2";
-		
-		//post connector		
-		responseMap = comUtil.executePost(reqUrl,testName);
-		
+				
 		//delete connector by id
-		comUtil.executeDelete(reqUrl+"/"+comUtil.getConnectorId(responseMap.get("jsonRes")).get(0)+000000);
+		responseMap = comUtil.executeDelete(reqUrl+"/"+"12345-0000-abc");
 		comUtil.checkStatus(responseMap, testName);
 		comUtil.checkResponseNode(responseMap, testName, "ERRORCODE");
 	}
@@ -41,12 +38,9 @@ public class DeleteConnectsByIdNegTest {
 	@Test
 	public void testDeleteConnectorsById3() {
 		testName = "deleteconnectorsById3";
-		
-		//post connector		
-		responseMap = comUtil.executePost(reqUrl,testName);
-		
+				
 		//delete connector by id
-		comUtil.executeDelete(reqUrl+"/");
+		responseMap = comUtil.executeDelete(reqUrl+"/");
 		comUtil.checkStatus(responseMap, testName);
 	}
 		
