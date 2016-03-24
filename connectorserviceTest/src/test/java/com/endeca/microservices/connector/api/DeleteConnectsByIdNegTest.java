@@ -17,7 +17,7 @@ public class DeleteConnectsByIdNegTest {
 	private String testName;
 	private Map<String, String> responseMap ;
 	
-	CommonUtil comUtil = new CommonUtil(client, xmlName);
+	CommonUtil comUtil = new CommonUtil(client, xmlName, DeleteConnectsByIdNegTest.class);
 				
 	/**
 	 * delete connector via wrong connectorId

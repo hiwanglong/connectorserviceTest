@@ -21,7 +21,7 @@ public class GetConnectorsTest {
 	
 	Client client = Client.create();
 	String testFile="GetConnectorsTest.xml";
-	CommonUtil util=new CommonUtil(client, testFile);
+	CommonUtil util=new CommonUtil(client, testFile, GetConnectorsTest.class);
 	String reqUrl=Constants.connectors;
 	int count;
 	String res, testCase;

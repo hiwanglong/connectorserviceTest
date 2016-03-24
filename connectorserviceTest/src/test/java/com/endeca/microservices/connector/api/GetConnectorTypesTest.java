@@ -19,7 +19,7 @@ public class GetConnectorTypesTest {
 	
 	Client client = Client.create();
 	String testFile="GetConnectorTypesTest.xml";
-	CommonUtil util=new CommonUtil(client, testFile);
+	CommonUtil util=new CommonUtil(client, testFile,GetConnectorTypesTest.class);
 	String reqUrl=Constants.connectorTypes;
 	Map<String, String> response;
 

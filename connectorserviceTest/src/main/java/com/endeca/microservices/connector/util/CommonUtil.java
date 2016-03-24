@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -14,25 +17,35 @@ import com.sun.jersey.api.client.WebResource;
 
 
 public class CommonUtil {
+	Logger logger;
 	private WebResource webRes; 
 	private ClientResponse response;
 	private Client client;
 	private Map<String, String> xmlMap;
-	private String output;
 	private String xmlName;
 	private String language;
-	private Map<String, String> responseMap = new HashMap<String, String>();;
+	private Map<String, String> responseMap = new HashMap<String, String>();
 	
 	public CommonUtil(Client client,String xmlName,String language) {
 		this.client = client;
 		this.xmlName = xmlName;
 		this.language = language;
+		logger = LoggerFactory.getLogger(this.getClass());
 	}
 	
 	public CommonUtil(Client client,String xmlName) {
+		this(client, xmlName, "en-US");	 
+	}
+	
+	public CommonUtil(Client client,String xmlName, Class<?> clazz) {
+		this(client, xmlName, "en-US", clazz);	
+	}
+	
+	public CommonUtil(Client client,String xmlName, String language, Class<?> clazz) {
 		this.client = client;
 		this.xmlName = xmlName;
-		this.language = "en-US";		 
+		this.language = language;
+		logger = LoggerFactory.getLogger(clazz);
 	}
 	
 	/**
@@ -43,7 +56,7 @@ public class CommonUtil {
 	 */
 	public Map<String, String> executePost(String requestUrl,String testName){		
 		webRes = client.resource(requestUrl);
-		System.out.println("execute POST "+requestUrl);
+		logger.info("execute POST "+requestUrl);
 		
 		xmlMap = GetResourceXML.parseXml(xmlName,testName);
 		String reqJson = xmlMap.get("REQUESTJSON");	
@@ -60,7 +73,7 @@ public class CommonUtil {
 	 */
 	public Map<String, String> executePut(String requestUrl,String testName){		
 		webRes = client.resource(requestUrl);
-		System.out.println("execute PUT "+requestUrl);
+		logger.info("execute PUT "+requestUrl);
 		
 		xmlMap = GetResourceXML.parseXml(xmlName,testName);
 		String reqJson = xmlMap.get("REQUESTJSON");	
@@ -76,8 +89,8 @@ public class CommonUtil {
 	 * @return Map<String, String> responseMap status,jsonRes
 	 */
 	public Map<String, String> executeGet(String requestUrl){
-		webRes = client.resource(requestUrl);			
-		System.out.println("execute GET "+requestUrl);
+		webRes = client.resource(requestUrl);
+		logger.info("execute GET "+requestUrl);
 		
 		//execute GET
 		response = webRes.acceptLanguage(language).get(ClientResponse.class);
@@ -93,7 +106,7 @@ public class CommonUtil {
 	 */
 	public Map<String, String>  executeDelete(String requestUrl){
 		webRes = client.resource(requestUrl);
-		System.out.println("execute DELETE "+requestUrl);
+		logger.info("execute DELETE "+requestUrl);
 		
 		//execute DELETE
 		response = webRes.acceptLanguage(language).delete(ClientResponse.class);
@@ -107,8 +120,7 @@ public class CommonUtil {
 	 * @param client	Client
 	 */
 	public void cleanConnectors(){ 
-		
-		System.out.println("execute DELETE ALL ");
+		logger.info("execute DELETE ALL ");
 	
 		//get all connectors' id	
 		List <String> connectotIds=getConnectorId(executeGet(Constants.connectors).get("jsonRes"));
@@ -130,8 +142,8 @@ public class CommonUtil {
 	 * @param requestUrl	String
 	 * @param testName	String
 	 */
-	public void executePostBatch(String requestUrl,String testName){	
-		System.out.println("execute POST batch");
+	public void executePostBatch(String requestUrl,String testName){
+		logger.info(testName + " do batch POST operation ...");
 		webRes = client.resource(requestUrl);
 		xmlMap = GetResourceXML.parseXml(xmlName,testName);
 		String[] reqJsonArr = xmlMap.get("REQUESTJSON").split(";");	
@@ -149,15 +161,16 @@ public class CommonUtil {
 	 */
 	public void checkResponse(Map<String,String> responseMap,String testName){
 		xmlMap = GetResourceXML.parseXml(xmlName,testName);
-		output = responseMap.get("jsonRes");
+		String output = responseMap.get("jsonRes");
 		String expectedResponse = GetResourceXML.trimAllSpaces(xmlMap.get("RESPONSEJSON"));			
 		if(expectedResponse.contains("%connectorId%")){
 			expectedResponse = expectedResponse.replace("%connectorId%", getConnectorId(output).get(0));
 		}
 		
-		System.out.println("Actual Response:=====================================================");
-		System.out.println(output);
-		System.out.println("=====================================================================");
+		logger.debug(testName);
+		logger.debug("Actual Response:=====================================================");
+		logger.debug(output);
+		logger.debug("=====================================================================");
 				
 		assertEquals(testName+" response and expectation are different",expectedResponse,GetResourceXML.trimAllSpaces(output));
 		
@@ -172,8 +185,9 @@ public class CommonUtil {
 		xmlMap = GetResourceXML.parseXml(xmlName,testName);
 		String status = xmlMap.get("STATUS");
 		
-		System.out.println("Actual status:"+responseMap.get("status"));
-		System.out.println("Expected status:"+status);
+		logger.info(testName);
+		logger.info("Actual status:"+responseMap.get("status"));
+		logger.info("Expected status:"+status);
 		
 		assertEquals(testName+" response status is not "+status, status,responseMap.get("status"));	//check status 
 	}
@@ -186,12 +200,13 @@ public class CommonUtil {
 	 */
 	public void checkResponseNode(Map<String,String> responseMap,String testName,String nodeName){
 		xmlMap = GetResourceXML.parseXml(xmlName,testName);
-		output = GetResourceXML.trimAllSpaces(responseMap.get("jsonRes"));	
+		String output = GetResourceXML.trimAllSpaces(responseMap.get("jsonRes"));	
 		String nodeElement = GetResourceXML.trimAllSpaces(xmlMap.get(nodeName));	
 		
-		System.out.println("Actual Node:=========================================================");
-		System.out.println(output);
-		System.out.println("=====================================================================");
+		logger.debug(testName);
+		logger.debug("Actual Node:=====================================================");
+		logger.debug(output);
+		logger.debug("=====================================================================");
 		
 		assertTrue(testName+" response doesn't contains "+ nodeElement,output.contains(nodeElement));	
 		

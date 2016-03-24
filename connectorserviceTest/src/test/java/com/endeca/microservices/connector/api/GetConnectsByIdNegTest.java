@@ -19,7 +19,7 @@ public class GetConnectsByIdNegTest{
 	private String xmlName = "GetConnectsByIdNegTest.xml";
 	private String connectorId;
 	
-	CommonUtil comUtil = new CommonUtil(client, xmlName);
+	CommonUtil comUtil = new CommonUtil(client, xmlName, GetConnectsByIdNegTest.class);
 	
 	@After
 	public void tearDown() throws Exception {

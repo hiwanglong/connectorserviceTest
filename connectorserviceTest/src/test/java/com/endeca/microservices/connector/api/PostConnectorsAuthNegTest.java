@@ -16,7 +16,7 @@ public class PostConnectorsAuthNegTest {
 
 	static Client client = Client.create();
 	static String testFile="PostConnectorsAuthNegTest.xml";
-	static CommonUtil util=new CommonUtil(client, testFile);
+	static CommonUtil util=new CommonUtil(client, testFile, PostConnectorsAuthNegTest.class);
 	static String reqUrl, connectorId;
 	String testName;
 	Map<String, String> response;

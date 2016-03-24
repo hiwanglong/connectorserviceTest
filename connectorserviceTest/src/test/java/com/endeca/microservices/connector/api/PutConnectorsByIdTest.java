@@ -16,7 +16,7 @@ public class PutConnectorsByIdTest {
 	
 	Client client = Client.create();
 	String testFile="PutConnectorsByIdTest.xml";
-	CommonUtil util=new CommonUtil(client, testFile);
+	CommonUtil util=new CommonUtil(client, testFile, PutConnectorsByIdTest.class);
 	String testName, connectorId, reqUrl;
 	Map<String, String> response;
 	

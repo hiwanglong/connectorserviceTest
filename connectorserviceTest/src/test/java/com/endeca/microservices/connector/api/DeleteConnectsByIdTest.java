@@ -17,7 +17,7 @@ public class DeleteConnectsByIdTest {
 	private Map<String, String> responseMap ;
 	private String xmlName = "DeleteConnectsByIdTest.xml";
 	
-	CommonUtil comUtil = new CommonUtil(client, xmlName);
+	CommonUtil comUtil = new CommonUtil(client, xmlName, DeleteConnectsByIdTest.class);
 	
 	/**
 	 * delete connector via correct connectorId

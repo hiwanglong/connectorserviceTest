@@ -16,7 +16,7 @@ public class PostConnectorsAuthTest {
 
 	static Client client = Client.create();
 	static String testFile="PostConnectorsAuthTest.xml";
-	static CommonUtil util=new CommonUtil(client, testFile);
+	static CommonUtil util=new CommonUtil(client, testFile, PostConnectorsAuthTest.class);
 	static String reqUrl, connectorId;
 	String testName;
 	Map<String, String> response;

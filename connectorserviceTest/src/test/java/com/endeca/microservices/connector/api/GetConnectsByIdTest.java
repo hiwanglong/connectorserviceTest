@@ -22,7 +22,7 @@ public class GetConnectsByIdTest{
 	private String xmlName = "GetConnectsByIdTest.xml";
 	private String connectorId;
 	
-	CommonUtil comUtil = new CommonUtil(client, xmlName);
+	CommonUtil comUtil = new CommonUtil(client, xmlName, GetConnectsByIdTest.class);
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {		

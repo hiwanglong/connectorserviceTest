@@ -21,7 +21,7 @@ public class PostConnectsNegTest {
 	private String testName;
 	private Map<String, String> responseMap ;
 	
-	CommonUtil comUtil = new CommonUtil(client, xmlName);
+	CommonUtil comUtil = new CommonUtil(client, xmlName, PostConnectsNegTest.class);
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {		
