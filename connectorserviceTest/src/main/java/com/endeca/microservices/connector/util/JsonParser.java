@@ -1,4 +1,4 @@
-package com.oracle.bdd.util;
+package com.endeca.microservices.connector.util;
 
 import java.io.IOException;
 import java.io.InputStream;

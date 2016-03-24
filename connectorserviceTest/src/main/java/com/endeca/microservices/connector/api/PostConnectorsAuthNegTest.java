@@ -1,4 +1,4 @@
-package com.oracle.bdd.connectorserviceTest;
+package com.endeca.microservices.connector.api;
 
 import static org.junit.Assert.*;
 
@@ -10,11 +10,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.oracle.bdd.util.CommonUtil;
-import com.oracle.bdd.util.Constants;
+import com.endeca.microservices.connector.util.CommonUtil;
+import com.endeca.microservices.connector.util.Constants;
 import com.sun.jersey.api.client.Client;
 
-public class PostConnectorsAuthTest {
+public class PostConnectorsAuthNegTest {
 
 	static Client client = Client.create();
 	static String testFile="PostConnectorsAuthTest.xml";
@@ -41,7 +41,6 @@ public class PostConnectorsAuthTest {
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		//
 		
 	}
 
@@ -53,13 +52,14 @@ public class PostConnectorsAuthTest {
 	public void tearDown() throws Exception {
 	}
 
-
+	@Test
+	public void createData(){
+		System.out.println("hello");
+	}
+	
 	@Test
 	public void testPostConnectorsAuthTest1() {
-		String testName="testPostConnectorsAuthTest1";
-		//post auth
-		util.executePost(reqUrl, testName);
-		
+		//fail("Not yet implemented");
 	}
 
 }

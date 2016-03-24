@@ -1,4 +1,4 @@
-package com.oracle.bdd.util;
+package com.endeca.microservices.connector.util;
 
 /**
  *  GET /v1/connectorTypes (sync)

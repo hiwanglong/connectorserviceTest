@@ -1,8 +1,8 @@
-package com.oracle.bdd.connectorserviceTest;
+package com.endeca.microservices.connector.api;
 
 import java.io.InputStream;
 
-import com.oracle.bdd.util.JsonParser;
+import com.endeca.microservices.connector.util.JsonParser;
 
 /**
  * Hello world!

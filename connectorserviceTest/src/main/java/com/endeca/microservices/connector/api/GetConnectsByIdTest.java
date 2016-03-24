@@ -1,4 +1,4 @@
-package com.oracle.bdd.connectorserviceTest;
+package com.endeca.microservices.connector.api;
 
 import java.util.Map;
 
@@ -8,8 +8,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.oracle.bdd.util.CommonUtil;
-import com.oracle.bdd.util.Constants;
+import com.endeca.microservices.connector.util.CommonUtil;
+import com.endeca.microservices.connector.util.Constants;
 import com.sun.jersey.api.client.Client;
 
 
