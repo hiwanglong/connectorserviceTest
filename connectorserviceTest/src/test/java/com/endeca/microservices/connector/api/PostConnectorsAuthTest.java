@@ -2,9 +2,7 @@ package com.endeca.microservices.connector.api;
 
 import java.util.Map;
 
-import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -43,14 +41,6 @@ public class PostConnectorsAuthTest {
 		String delUrl=Constants.connectorId.replace("{connectorId}",connectorId);
 		util.executeDelete(delUrl);
 		
-	}
-
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
 	}
 
 
