@@ -2,9 +2,7 @@ package com.endeca.microservices.connector.api;
 
 import java.util.Map;
 
-import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -46,13 +44,6 @@ public class PostConnectorsAuthNegTest {
 		
 	}
 
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
 
 	/**
 	 * check request with invalid connectorId to post, err:00101

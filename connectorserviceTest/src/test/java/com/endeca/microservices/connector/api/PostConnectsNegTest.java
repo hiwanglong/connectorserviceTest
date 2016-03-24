@@ -23,22 +23,6 @@ public class PostConnectsNegTest {
 	
 	CommonUtil comUtil = new CommonUtil(client, xmlName, PostConnectsNegTest.class);
 	
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {		
-	}
-	
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {	
-	}
-	
 	/**
 	 * create a new connector with wrong connectorType format
 	 */
@@ -227,6 +211,45 @@ public class PostConnectsNegTest {
 	@Test
 	public void testPostconnectorsNeg23() {
 		testName = "testPostconnectors23";
+		
+		//post connector		
+		responseMap = comUtil.executePost(reqUrl,testName);
+		comUtil.checkStatus(responseMap, testName);
+		comUtil.checkResponseNode(responseMap, testName, "ERRORCODE");
+	}
+	
+	/**
+	 * 	create a new connector with missing comma
+	 */
+	@Test
+	public void testPostconnectorsNeg24() {
+		testName = "testPostconnectors24";
+		
+		//post connector		
+		responseMap = comUtil.executePost(reqUrl,testName);
+		comUtil.checkStatus(responseMap, testName);
+		comUtil.checkResponseNode(responseMap, testName, "ERRORCODE");
+	}
+	
+	/**
+	 * 	create a new connector with null
+	 */
+	@Test
+	public void testPostconnectorsNeg25() {
+		testName = "testPostconnectors25";
+		
+		//post connector		
+		responseMap = comUtil.executePost(reqUrl,testName);
+		comUtil.checkStatus(responseMap, testName);
+		comUtil.checkResponseNode(responseMap, testName, "ERRORCODE");
+	}
+	
+	/**
+	 * 	create a new connector with empty {}
+	 */
+	@Test
+	public void testPostconnectorsNeg26() {
+		testName = "testPostconnectors26";
 		
 		//post connector		
 		responseMap = comUtil.executePost(reqUrl,testName);

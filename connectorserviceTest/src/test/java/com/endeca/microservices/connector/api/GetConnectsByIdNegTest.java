@@ -39,7 +39,7 @@ public class GetConnectsByIdNegTest{
 		
 		//get connector by id
 		connectorId = comUtil.getConnectorId(responseMap.get("jsonRes")).get(0);
-		comUtil.executeGet(reqUrl+"/"+connectorId+"00abc00");
+		responseMap = comUtil.executeGet(reqUrl+"/"+connectorId+"00abc00");
 		comUtil.checkStatus(responseMap, testName);
 		comUtil.checkResponseNode(responseMap, testName, "ERRORCODE");
 	}

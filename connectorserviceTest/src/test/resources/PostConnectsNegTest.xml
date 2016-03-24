@@ -282,4 +282,37 @@
 		<STATUS>400</STATUS>
 		<ERRORCODE>"o:errorCode": "00108"</ERRORCODE>
 	</TEST>
+	<TEST testname="testPostconnectors24">	<!-- create a new connector with missing comma-->
+		<REQUESTJSON>
+		{
+			"connectorType": "OracleCloudStorage",
+			"connectorName": "testPostconnectors24",
+			"description": "testPostconnectors24",
+			"visibility": ["import","export"]
+			"parameters": {
+				"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+				"username" : "dfisher.Storageadmin",
+				"password" : "wel",
+				"whiteList": "rules456",
+				"blackList": "rule123"
+			}
+		}
+		</REQUESTJSON>
+		<STATUS>400</STATUS>
+		<ERRORCODE>"o:errorCode": "00105"</ERRORCODE>
+	</TEST>
+	<TEST testname="testPostconnectors25">	<!-- create a new connector with null-->
+		<REQUESTJSON>		
+		</REQUESTJSON>
+		<STATUS>400</STATUS>
+		<ERRORCODE>"o:errorCode": "00105"</ERRORCODE>
+	</TEST>
+	<TEST testname="testPostconnectors26">	<!-- create a new connector with empty {}-->
+		<REQUESTJSON>
+		{
+		}		
+		</REQUESTJSON>
+		<STATUS>400</STATUS>
+		<ERRORCODE>"o:errorCode": "00105"</ERRORCODE>
+	</TEST>
 </RESULT>
