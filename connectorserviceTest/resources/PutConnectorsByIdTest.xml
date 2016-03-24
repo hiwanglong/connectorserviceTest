@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RESULT>
+	<TEST testname="setUpPutConnectorsById">
+		<REQUESTJSON>
+		{
+		    "connectorType": "OracleCloudStorage",
+		    "connectorName": "setUpPutConnectorsById",
+		    "description": "setUpPutConnectorsById",
+		    "visibility": ["import","export"],
+		    "parameters": {
+		        "storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+		        "username" : "dfisher.Storageadmin",
+		        "password" : "welcome1",
+		        "whiteList": "rules456",
+		        "blackList": "rule123"
+		     }
+		}
+		</REQUESTJSON>
+		<STATUS>200</STATUS>
+		<RESPONSEJSON></RESPONSEJSON>
+	</TEST>
+	<TEST testname="testPutConnectorsById1">
+		<REQUESTJSON>
+		{
+		    "connectorType": "OracleCloudStorage",
+		    "connectorName": "testPutConnectorsById1 NEW",
+		    "description": "testPutConnectorsById1 NEW",
+		    "visibility": ["import NEW","export NEW"],
+		    "parameters": {
+		        "storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher NEW",
+		        "username" : "dfisher.Storageadmin NEW",
+		        "password" : "welcome1 NEW",
+		        "whiteList": "rules456 NEW",
+		        "blackList": "rule123 NEW"
+		     }
+		}
+		</REQUESTJSON>
+		<STATUS>200</STATUS>
+		<RESPONSEJSON>
+		{
+			  "connectorType" : "OracleCloudStorage",
+			  "id" : "%connectorId%",
+			  "connectorName" : "testPutConnectorsById1 NEW",
+			  "description" : "testPutConnectorsById1 NEW",
+			  "visibility" : [ "import NEW", "export NEW" ],
+			  "parameters" : {
+			    "blackList" : "rule123 NEW",
+			    "whiteList" : "rules456 NEW",
+			    "storageServiceUrl" : "https://storage.oraclecorp.com/v1/Storage-dfisher NEW",
+			    "username" : "dfisher.Storageadmin NEW"
+			  }
+			}
+		</RESPONSEJSON>
+	</TEST>
+		<TEST testname="testPutConnectorsById2">
+		<REQUESTJSON>
+		{
+		    "connectorType": "OracleCloudStorage",
+		    "parameters": {
+		        "storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher NEW",
+		        "username" : "dfisher.Storageadmin NEW",
+		        "password" : "welcome1 NEW",
+		        "blackList": "rule123 NEW",
+				"whiteList": "rules456 NEW"
+		     }
+		}
+		</REQUESTJSON>
+		<STATUS>200</STATUS>
+		<RESPONSEJSON>
+		{
+		    "connectorType": "OracleCloudStorage",
+		    "id": "%connectorId%",
+		    "parameters": {
+		    	"blackList": "rule123 NEW",
+		        "whiteList": "rules456 NEW",
+		        "storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher NEW",
+		        "username" : "dfisher.Storageadmin NEW"       
+		     }
+		}
+		</RESPONSEJSON>
+	</TEST>
+	<TEST testname="testPutConnectorsById3">
+		<REQUESTJSON>
+		{
+		    "connectorType": "OracleCloudStorage",
+		    "parameters": {
+		        "storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher NEW",
+		        "username" : "dfisher.Storageadmin NEW",
+		        "password" : "welcome1 NEW"
+		     }
+		}
+		</REQUESTJSON>
+		<STATUS>200</STATUS>
+		<RESPONSEJSON>
+		{
+		    "connectorType": "OracleCloudStorage",
+		    "id": "%connectorId%",
+		    "parameters": {
+		        "storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher NEW",
+		        "username" : "dfisher.Storageadmin NEW"       
+		     }
+		}
+		</RESPONSEJSON>
+	</TEST>
+</RESULT>

@@ -21,7 +21,7 @@ public class GetConnectorTypesTest {
 	String testFile="GetConnectorTypesTest.xml";
 	CommonUtil util=new CommonUtil(client, testFile);
 	String reqUrl=Constants.connectorTypes;
-	
+	Map<String, String> response;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -47,10 +47,13 @@ public class GetConnectorTypesTest {
 	
 		String testCase="testGetConnectorTypes";
 		
-		//get connector types
-	    Map<String, String>response=util.executeGet(reqUrl);
+		//get response
+	    response=util.executeGet(reqUrl);
+	    
+	    //check status
+	    util.checkStatus(response, testCase);
 	   		
-		//check get response
+		//check response
 	    util.checkResponse(response, testCase); 
 	   
 	}

@@ -16,7 +16,7 @@
 		}
 		</REQUESTJSON>
 		<STATUS>400</STATUS>
-		<ERRORCODE>"o:errorCode": "00101"</ERRORCODE>		
+		<ERRORCODE>"o:errorCode":"00101"</ERRORCODE>		
 	</TEST>
 	<TEST testname="deleteconnectorsById3">  <!-- delete connector via wrong connectorId  -->
 		<REQUESTJSON>

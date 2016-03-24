@@ -4,8 +4,8 @@
 		<REQUESTJSON>
 		{
 		    "connectorType": "OracleCloudStorage",
-		    "connectorName": "setUpPostConnectorsAuthTest",
-		    "description": "setUpPostConnectorsAuthTest",
+		    "connectorName": "setUpPostConnectorsAuth",
+		    "description": "setUpPostConnectorsAuth",
 		    "visibility": ["import","export"],
 		    "parameters": {
 		        "storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
