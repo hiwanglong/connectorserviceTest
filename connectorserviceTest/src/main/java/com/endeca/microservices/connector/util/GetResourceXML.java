@@ -24,9 +24,6 @@ public class GetResourceXML {
 		
 		SAXReader reader = new SAXReader();
 		try {
-			//InputStream f = GetResourceXML.class.getResourceAsStream("../xml"+xmlName);
-			
-			//File f1 = new File("F:\\work\\workspace\\testXmlPost\\src\\test\\java\\bdd\\test\\xml\\BDDConnectsAPITest.xml");
 			File f1 = new File(GetResourceXML.class.getResource("/"+xmlName).getPath());
 			InputStream f = new FileInputStream(f1);
 			
@@ -72,12 +69,9 @@ public class GetResourceXML {
 
 	public static void main(String arge[]) {
 		
-//		Map<String, String> res_map=GetResourceXML.parseXml("GetConnectorTypesTest.xml", "testGetConnectorTypes");
-//		String res_expected=res_map.get("RESPONSEJSON").trim();
-//		String result = GetResourceXML.trimAllSpaces(res_expected);
-//		System.out.println(result);
-		GetResourceXML g = new GetResourceXML();
-		String path2 = g.getClass().getResource("/").getPath();
-		System.out.println(path2);
+		Map<String, String> res_map=GetResourceXML.parseXml("GetConnectorTypesTest.xml", "testGetConnectorTypes");
+		String res_expected=res_map.get("RESPONSEJSON").trim();
+		String result = GetResourceXML.trimAllSpaces(res_expected);
+		System.out.println(result);
 	}
 }
