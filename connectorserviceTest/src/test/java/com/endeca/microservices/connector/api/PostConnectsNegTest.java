@@ -2,7 +2,7 @@ package com.endeca.microservices.connector.api;
 
 import java.util.Map;
 
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 import com.endeca.microservices.connector.util.CommonUtil;
 import com.endeca.microservices.connector.util.Constants;
@@ -22,7 +22,7 @@ public class PostConnectsNegTest {
 	/**
 	 * create a new connector with wrong connectorType format
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPostconnectorsNeg9() {
 		testName = "testPostconnectors9";
 		
@@ -35,7 +35,7 @@ public class PostConnectsNegTest {
 	/**
 	 * create a new connector with incorrect json format
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPostconnectorsNeg10() {
 		testName = "testPostconnectors10";
 		
@@ -48,7 +48,7 @@ public class PostConnectsNegTest {
 	/**
 	 * create a new connector with missing password parameter
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPostconnectorsNeg11() {
 		testName = "testPostconnectors11";
 		
@@ -61,7 +61,7 @@ public class PostConnectsNegTest {
 	/**
 	 * create a new connector with missing storageServiceUrl parameter
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPostconnectorsNeg12() {
 		testName = "testPostconnectors12";
 		
@@ -74,7 +74,7 @@ public class PostConnectsNegTest {
 	/**
 	 * create a new connector with missing parameter(username)
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPostconnectorsNeg13() {
 		testName = "testPostconnectors13";
 		
@@ -87,7 +87,7 @@ public class PostConnectsNegTest {
 	/**
 	 * create a new connector with incorrect storageServiceUrl format
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPostconnectorsNeg14() {
 		testName = "testPostconnectors14";
 		
@@ -100,7 +100,7 @@ public class PostConnectsNegTest {
 	/**
 	 * create a new connector with too long storageServiceUrl parameter
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPostconnectorsNeg15() {
 		testName = "testPostconnectors15";
 		
@@ -113,7 +113,7 @@ public class PostConnectsNegTest {
 	/**
 	 * create a new connector with too long username parameter
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPostconnectorsNeg16() {
 		testName = "testPostconnectors16";
 		
@@ -126,7 +126,7 @@ public class PostConnectsNegTest {
 	/**
 	 * create a new connector with too long password parameter
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPostconnectorsNeg17() {
 		testName = "testPostconnectors17";
 		
@@ -139,7 +139,7 @@ public class PostConnectsNegTest {
 	/**
 	 * 	create a new connector with too long whiteList parameter
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPostconnectorsNeg18() {
 		testName = "testPostconnectors18";
 		
@@ -152,7 +152,7 @@ public class PostConnectsNegTest {
 	/**
 	 * create a new connector with too long blackList parameter
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPostconnectorsNeg19() {
 		testName = "testPostconnectors19";
 		
@@ -165,7 +165,7 @@ public class PostConnectsNegTest {
 	/**
 	 * 	create a new connector with wrong visibility parameter
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPostconnectorsNeg20() {
 		testName = "testPostconnectors20";
 		
@@ -178,7 +178,7 @@ public class PostConnectsNegTest {
 	/**
 	 * create a new connector with extra parameter in the parameters{}
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPostconnectorsNeg21() {
 		testName = "testPostconnectors21";
 		
@@ -191,7 +191,7 @@ public class PostConnectsNegTest {
 	/**
 	 * create a new connector with extra parameter
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPostconnectorsNeg22() {
 		testName = "testPostconnectors22";
 		
@@ -204,7 +204,7 @@ public class PostConnectsNegTest {
 	/**
 	 * 	create a new connector with too short password
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPostconnectorsNeg23() {
 		testName = "testPostconnectors23";
 		
@@ -217,7 +217,7 @@ public class PostConnectsNegTest {
 	/**
 	 * 	create a new connector with missing comma
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPostconnectorsNeg24() {
 		testName = "testPostconnectors24";
 		
@@ -230,7 +230,7 @@ public class PostConnectsNegTest {
 	/**
 	 * 	create a new connector with null
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPostconnectorsNeg25() {
 		testName = "testPostconnectors25";
 		
@@ -243,7 +243,7 @@ public class PostConnectsNegTest {
 	/**
 	 * 	create a new connector with empty {}
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPostconnectorsNeg26() {
 		testName = "testPostconnectors26";
 		

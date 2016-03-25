@@ -2,9 +2,9 @@ package com.endeca.microservices.connector.api;
 
 import java.util.Map;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 import com.endeca.microservices.connector.util.CommonUtil;
 import com.endeca.microservices.connector.util.Constants;
@@ -19,7 +19,7 @@ public class PostConnectorsAuthTest {
 	String testName;
 	Map<String, String> response;
 	
-	@BeforeClass
+	@BeforeClass(alwaysRun = true)
 	public static void setUpBeforeClass() throws Exception {
 		
 		//post connector 
@@ -34,7 +34,7 @@ public class PostConnectorsAuthTest {
 		
 	}
 
-	@AfterClass
+	@AfterClass(alwaysRun = true)
 	public static void tearDownAfterClass() throws Exception {
 		
 		//delete connector
@@ -47,7 +47,7 @@ public class PostConnectorsAuthTest {
 	/**
 	 * check request with valid body to post, status:200
 	 */
-	@Test
+	@Test(groups = {"Functional"})
 	public void testPostConnectorsAuthTest1() {
 		
 		testName="testPostConnectorsAuth1";

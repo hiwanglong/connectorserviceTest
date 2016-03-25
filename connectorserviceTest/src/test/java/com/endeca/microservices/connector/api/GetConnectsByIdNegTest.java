@@ -2,8 +2,8 @@ package com.endeca.microservices.connector.api;
 
 import java.util.Map;
 
-import org.junit.After;
-import org.junit.Test;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
 
 import com.endeca.microservices.connector.util.CommonUtil;
 import com.endeca.microservices.connector.util.Constants;
@@ -21,7 +21,7 @@ public class GetConnectsByIdNegTest{
 	
 	CommonUtil comUtil = new CommonUtil(client, xmlName, GetConnectsByIdNegTest.class);
 	
-	@After
+	@AfterMethod(alwaysRun = true)
 	public void tearDown() throws Exception {
 		//delete connector by id after each test
 		comUtil.executeDelete(reqUrl+"/"+connectorId);
@@ -30,7 +30,7 @@ public class GetConnectsByIdNegTest{
 	/**
 	 * Get connector detail via wrong connectorId
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testGetconnectorsById2() {
 		testName = "getconnectorsById2";
 		

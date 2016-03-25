@@ -2,7 +2,7 @@ package com.endeca.microservices.connector.api;
 
 import java.util.Map;
 
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 import com.endeca.microservices.connector.util.CommonUtil;
 import com.endeca.microservices.connector.util.Constants;
@@ -20,7 +20,7 @@ public class GetConnectorTypesTest {
 	Map<String, String> response;
 
 	
-	@Test
+	@Test(groups = {"Functional"})
 	public void testGetConnectorTypes(){
 	
 		String testCase="testGetConnectorTypes";

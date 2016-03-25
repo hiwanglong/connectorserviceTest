@@ -2,9 +2,9 @@ package com.endeca.microservices.connector.api;
 
 import java.util.Map;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import com.endeca.microservices.connector.util.CommonUtil;
 import com.endeca.microservices.connector.util.Constants;
@@ -19,7 +19,7 @@ public class PutConnectorsByIdNegTest {
 	Map<String, String> response;
 	
 
-	@Before
+	@BeforeMethod(alwaysRun = true)
 	public void setUp() throws Exception {
 		
 		//post connector
@@ -32,7 +32,7 @@ public class PutConnectorsByIdNegTest {
 		reqUrl=Constants.connectorId.replace("{connectorId}",connectorId);
 	}
 
-	@After
+	@AfterMethod(alwaysRun = true)
 	public void tearDown() throws Exception {
 		
 		//delete connector
@@ -42,7 +42,7 @@ public class PutConnectorsByIdNegTest {
 	/**
 	 * check request with invalid id to put, err:00101
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPutConnectorsByIdNeg1() { 
 		
 		testName="testPutConnectorsByIdNeg1";
@@ -61,7 +61,7 @@ public class PutConnectorsByIdNegTest {
 	/**
 	 * check request body NULL to put, err:00105
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPutConnectorsByIdNeg2() { 
 		
 		testName="testPutConnectorsByIdNeg2";
@@ -79,7 +79,7 @@ public class PutConnectorsByIdNegTest {
 	/**
 	 * check request with extra nodes to put, err:00105
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPutConnectorsByIdNeg3() {  
 		
 		testName="testPutConnectorsByIdNeg3";
@@ -97,7 +97,7 @@ public class PutConnectorsByIdNegTest {
 	/**
 	 * check request with extra parameter to put, err:00105
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPutConnectorsByIdNeg4() {  
 		
 		testName="testPutConnectorsByIdNeg4";
@@ -115,7 +115,7 @@ public class PutConnectorsByIdNegTest {
 	/**
 	 * check request with missing  parameter node to put, err:00108
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPutConnectorsByIdNeg5() {  
 		
 		testName="testPutConnectorsByIdNeg5";
@@ -133,7 +133,7 @@ public class PutConnectorsByIdNegTest {
 	/**
 	 * check request with missing  parameter "storageServiceUrl" to put, err:00108
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPutConnectorsByIdNeg6() {  
 		
 		testName="testPutConnectorsByIdNeg6";
@@ -151,7 +151,7 @@ public class PutConnectorsByIdNegTest {
 	/**
 	 * check request with missing  parameter "username" to put, err:00108
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPutConnectorsByIdNeg7() {  
 		
 		testName="testPutConnectorsByIdNeg7";
@@ -169,7 +169,7 @@ public class PutConnectorsByIdNegTest {
 	/**
 	 *  check request with missing  parameter "password" to put, err:00108
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPutConnectorsByIdNeg8() { 
 		
 		testName="testPutConnectorsByIdNeg8";
@@ -187,7 +187,7 @@ public class PutConnectorsByIdNegTest {
 	/**
 	 * check request with "connectorType" changed to put, err:00108
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPutConnectorsByIdNeg9() {  
 		
 		testName="testPutConnectorsByIdNeg9";

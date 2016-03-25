@@ -2,9 +2,9 @@ package com.endeca.microservices.connector.api;
 
 import java.util.Map;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import com.endeca.microservices.connector.util.CommonUtil;
 import com.endeca.microservices.connector.util.Constants;
@@ -19,7 +19,7 @@ public class PutConnectorsByIdTest {
 	Map<String, String> response;
 	
 
-	@Before
+	@BeforeMethod(alwaysRun = true)
 	public void setUp() throws Exception {
 		
 		//post connector
@@ -32,7 +32,7 @@ public class PutConnectorsByIdTest {
 		reqUrl=Constants.connectorId.replace("{connectorId}",connectorId);
 	}
 
-	@After
+	@AfterMethod(alwaysRun = true)
 	public void tearDown() throws Exception {
 		
 		//delete connector
@@ -42,7 +42,7 @@ public class PutConnectorsByIdTest {
 	/**
 	 * check all nodes updated without "connectorType" to put
 	 */
-	@Test
+	@Test(groups = {"Functional"})
 	public void testPutConnectorsById1() {  
 		
 		testName="testPutConnectorsById1";
@@ -60,7 +60,7 @@ public class PutConnectorsByIdTest {
 	/**
 	 * check  missing "connectorName" "description" "visibility" to put
 	 */
-	@Test
+	@Test(groups = {"Functional"})
 	public void testPutConnectorsById2() {  
 		
 		testName="testPutConnectorsById2";
@@ -78,7 +78,7 @@ public class PutConnectorsByIdTest {
 	/**
 	 * check  missing "blackList" "whiteList" to put
 	 */
-	@Test
+	@Test(groups = {"Functional"})
 	public void testPutConnectorsById3() {  
 		
 		testName="testPutConnectorsById3";

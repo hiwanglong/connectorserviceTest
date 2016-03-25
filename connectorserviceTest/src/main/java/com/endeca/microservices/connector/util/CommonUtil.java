@@ -120,14 +120,18 @@ public class CommonUtil {
 	 * @param client	Client
 	 */
 	public void cleanConnectors(){ 
-		logger.info("execute DELETE ALL ");
+		logger.info("================== execute DELETE ALL =====================");
 	
 		//get all connectors' id	
-		List <String> connectotIds=getConnectorId(executeGet(Constants.connectors).get("jsonRes"));
+		List <String> connectorIds=getConnectorId(executeGet(Constants.connectors).get("jsonRes"));
+		
+		//make sure instance including connectors
+		if (connectorIds.size() == 0)
+			return;
 		
 		//delete all connectors one by one
-		for (int i=0; i<connectotIds.size();i++){
-			String delUrl=Constants.connectorId.replace("{connectorId}",connectotIds.get(i) );
+		for (int i=0; i<connectorIds.size();i++){
+			String delUrl=Constants.connectorId.replace("{connectorId}",connectorIds.get(i) );
 			
 			//execute DELETE
 			webRes = client.resource(delUrl);	

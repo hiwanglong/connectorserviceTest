@@ -2,8 +2,8 @@ package com.endeca.microservices.connector.api;
 
 import java.util.Map;
 
-import org.junit.After;
-import org.junit.Test;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
 
 import com.endeca.microservices.connector.util.CommonUtil;
 import com.endeca.microservices.connector.util.Constants;
@@ -12,7 +12,7 @@ import com.sun.jersey.api.client.Client;
 
 public class PostConnectsTest {
 	
-	private static Client client = Client.create();;
+	private static Client client = Client.create();
 	private String reqUrl = Constants.connectors;
 	private String xmlName = "PostConnectsTest.xml";
 	private String testName;
@@ -20,7 +20,7 @@ public class PostConnectsTest {
 	
 	CommonUtil comUtil = new CommonUtil(client, xmlName, PostConnectsTest.class);
 	
-	@After
+	@AfterMethod(alwaysRun = true)
 	public void tearDown() throws Exception {
 		//delete connector by id after each test
 		comUtil.executeDelete(reqUrl+"/"+comUtil.getConnectorId(responseMap.get("jsonRes")).get(0));		
@@ -29,7 +29,7 @@ public class PostConnectsTest {
 	/**
 	 * 	create a new connector ,connectorType : CloudStorage ,visibility : import,blackList: rule123
 	 */
-	@Test
+	@Test(groups = {"Functional"})
 	public void testPOSTconnectors1() {
 		testName = "testPostconnectors1";
 		
@@ -42,7 +42,7 @@ public class PostConnectsTest {
 	/**
 	 * create a new connector , connectorType : CloudStorage , visibility : export, whiteList: rules456
 	 */
-	@Test
+	@Test(groups = {"Functional"})
 	public void testPOSTconnectors2() {
 		testName = "testPostconnectors2";
 		
@@ -55,7 +55,7 @@ public class PostConnectsTest {
 	/**
 	 * 	create a new connector , connectorType : CloudStorage , visibility : import,export, whiteList: rules456" ,blackList: rule123
 	 */
-	@Test
+	@Test(groups = {"Functional"})
 	public void testPOSTconnectors3() {
 		testName = "testPostconnectors3";
 		
@@ -68,7 +68,7 @@ public class PostConnectsTest {
 	/**
 	 * create a new connector without whitelist and blacklist,visibility : import,export
 	 */
-	@Test
+	@Test(groups = {"Functional"})
 	public void testPOSTconnectors4() {
 		testName = "testPostconnectors4";
 		
@@ -81,7 +81,7 @@ public class PostConnectsTest {
 	/**
 	 * 	create a new connector with ,"visibility" : []
 	 */
-	@Test
+	@Test(groups = {"Functional"})
 	public void testPOSTconnectors5() {
 		testName = "testPostconnectors5";
 		
@@ -94,7 +94,7 @@ public class PostConnectsTest {
 	/**
 	 * create a new connector with wrong storageServiceUrl & username and password
 	 */
-	@Test
+	@Test(groups = {"Functional"})
 	public void testPOSTconnectors6() {
 		testName = "testPostconnectors6";
 		
@@ -107,7 +107,7 @@ public class PostConnectsTest {
 	/**
 	 * 	create a new connector without visibility
 	 */
-	@Test
+	@Test(groups = {"Functional"})
 	public void testPOSTconnectors7() {
 		testName = "testPostconnectors7";
 		
@@ -120,7 +120,7 @@ public class PostConnectsTest {
 	/**
 	 * create a new connector with required parameter
 	 */
-	@Test
+	@Test(groups = {"Functional"})
 	public void testPOSTconnectors8() {
 		testName = "testPostconnectors8";
 			

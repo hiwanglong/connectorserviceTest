@@ -2,9 +2,9 @@ package com.endeca.microservices.connector.api;
 
 import java.util.Map;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 import com.endeca.microservices.connector.util.CommonUtil;
 import com.endeca.microservices.connector.util.Constants;
@@ -20,7 +20,7 @@ public class PostConnectorsAuthNegTest {
 	Map<String, String> response;
 	
 	
-	@BeforeClass
+	@BeforeClass(alwaysRun = true)
 	public static void setUpBeforeClass() throws Exception {
 		
 		//post connector 
@@ -35,7 +35,7 @@ public class PostConnectorsAuthNegTest {
 		
 	}
 
-	@AfterClass
+	@AfterClass(alwaysRun = true)
 	public static void tearDownAfterClass() throws Exception {
 		
 		//delete connector
@@ -48,7 +48,7 @@ public class PostConnectorsAuthNegTest {
 	/**
 	 * check request with invalid connectorId to post, err:00101
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPostConnectorsAuthNeg1() { 
 		
 		testName="testPostConnectorsAuthNeg1";
@@ -66,7 +66,7 @@ public class PostConnectorsAuthNegTest {
 	/**
 	 * check request with body NULL to post, err:00105
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPostConnectorsAuthNeg2() { 
 		
 		testName="testPostConnectorsAuthNeg2";
@@ -84,7 +84,7 @@ public class PostConnectorsAuthNegTest {
 	/**
 	 * check request with extra nodes to post, err:00105
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPostConnectorsAuthNeg3() { 
 		
 		testName="testPostConnectorsAuthNeg3";
@@ -102,7 +102,7 @@ public class PostConnectorsAuthNegTest {
 	/**
 	 * check request with extra parameters to post, err:00105
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPostConnectorsAuthNeg4() { 
 		
 		testName="testPostConnectorsAuthNeg4";
@@ -120,7 +120,7 @@ public class PostConnectorsAuthNegTest {
 	/**
 	 * check request with missing parameters "username" to post, err:00107
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPostConnectorsAuthNeg5() { 
 		
 		testName="testPostConnectorsAuthNeg5";
@@ -138,7 +138,7 @@ public class PostConnectorsAuthNegTest {
 	/**
 	 * check request with missing parameters "password" to post, err:00107
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPostConnectorsAuthNeg6() { 
 		
 		testName="testPostConnectorsAuthNeg6";
@@ -156,7 +156,7 @@ public class PostConnectorsAuthNegTest {
 	/**
 	 * check request with invalid parameters "username" to post, err:00104
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPostConnectorsAuthNeg7() { 
 		
 		testName="testPostConnectorsAuthNeg7";
@@ -174,7 +174,7 @@ public class PostConnectorsAuthNegTest {
 	/**
 	 * check request with invalid parameters "password" to post, err:00104
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testPostConnectorsAuthNeg8() { 
 		
 		testName="testPostConnectorsAuthNeg8";

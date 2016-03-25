@@ -2,7 +2,7 @@ package com.endeca.microservices.connector.api;
 
 import java.util.Map;
 
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 import com.endeca.microservices.connector.util.CommonUtil;
 import com.endeca.microservices.connector.util.Constants;
@@ -22,7 +22,7 @@ public class DeleteConnectsByIdNegTest {
 	/**
 	 * delete connector via wrong connectorId
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testDeleteConnectorsById2() {
 		testName = "deleteconnectorsById2";
 				
@@ -35,7 +35,7 @@ public class DeleteConnectsByIdNegTest {
 	/**
 	 * delete connector via null connectorId
 	 */
-	@Test
+	@Test(groups = {"Negative"})
 	public void testDeleteConnectorsById3() {
 		testName = "deleteconnectorsById3";
 				

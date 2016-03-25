@@ -2,8 +2,8 @@ package com.endeca.microservices.connector.api;
 
 import java.util.Map;
 
-import org.junit.After;
-import org.junit.Test;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
 
 import com.endeca.microservices.connector.util.CommonUtil;
 import com.endeca.microservices.connector.util.Constants;
@@ -11,7 +11,7 @@ import com.sun.jersey.api.client.Client;
 
 public class GetConnectsByIdTest{
 	
-	private static Client client = Client.create();;
+	private static Client client = Client.create();
 	private String reqUrl = Constants.connectors;
 	private String testName;
 	private Map<String, String> responseMap ;
@@ -20,7 +20,7 @@ public class GetConnectsByIdTest{
 	
 	CommonUtil comUtil = new CommonUtil(client, xmlName, GetConnectsByIdTest.class);
 	
-	@After
+	@AfterMethod(alwaysRun = true)
 	public void tearDown() throws Exception {
 		//delete connector by id after each test
 		comUtil.executeDelete(reqUrl+"/"+connectorId);
@@ -29,7 +29,7 @@ public class GetConnectsByIdTest{
 	/**
 	 * Get connector detail via correct connectorId
 	 */
-	@Test
+	@Test(groups = {"Functional"})
 	public void testGetConnectorsById1() {
 		testName = "getconnectorsById1";
 		
