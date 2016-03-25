@@ -9,7 +9,6 @@ import com.endeca.microservices.connector.util.CommonUtil;
 import com.endeca.microservices.connector.util.Constants;
 import com.sun.jersey.api.client.Client;
 
-
 public class GetConnectsByIdTest{
 	
 	private static Client client = Client.create();;
@@ -31,7 +30,7 @@ public class GetConnectsByIdTest{
 	 * Get connector detail via correct connectorId
 	 */
 	@Test
-	public void testDeleteConnectorsById1() {
+	public void testGetConnectorsById1() {
 		testName = "getconnectorsById1";
 		
 		//post connector		
