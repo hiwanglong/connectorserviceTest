@@ -1,17 +1,20 @@
 package com.endeca.microservices.connector.util;
 
 
-import java.io.*;
-import java.util.*;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.dom4j.*;
-import org.dom4j.io.*;
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 
 
 
 public class GetResourceXML {
+	
 	
 	/**
 	 * parser input(s) and output(s) to a map
@@ -20,12 +23,12 @@ public class GetResourceXML {
 	 * @return hash map include input(s) and output(s)
 	 */
 	public static Map<String, String> parseXml(String xmlName,String testName) {
+		
 		Map<String, String> requestMap = new HashMap<String, String>();
 		
 		SAXReader reader = new SAXReader();
-		try {
-			File f1 = new File(GetResourceXML.class.getResource("/"+xmlName).getPath());
-			InputStream f = new FileInputStream(f1);
+		try {						
+			InputStream f = GetResourceXML.class.getResourceAsStream("/"+xmlName);
 			
 			Document doc = reader.read(f);
 			Element root = doc.getRootElement(); 								//get xml root ,getName() get root names
