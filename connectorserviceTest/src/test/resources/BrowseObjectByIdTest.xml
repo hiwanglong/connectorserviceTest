@@ -1,40 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RESULT>
-	<TEST testname="browseContainerById1">  <!--browse root by id-->
+	<TEST testname="setUpBrowseObjectByIdToConnectorId">  <!--browse root by id-->
 		<REQUESTJSON>
 		{
 			"connectorType": "OracleCloudStorage",
-			"connectorName": "browseById1",
-			"description": "browseById1 desc",
-			"visibility": ["import"],
-			"parameters": {
-				"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
-				"username" : "dfisher.Storageadmin",
-				"password" : "welcome1"
+			"connectorName": "setUpBrowseObjectByIdToConnectorId",
+			"description": "setUpBrowseObjectByIdToConnectorId",
+			"visibility": ["import","export"],
+		    "parameters": {
+		        "storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+		        "username" : "dfisher.Storageadmin",
+		        "password" : "welcome1"
 			}
 		}
 		</REQUESTJSON>
-		<STATUS>204</STATUS>		
+		<STATUS>200</STATUS>
+		<RESPONSEJSON>
+		{
+			  "connectorType" : "OracleCloudStorage",
+			  "id" : "%connectorId%",
+			  "connectorName" : "setUpBrowseObjectByIdToConnectorId",
+			  "description" : "setUpBrowseObjectByIdToConnectorId",
+			  "visibility" : [ "import", "export" ],
+			  "parameters" : {
+			    "storageServiceUrl" : "https://storage.oraclecorp.com/v1/Storage-dfisher",
+			    "username" : "dfisher.Storageadmin"
+			  }
+			}
+		</RESPONSEJSON>		
 	</TEST>		
-	<TEST testname="browseContainerById2-connector">  <!--browse container-->
+	<TEST testname="setUpBrowseObjectByIdToAuth">  <!--browse container-->
 		<REQUESTJSON>
 		{
-			"connectorType": "OracleCloudStorage",
-			"connectorName": "browseContainerById2",
-			"description": "browseContainerById2 desc",
-			"visibility": ["import"],
-			"parameters": {
-				"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
-				"username" : "dfisher.Storageadmin",
-				"password" : "welcome1"
-			}
+    		"userAuthParameters": {
+       		 "username": "dfisher.Storageadmin",
+       		 "password": "welcome1"
+		    }
 		}
-		</REQUESTJSON>
-	</TEST>	
-	<TEST testname="testBrowseObjectById1">
-		<REQUESTJSON>
 		</REQUESTJSON>
 		<STATUS>200</STATUS>
 		<RESPONSEJSON></RESPONSEJSON>
+	</TEST>	
+	<TEST testname="testBrowseObjectById1">
+		<CONTAINERID>YnJvd3NlQXBpVGVzdERhdGEvb2JqMw==</CONTAINERID>
+		<REQUESTJSON>
+		</REQUESTJSON>
+		<STATUS>200</STATUS>
+		<RESPONSEJSON>
+		{
+			  "name" : "obj3",
+			  "id" : "YnJvd3NlQXBpVGVzdERhdGEvb2JqMw==",
+			  "navigable" : false,
+			  "nativePath" : "browseApiTestData/obj3",
+			  "attributes" : {
+			    "fileSize" : "0",
+			    "lastModifiedDate" : "Tue Mar 29 04:05:36 EDT 2016"
+			  },
+			  "links" : [ {
+			    "rel" : "self",
+			    "href" : "http://busgf1515.us.oracle.com:7205/bdd.connectorservice/v1/connectors/"%connectorId%"/containers/YnJvd3NlQXBpVGVzdERhdGEvb2JqMw=="
+			  } ],
+			  "parentContainer" : {
+			    "name" : "browseApiTestData",
+			    "id" : "YnJvd3NlQXBpVGVzdERhdGE=",
+			    "navigable" : true,
+			    "nativePath" : "browseApiTestData",
+			    "links" : [ {
+			      "rel" : "self",
+			      "href" : "http://busgf1515.us.oracle.com:7205/bdd.connectorservice/v1/connectors/"%connectorId%"/containers/YnJvd3NlQXBpVGVzdERhdGE="
+			    } ]
+			  },
+			  "hasMore" : false,
+			  "totalResults" : 0
+		}
+		</RESPONSEJSON>
 	</TEST>
+	<TEST testname="testBrowseObjectById2">
+		<CONTAINERID>YnJvd3NlQXBpVGVzdERhdGEvb2JqMS5jc3Y=</CONTAINERID>
+		<REQUESTJSON>
+		</REQUESTJSON>
+		<STATUS>200</STATUS>
+		<RESPONSEJSON>
+		{
+			  "name" : "obj1.csv",
+			  "id" : "YnJvd3NlQXBpVGVzdERhdGEvb2JqMS5jc3Y=",
+			  "navigable" : false,
+			  "nativePath" : "browseApiTestData/obj1.csv",
+			  "attributes" : {
+			    "fileSize" : "51",
+			    "lastModifiedDate" : "Tue Mar 29 04:03:51 EDT 2016"
+			  },
+			  "links" : [ {
+			    "rel" : "self",
+			    "href" : "http://busgf1515.us.oracle.com:7205/bdd.connectorservice/v1/connectors/"%connectorId%"/containers/YnJvd3NlQXBpVGVzdERhdGEvb2JqMS5jc3Y="
+			  } ],
+			  "parentContainer" : {
+			    "name" : "browseApiTestData",
+			    "id" : "YnJvd3NlQXBpVGVzdERhdGE=",
+			    "navigable" : true,
+			    "nativePath" : "browseApiTestData",
+			    "links" : [ {
+			      "rel" : "self",
+			      "href" : "http://busgf1515.us.oracle.com:7205/bdd.connectorservice/v1/connectors/"%connectorId%"/containers/YnJvd3NlQXBpVGVzdERhdGE="
+			    } ]
+			  },
+			  "hasMore" : false,
+			  "totalResults" : 0
+		}
+		</RESPONSEJSON>
+	</TEST>
+
 </RESULT>

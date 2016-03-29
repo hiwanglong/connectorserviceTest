@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 
 import com.endeca.microservices.connector.util.CommonUtil;
 import com.endeca.microservices.connector.util.Constants;
+import com.endeca.microservices.connector.util.GetResourceXML;
 import com.sun.jersey.api.client.Client;
 
 public class BrowseObjectById {
@@ -16,7 +17,7 @@ public class BrowseObjectById {
 	static Client client = Client.create();
 	static String testFile="BrowseObjectByIdTest.xml";
 	static CommonUtil util=new CommonUtil(client, testFile, PostConnectorsAuthTest.class);
-	static String reqUrl, connectorId, token;
+	static String reqUrl, connectorId, token, browseUrl;
 	String testName;
 	Map<String, String> response;
 	
@@ -29,8 +30,11 @@ public class BrowseObjectById {
 	    //get connector id
 		connectorId=util.getConnectorId(connectorRes).get(0);
 				
-		//update connectorAuth reqUrl	
+		//update reqUrl	with connectorId
 		reqUrl=Constants.connectorAuth.replace("{connectorId}",connectorId);
+		
+		//update browseUrl with connectorId
+		browseUrl=Constants.browseByContainerId.replace("{connectorId}",connectorId);
 		
 		//post auth
 		String authRes=util.executePost(reqUrl, "setUpBrowseObjectByIdToAuth").get("jsonRes");
@@ -49,17 +53,48 @@ public class BrowseObjectById {
 	}
 	
 	/**
-	 * check request with valid body to post, status:200
+	 * check response with filesize=0 status:200
 	 */
 	@Test(groups = {"Functional"})
 	public void testBrowseObjectById1() {
 		
 		testName="testBrowseObjectById1";
 		
+		//update browserUrl with containerId
+		String containerId=GetResourceXML.parseXml(testFile,testName).get("CONTAINERID");
+		browseUrl=browseUrl.replace("{containerId}", containerId);
+		
 		//browse(get) object request
-		response=util.executeGet(reqUrl, token);
+		response=util.executeGet(browseUrl, token);
 		
 		//check status
 		util.checkStatus(response, testName);
+		
+		//check response
+		//util.checkResponse(response, testName);
 	}
+	
+	/**
+	 * check response with filesize!=0 status:200
+	 */
+	@Test(groups = {"Functional"})
+	public void testBrowseObjectById2() {
+		
+		testName="testBrowseObjectById2";
+		
+		//update browserUrl with containerId
+		String containerId=GetResourceXML.parseXml(testFile,testName).get("CONTAINERID");
+		browseUrl=browseUrl.replace("{containerId}", containerId);
+		
+		//browse(get) object request
+		response=util.executeGet(browseUrl, token);
+		
+		//check status
+		util.checkStatus(response, testName);
+		
+		//check response
+		//util.checkResponse(response, testName);
+	}
+	
+
 }

@@ -29,7 +29,7 @@ public final class Constants {
 	
 	
 	public static final String connectorAuth=connectorId+"/auth";
-	public static final String browseByContainerId=connectorId+"/containers/{containerId}?";
+	public static final String browseByContainerId=connectorId+"/containers/{containerId}";
 	public static final String browseByPath=connectorId+"/containers?searchByPath={URL-encoded path}";
 	public static final String previewData=connectorId+"/previewData";
 	
