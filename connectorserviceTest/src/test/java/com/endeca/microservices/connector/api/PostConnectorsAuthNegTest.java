@@ -66,7 +66,7 @@ public class PostConnectorsAuthNegTest {
 	/**
 	 * check request with body NULL to post, err:00105
 	 */
-	@Test(groups = {"Negative"})
+	@Test(groups = {"Negative"}, enabled = false)
 	public void testPostConnectorsAuthNeg2() { 
 		
 		testName="testPostConnectorsAuthNeg2";
@@ -84,7 +84,7 @@ public class PostConnectorsAuthNegTest {
 	/**
 	 * check request with extra nodes to post, err:00105
 	 */
-	@Test(groups = {"Negative"})
+	@Test(groups = {"Negative"}, enabled = false)
 	public void testPostConnectorsAuthNeg3() { 
 		
 		testName="testPostConnectorsAuthNeg3";
@@ -102,7 +102,7 @@ public class PostConnectorsAuthNegTest {
 	/**
 	 * check request with extra parameters to post, err:00105
 	 */
-	@Test(groups = {"Negative"})
+	@Test(groups = {"Negative"}, enabled = false)
 	public void testPostConnectorsAuthNeg4() { 
 		
 		testName="testPostConnectorsAuthNeg4";

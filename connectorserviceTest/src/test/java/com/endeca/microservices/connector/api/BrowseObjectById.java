@@ -78,6 +78,7 @@ public class BrowseObjectById {
 	 * check response with filesize!=0 status:200
 	 */
 	@Test(groups = {"Functional"})
+    //@Test(enabled = false)
 	public void testBrowseObjectById2() {
 		
 		testName="testBrowseObjectById2";
