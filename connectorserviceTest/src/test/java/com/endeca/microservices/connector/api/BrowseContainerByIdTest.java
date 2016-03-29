@@ -16,7 +16,11 @@ public class BrowseContainerByIdTest {
 	private String reqUrl = Constants.connectors;
 	private String testName;
 	private Map<String, String> responseMap ;
+	private String connectorId;
+	private String containerId;
+	private String token;
 	private String xmlName = "BrowseContainerByIdTest.xml";
+	
 	
 	CommonUtil comUtil = new CommonUtil(client, xmlName, BrowseContainerByIdTest.class);
 	
@@ -30,13 +34,22 @@ public class BrowseContainerByIdTest {
 	 * 
 	 */
 	@Test(groups = {"Functional"})
-	public void testBrowseContainerById2() {
-		testName = "browseContainerById2-connector";
-		
+	public void testBrowseContainerById2() {	
 		//post connector		
+		testName = "browseContainerById2-connector";	
+		String connectorRes = comUtil.executePost(reqUrl,testName).get("jsonRes");						
+		connectorId = comUtil.getConnectorId(connectorRes).get(0);	//get connector id
+		
+		//post auth	
+		testName = "browseContainerById2-auth";		
+		reqUrl = Constants.connectorAuth.replace("{connectorId}",connectorId);	//replace connectorId
 		responseMap = comUtil.executePost(reqUrl,testName);
+		token = comUtil.getToken(responseMap.get("jsonRes"));
+		System.out.println(token);
 		
-		
+		//browse
+		containerId = "YnJvd3NlQXBpVGVzdERhdGE";
+		reqUrl = Constants.browseByContainerId.replace("{connectorId}",connectorId).replace("{containerId}",containerId);
 		
 	}
 }
