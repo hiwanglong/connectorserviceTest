@@ -194,7 +194,7 @@ public class CommonUtil {
 		if(expectedResponse.contains("%connectorId%")){
 			expectedResponse = expectedResponse.replace("%connectorId%", getConnectorId(output).get(0));
 		}
-		System.out.println(output);
+		
 		logger.debug(testName);
 		logger.debug("Actual Response:=====================================================");
 		logger.debug(output);
@@ -241,6 +241,36 @@ public class CommonUtil {
 		
 	}
 	
+	/**
+	 * check response with REGEX
+	 * @param responseMap
+	 * @param testName
+	 */
+	public void checkResponseRegex(Map<String,String> responseMap,String testName){
+		xmlMap = GetResourceXML.parseXml(xmlName,testName);
+		String output = GetResourceXML.trimAllSpaces(responseMap.get("jsonRes"));
+		String expectedResponse = GetResourceXML.trimAllSpaces(xmlMap.get("RESPONSEJSON"));	
+
+		logger.debug(testName);
+		logger.debug("Actual Response:=====================================================");
+		logger.debug(output);
+		logger.debug("=====================================================================");
+				
+		assertTrue(testName+" response and expectation are different",output.matches(expectedResponse));
+		
+	}
+	
+	/**
+	 * get element of xml
+	 * @param testName	String
+	 * @param nodeName	String	xml node
+	 * @return
+	 */
+	public String getXmlNode(String testName,String nodeName){
+		xmlMap = GetResourceXML.parseXml(xmlName,testName);
+		String nodeElement = xmlMap.get(nodeName);	
+		return nodeElement;
+	}
 
 	/**
 	 * get connectors' id from response

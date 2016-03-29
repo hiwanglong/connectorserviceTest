@@ -54,16 +54,15 @@ public class BrowseContainerByIdTest {
 		responseMap = comUtil.executeGet(reqUrl, token);
 		
 		//String output = GetResourceXML.trimAllSpaces(responseMap.get("jsonRes")).replace("&", "");
-		String output = GetResourceXML.trimAllSpaces(responseMap.get("jsonRes"));
-		System.out.println("----------------------------");
-		System.out.println(output);
-		
-		Map<String, String>  xmlMap = GetResourceXML.parseXml(xmlName,"browseContainerById2-browse");
-		String expectedResponse = GetResourceXML.trimAllSpaces(xmlMap.get("RESPONSE"));
-		System.out.println(expectedResponse);
-		//System.out.println(output.matches("\\{\"name\":\"browseApiTestData\",\"id\":.*"));
-		System.out.println(output.matches(expectedResponse));
-		//System.out.println(output.equals(expectedResponse));
+//		String output = responseMap.get("jsonRes");
+//		System.out.println("----------------------------");
+//		System.out.println(output);
+//		
+//		Map<String, String>  xmlMap = GetResourceXML.parseXml(xmlName,"browseContainerById2-browse");
+//		String expectedResponse = xmlMap.get("RESPONSE");
+//		System.out.println(expectedResponse);
+//		System.out.println(output.matches(expectedResponse));
+		comUtil.checkResponseRegex(responseMap, "browseContainerById2-browse");
 		
 	}
 	
