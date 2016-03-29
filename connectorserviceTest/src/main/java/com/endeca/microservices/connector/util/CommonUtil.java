@@ -105,6 +105,25 @@ public class CommonUtil {
 	
 	
 	/**
+	 * execute GET API
+	 * @param requestUrl	String
+	 * @param token		String
+	 * @return Map<String, String> responseMap status,jsonRes
+	 */
+	public Map<String, String> executeGet(String requestUrl,String token){		
+		
+		webRes = client.resource(requestUrl);
+		logger.info("execute GET "+requestUrl);
+		
+		//execute GET
+		response = webRes.header("X-Connector-Auth-Token", token).acceptLanguage(language).get(ClientResponse.class);
+		//response = webRes.acceptLanguage(language).get(ClientResponse.class);
+	
+		return getResponseMap(response);
+	}
+	
+	
+	/**
 	 * execute DELETE API
 	 * @param requestUrl	String
 	 * @return Map<String, String> responseMap status,jsonRes
