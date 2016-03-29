@@ -65,6 +65,11 @@ public class CommonUtil {
 		return getResponseMap(response);
 	}
 	
+	public Map<String, String> executePost(String requestUrl,String testName,String token){		
+		
+		return null;
+	}
+	
 	/**
 	 * execute PUT API
 	 * @param requestUrl	String
