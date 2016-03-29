@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RESULT>
+	<TEST testname="browseContainerById1">  <!--browse root by id-->
+		<REQUESTJSON>
+		{
+			"connectorType": "OracleCloudStorage",
+			"connectorName": "browseById1",
+			"description": "browseById1 desc",
+			"visibility": ["import"],
+			"parameters": {
+				"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+				"username" : "dfisher.Storageadmin",
+				"password" : "welcome1"
+			}
+		}
+		</REQUESTJSON>
+		<STATUS>204</STATUS>		
+	</TEST>		
+	<TEST testname="browseContainerById2-connector">  <!--browse container-->
+		<REQUESTJSON>
+		{
+			"connectorType": "OracleCloudStorage",
+			"connectorName": "browseContainerById2",
+			"description": "browseContainerById2 desc",
+			"visibility": ["import"],
+			"parameters": {
+				"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+				"username" : "dfisher.Storageadmin",
+				"password" : "welcome1"
+			}
+		}
+		</REQUESTJSON>
+	</TEST>	
+	<TEST testname="testBrowseObjectById1">
+		<REQUESTJSON>
+		</REQUESTJSON>
+		<STATUS>200</STATUS>
+		<RESPONSEJSON></RESPONSEJSON>
+	</TEST>
+</RESULT>
