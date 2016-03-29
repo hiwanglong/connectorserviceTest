@@ -105,6 +105,25 @@ public class CommonUtil {
 	
 	
 	/**
+	 * execute GET API
+	 * @param requestUrl	String
+	 * @param token		String
+	 * @return Map<String, String> responseMap status,jsonRes
+	 */
+	public Map<String, String> executeGet(String requestUrl,String token){		
+		
+		webRes = client.resource(requestUrl);
+		logger.info("execute GET "+requestUrl);
+		
+		//execute GET
+		response = webRes.header("X-Connector-Auth-Token", token).acceptLanguage(language).get(ClientResponse.class);
+		//response = webRes.acceptLanguage(language).get(ClientResponse.class);
+	
+		return getResponseMap(response);
+	}
+	
+	
+	/**
 	 * execute DELETE API
 	 * @param requestUrl	String
 	 * @return Map<String, String> responseMap status,jsonRes
@@ -171,11 +190,11 @@ public class CommonUtil {
 	public void checkResponse(Map<String,String> responseMap,String testName){
 		xmlMap = GetResourceXML.parseXml(xmlName,testName);
 		String output = responseMap.get("jsonRes");
-		String expectedResponse = GetResourceXML.trimAllSpaces(xmlMap.get("RESPONSEJSON"));			
+		String expectedResponse = GetResourceXML.trimAllSpaces(xmlMap.get("RESPONSEJSON"));	
 		if(expectedResponse.contains("%connectorId%")){
 			expectedResponse = expectedResponse.replace("%connectorId%", getConnectorId(output).get(0));
 		}
-		
+		System.out.println(output);
 		logger.debug(testName);
 		logger.debug("Actual Response:=====================================================");
 		logger.debug(output);
@@ -185,6 +204,7 @@ public class CommonUtil {
 		
 	} 
 	
+
 	/**
 	 * check response status with STATUS of xml
 	 * @param responseMap	Map<String,String>
