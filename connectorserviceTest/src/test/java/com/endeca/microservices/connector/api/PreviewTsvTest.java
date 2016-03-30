@@ -2,6 +2,7 @@ package com.endeca.microservices.connector.api;
 
 import java.util.Map;
 
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -11,54 +12,120 @@ import com.endeca.microservices.connector.util.Constants;
 import com.sun.jersey.api.client.Client;
 
 public class PreviewTsvTest {
-	private static Client client = Client.create();;
-	private String reqUrl = Constants.connectors;
-	private String testName;
-	private Map<String, String> responseMap ;
-	private String connectorId;
-	private String containerId;
-	private String token;
-	private String xmlName = "PreviewTsvTest.xml";
-	
-	
-	CommonUtil comUtil = new CommonUtil(client, xmlName, BrowseContainerByIdTest.class);
+
+	static Client client = Client.create();
+	static String testFile="PreviewTsvTest.xml";
+	static CommonUtil util=new CommonUtil(client, testFile, PostConnectorsAuthTest.class);
+	static String reqUrl, connectorId, token, previewUrl;
+	String testName;
+	Map<String, String> response;
 	
 	@BeforeClass(alwaysRun = true)
 	public static void setUpBeforeClass() throws Exception {
 		
+		//post connector 
+		String connectorRes=util.executePost(Constants.connectors, "setUpPreviewTsvToConnectorId").get("jsonRes");
+						
+	    //get connector id
+		connectorId=util.getConnectorId(connectorRes).get(0);
+				
+		//update reqUrl	with connectorId
+		reqUrl=Constants.connectorAuth.replace("{connectorId}",connectorId);
+		
+		//update browseUrl with connectorId
+		previewUrl=Constants.previewData.replace("{connectorId}",connectorId);
+		
+		//post auth
+		String authRes=util.executePost(reqUrl, "setUpPreviewTsvToAuth").get("jsonRes");
+		
+		//get token
+		token=util.getToken(authRes);	
+		
 		
 	}
 	
-	@AfterMethod(alwaysRun = true)
-	public void tearDown() throws Exception {
-		//delete connector by id after each test
-		comUtil.executeDelete(Constants.connectors+"/"+connectorId);	
+	@AfterClass(alwaysRun = true)
+	public static void tearDownAfterClass() throws Exception {
+		
+		//delete connector
+		String delUrl=Constants.connectorId.replace("{connectorId}",connectorId);
+		util.executeDelete(delUrl);
+		
 	}
 	
 	/**
-	 * preview csv file with containerId
+	 * preview tsv file with containerId only request
 	 */
 	@Test(groups = {"Functional"})
-	public void testProviewCsvByContainerId1() {	
-		//post connector		
-		testName = "previewCsv-connector";	
-		responseMap = comUtil.executePost(reqUrl,testName);	//create connector and get response					
-		connectorId = comUtil.getConnectorId(responseMap.get("jsonRes")).get(0);	//get connector id
+	public void testPreviewTsv1() {	
 		
-		//post auth	
-		testName = "proviewCsvByContainerId1-auth";		
-		reqUrl = Constants.connectorAuth.replace("{connectorId}",connectorId);	//replace connectorId to get url
-		responseMap = comUtil.executePost(reqUrl,testName);				//post auth
-		token = comUtil.getToken(responseMap.get("jsonRes"));			//get token
+		testName="testPreviewTsv1";
 		
-		//proview
-		testName = "proviewCsvByContainerId1-proview";
-		containerId = comUtil.getXmlNode(testName, "CONTAINERID");		//get containerId
-		reqUrl = Constants.browseByContainerId.replace("{connectorId}",connectorId).replace("{containerId}",containerId);	//replace connectorId & containerId to get url
-		responseMap = comUtil.executeGet(reqUrl, token);				//execute browse
+		//post request with a containerId
+		response=util.executePost(previewUrl, testName, token);
 		
-		comUtil.checkStatus(responseMap, testName);
-		comUtil.checkResponseRegex(responseMap, "browseContainerById2-browse");			//check response with REGEX
+		//check status
+		util.checkStatus(response, testName);
+				
+		//check response
+		util.checkResponse(response, testName);
+		
+	}
+	
+	/**
+	 * preview tsv file with containerId + topNRow=1 request
+	 */
+	@Test(groups = {"Functional"})
+	public void testPreviewTsv2() {	
+		
+		testName="testPreviewTsv2";
+		
+		//post request with a containerId
+		response=util.executePost(previewUrl, testName, token);
+		
+		//check status
+		util.checkStatus(response, testName);
+				
+		//check response node
+		util.checkResponseNode(response, testName, "DATANODE");
+		
+	}
+	
+	/**
+	 * preview tsv file with containerId + sql=1 column request
+	 */
+	@Test(groups = {"Functional"})
+	public void testPreviewTsv3() {	
+		
+		testName="testPreviewTsv3";
+		
+		//post request with a containerId
+		response=util.executePost(previewUrl, testName, token);
+		
+		//check status
+		util.checkStatus(response, testName);
+				
+		//check response node
+		util.checkResponseNode(response, testName, "DATANODE");
+		
+	}
+	
+	/**
+	 * preview tsv file with containerId + parsingOption:herder=false request
+	 */
+	@Test(groups = {"Functional"})
+	public void testPreviewTsv4() {	
+		
+		testName="testPreviewTsv3";
+		
+		//post request with a containerId
+		response=util.executePost(previewUrl, testName, token);
+		
+		//check status
+		util.checkStatus(response, testName);
+				
+		//check response node
+		util.checkResponseNode(response, testName, "DATANODE");
 		
 	}
 }

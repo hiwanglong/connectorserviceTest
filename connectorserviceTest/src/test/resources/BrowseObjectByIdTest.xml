@@ -14,19 +14,8 @@
 			}
 		}
 		</REQUESTJSON>
-		<STATUS>200</STATUS>
+		<STATUS></STATUS>
 		<RESPONSEJSON>
-		{
-			  "connectorType" : "OracleCloudStorage",
-			  "id" : "%connectorId%",
-			  "connectorName" : "setUpBrowseObjectByIdToConnectorId",
-			  "description" : "setUpBrowseObjectByIdToConnectorId",
-			  "visibility" : [ "import", "export" ],
-			  "parameters" : {
-			    "storageServiceUrl" : "https://storage.oraclecorp.com/v1/Storage-dfisher",
-			    "username" : "dfisher.Storageadmin"
-			  }
-			}
 		</RESPONSEJSON>		
 	</TEST>		
 	<TEST testname="setUpBrowseObjectByIdToAuth">  <!--browse container-->
@@ -38,7 +27,7 @@
 		    }
 		}
 		</REQUESTJSON>
-		<STATUS>200</STATUS>
+		<STATUS></STATUS>
 		<RESPONSEJSON></RESPONSEJSON>
 	</TEST>	
 	<TEST testname="testBrowseObjectById1">
