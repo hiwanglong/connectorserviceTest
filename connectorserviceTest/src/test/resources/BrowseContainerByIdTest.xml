@@ -41,8 +41,6 @@
 			    }
 			}
 		</REQUESTJSON>
-		<STATUS>200</STATUS>
-		<RESPONSEJSON></RESPONSEJSON>	
 	</TEST>	
 	<TEST testname="browseContainerById2-browse">
 		<CONTAINERID>YnJvd3NlQXBpVGVzdERhdGE=</CONTAINERID>

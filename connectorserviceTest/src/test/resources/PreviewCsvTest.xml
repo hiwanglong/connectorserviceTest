@@ -5,9 +5,9 @@
 		<REQUESTJSON>
 		{
 			"connectorType": "OracleCloudStorage",
-			"connectorName": "browseContainerById2",
-			"description": "browseContainerById2 desc",
-			"visibility": ["import"],
+			"connectorName": "previewCsv-connector1",
+			"description": "previewCsv-connector1 desc",
+			"visibility": ["import","export"],
 			"parameters": {
 				"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
 				"username" : "dfisher.Storageadmin",
@@ -25,14 +25,118 @@
 			    }
 			}
 		</REQUESTJSON>
-		<STATUS>200</STATUS>
-		<RESPONSEJSON></RESPONSEJSON>	
 	</TEST>	
 	<TEST testname="previewCsvByContainerId1">
-		<CONTAINERID>YnJvd3NlQXBpVGVzdERhdGE=</CONTAINERID>
+		<REQUESTJSON>
+			{
+			    "containerId": "cHJldmlld0FwaVRlc3REYXRhL2Nzdk9iajEuY3N2"
+			}
+		</REQUESTJSON>
 		<STATUS>200</STATUS>		
 		<RESPONSEJSON>
-			
+			\{
+			  "containerId": "cHJldmlld0FwaVRlc3REYXRhL2Nzdk9iajEuY3N2",
+			  "tableName": "browsecontainerbyid2_csvobj1_csv",
+			  "sql": "select header1, header2, header3, header4, header5 from browsecontainerbyid2_csvobj1_csv",
+			  "schema": \{
+			    "fields": \[
+			      \{
+			        "name": "header1",
+			        "type": "string",
+			        "nullable": true,
+			        "metadata": \{}
+			      },
+			      \{
+			        "name": "header2",
+			        "type": "int",
+			        "nullable": true,
+			        "metadata": \{}
+			      },
+			      \{
+			        "name": "header3",
+			        "type": "double",
+			        "nullable": true,
+			        "metadata": \{}
+			      },
+			      \{
+			        "name": "header4",
+			        "type": "double",
+			        "nullable": true,
+			        "metadata": \{}
+			      },
+			      \{
+			        "name": "header5",
+			        "type": "string",
+			        "nullable": true,
+			        "metadata": \{}
+			      }
+			    ]
+			  },
+			  "data": \[
+			    \{
+			      "header5": "0.236*100",
+			      "header4": 12.234,
+			      "header3": 1,
+			      "header2": 0,
+			      "header1": "a0"
+			    },
+			    \{
+			      "header5": "0.05+0.01",
+			      "header4": 1e+31,
+			      "header3": 2,
+			      "header2": 1,
+			      "header1": "a1"
+			    },
+			    \{
+			      "header5": "10/3",
+			      "header4": 0.236,
+			      "header3": 6.3,
+			      "header2": -2,
+			      "header1": "a2"
+			    },
+			    \{
+			      "header5": "-0.44",
+			      "header4": 0.33333,
+			      "header3": -11,
+			      "header2": 11,
+			      "header1": "a11"
+			    }
+			  ],
+			  "parsingOptions": \{
+			    "quote": "\"",
+			    "delimiter": ",",
+			    "charset": "UTF-8",
+			    "skipNRow": "0",
+			    "header": "true",
+			    "contentFormat": "DELIMITED_CSV",
+			    "parsingMode": "PERMISSIVE",
+			    "escape": "\\",
+			    "topNRow": "50"
+			  },
+			  "availableParsingOptions": \[
+			    \{
+			      "id": "DELIMITED"
+			    },
+			    \{
+			      "id": "AVRO"
+			    },
+			    \{
+			      "id": "PARQUET"
+			    },
+			    \{
+			      "id": "JSON"
+			    },
+			    \{
+			      "id": "APACHE_LOG"
+			    },
+			    \{
+			      "id": "ODL_LOG"
+			    },
+			    \{
+			      "id": "REGEX"
+			    }
+			  ]
+			}
 		</RESPONSEJSON>	
 	</TEST>	
 </RESULT>
