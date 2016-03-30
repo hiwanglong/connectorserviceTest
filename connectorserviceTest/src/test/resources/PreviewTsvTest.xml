@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RESULT>
+	<TEST testname="setUpPreviewTsvToConnectorId">  <!--browse root by id-->
+		<REQUESTJSON>
+		{
+			"connectorType": "OracleCloudStorage",
+			"connectorName": "setUpPreviewObjectByIdToConnectorId",
+			"description": "setUpPreviewObjectByIdToConnectorId",
+			"visibility": ["import","export"],
+		    "parameters": {
+		        "storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+		        "username" : "dfisher.Storageadmin",
+		        "password" : "welcome1"
+			}
+		}
+		</REQUESTJSON>
+		<STATUS></STATUS>
+		<RESPONSEJSON>
+		</RESPONSEJSON>		
+	</TEST>		
+	<TEST testname="setUpPreviewTsvToAuth">  <!--browse container-->
+		<REQUESTJSON>
+		{
+    		"userAuthParameters": {
+       		 "username": "dfisher.Storageadmin",
+       		 "password": "welcome1"
+		    }
+		}
+		</REQUESTJSON>
+		<STATUS></STATUS>
+		<RESPONSEJSON></RESPONSEJSON>
+	</TEST>	
+	<TEST testname="testPreviewTsv1">
+		<CONTAINERID>cHJldmlld0FwaVRlc3REYXRhL3Rzdk9iajEudHN2</CONTAINERID>
+		<REQUESTJSON>
+		{
+   		 "containerId": "cHJldmlld0FwaVRlc3REYXRhL3Rzdk9iajEudHN2"
+		}
+		</REQUESTJSON>
+		<STATUS>200</STATUS>
+		<RESPONSEJSON>
+		{
+		  "containerId": "cHJldmlld0FwaVRlc3REYXRhL3Rzdk9iajEudHN2",
+		  "tableName": "setuppreviewobjectbyidtoconnectorid_tsvobj1_tsv",
+		  "sql": "select tsv1, tsv2, tsv3 from setuppreviewobjectbyidtoconnectorid_tsvobj1_tsv",
+		  "schema": {
+		    "fields": [
+		      {
+		        "name": "tsv1",
+		        "type": "string",
+		        "nullable": true,
+		        "metadata": {}
+		      },
+		      {
+		        "name": "tsv2",
+		        "type": "string",
+		        "nullable": true,
+		        "metadata": {}
+		      },
+		      {
+		        "name": "tsv3",
+		        "type": "string",
+		        "nullable": true,
+		        "metadata": {}
+		      }
+		    ]
+		  },
+		  "data": [
+		    {
+		      "tsv3": "c1",
+		      "tsv2": "b1",
+		      "tsv1": "a1"
+		    },
+		    {
+		      "tsv3": "c2",
+		      "tsv2": "b2",
+		      "tsv1": "a2"
+		    },
+		    {
+		      "tsv3": "c3",
+		      "tsv2": "b3",
+		      "tsv1": "a3"
+		    }
+		  ],
+		  "parsingOptions": {
+		    "quote": "\"",
+		    "delimiter": "\t",
+		    "charset": "UTF-8",
+		    "skipNRow": "0",
+		    "header": "true",
+		    "contentFormat": "DELIMITED_TSV",
+		    "parsingMode": "PERMISSIVE",
+		    "escape": "\\",
+		    "topNRow": "50"
+		  },
+		  "availableParsingOptions": [
+		    {
+		      "id": "DELIMITED"
+		    },
+		    {
+		      "id": "AVRO"
+		    },
+		    {
+		      "id": "PARQUET"
+		    },
+		    {
+		      "id": "JSON"
+		    },
+		    {
+		      "id": "APACHE_LOG"
+		    },
+		    {
+		      "id": "ODL_LOG"
+		    },
+		    {
+		      "id": "REGEX"
+		    }
+		  ]
+		}
+		</RESPONSEJSON>
+	</TEST>
+	<TEST testname="testPreviewTsv2">
+		<CONTAINERID>YnJvd3NlQXBpVGVzdERhdGEvb2JqMS5jc3Y=</CONTAINERID>
+		<REQUESTJSON>
+		{
+		    "containerId": "cHJldmlld0FwaVRlc3REYXRhL3Rzdk9iajEudHN2",
+		    "topNRow": "1"
+		}
+		</REQUESTJSON>
+		<STATUS>200</STATUS>
+		<RESPONSEJSON>
+		</RESPONSEJSON>
+		<DATANODE>
+		  "data": [
+		    {
+		      "tsv3": "c1",
+		      "tsv2": "b1",
+		      "tsv1": "a1"
+		    }
+		  ]
+		</DATANODE>
+	</TEST>
+		<TEST testname="testPreviewTsv3">
+		<CONTAINERID>YnJvd3NlQXBpVGVzdERhdGEvb2JqMS5jc3Y=</CONTAINERID>
+		<REQUESTJSON>
+		{
+		    "containerId": "cHJldmlld0FwaVRlc3REYXRhL3Rzdk9iajEudHN2",
+		    "sql": "select tsv1 from setuppreviewobjectbyidtoconnectorid_tsvobj1_tsv"
+		}
+		</REQUESTJSON>
+		<STATUS>200</STATUS>
+		<DATANODE>
+		  "data": [
+		    {
+		      "tsv1": "a1"
+		    },
+		    {
+		      "tsv1": "a2"
+		    },
+		    {
+		      "tsv1": "a3"
+		    }
+		</DATANODE>
+	</TEST>
+
+</RESULT>
