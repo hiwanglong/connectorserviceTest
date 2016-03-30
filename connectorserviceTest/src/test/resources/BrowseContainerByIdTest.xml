@@ -44,6 +44,7 @@
 		<RESPONSEJSON></RESPONSEJSON>	
 	</TEST>	
 	<TEST testname="browseContainerById2-browse">  <!--browse container-->
+		<CONTAINERID>YnJvd3NlQXBpVGVzdERhdGE=</CONTAINERID>
 		<STATUS>200</STATUS>		
 		<RESPONSEJSON>
 			\{
