@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 
 import com.endeca.microservices.connector.util.CommonUtil;
 import com.endeca.microservices.connector.util.Constants;
-import com.endeca.microservices.connector.util.GetResourceXML;
 import com.sun.jersey.api.client.Client;
 
 public class BrowseObjectById {
@@ -61,8 +60,7 @@ public class BrowseObjectById {
 		testName="testBrowseObjectById1";
 		
 		//update browserUrl with containerId
-		String containerId=GetResourceXML.parseXml(testFile,testName).get("CONTAINERID");
-		browseUrl=browseUrl.replace("{containerId}", containerId);
+		browseUrl=browseUrl.replace("{containerId}",util.getXmlNode(testName, "CONTAINERID"));
 		
 		//browse(get) object request
 		response=util.executeGet(browseUrl, token);
@@ -71,7 +69,7 @@ public class BrowseObjectById {
 		util.checkStatus(response, testName);
 		
 		//check response
-		//util.checkResponse(response, testName);
+		util.checkResponseRegex(response, testName);
 	}
 	
 	/**
@@ -83,8 +81,7 @@ public class BrowseObjectById {
 		testName="testBrowseObjectById2";
 		
 		//update browserUrl with containerId
-		String containerId=GetResourceXML.parseXml(testFile,testName).get("CONTAINERID");
-		browseUrl=browseUrl.replace("{containerId}", containerId);
+		browseUrl=browseUrl.replace("{containerId}",util.getXmlNode(testName, "CONTAINERID"));
 		
 		//browse(get) object request
 		response=util.executeGet(browseUrl, token);
@@ -93,7 +90,7 @@ public class BrowseObjectById {
 		util.checkStatus(response, testName);
 		
 		//check response
-		//util.checkResponse(response, testName);
+		util.checkResponseRegex(response, testName);
 	}
 	
 

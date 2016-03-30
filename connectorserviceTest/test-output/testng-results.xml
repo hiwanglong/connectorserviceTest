@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="2" passed="2">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="4174" started-at="2016-03-30T03:17:20Z" finished-at="2016-03-30T03:17:25Z">
+    <groups>
+      <group name="Functional">
+        <method signature="BrowseObjectById.testBrowseObjectById1()[pri:0, instance:com.endeca.microservices.connector.api.BrowseObjectById@133473a]" name="testBrowseObjectById1" class="com.endeca.microservices.connector.api.BrowseObjectById"/>
+        <method signature="BrowseObjectById.testBrowseObjectById2()[pri:0, instance:com.endeca.microservices.connector.api.BrowseObjectById@133473a]" name="testBrowseObjectById2" class="com.endeca.microservices.connector.api.BrowseObjectById"/>
+      </group> <!-- Functional -->
+    </groups>
+    <test name="Default test" duration-ms="4174" started-at="2016-03-30T03:17:20Z" finished-at="2016-03-30T03:17:25Z">
+      <class name="com.endeca.microservices.connector.api.BrowseObjectById">
+        <test-method status="PASS" signature="setUpBeforeClass()[pri:0, instance:com.endeca.microservices.connector.api.BrowseObjectById@133473a]" name="setUpBeforeClass" is-config="true" duration-ms="1301" started-at="2016-03-30T11:17:20Z" finished-at="2016-03-30T11:17:22Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpBeforeClass -->
+        <test-method status="PASS" signature="testBrowseObjectById1()[pri:0, instance:com.endeca.microservices.connector.api.BrowseObjectById@133473a]" name="testBrowseObjectById1" duration-ms="1325" started-at="2016-03-30T11:17:22Z" finished-at="2016-03-30T11:17:23Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testBrowseObjectById1 -->
+        <test-method status="PASS" signature="testBrowseObjectById2()[pri:0, instance:com.endeca.microservices.connector.api.BrowseObjectById@133473a]" name="testBrowseObjectById2" duration-ms="1263" started-at="2016-03-30T11:17:23Z" finished-at="2016-03-30T11:17:24Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testBrowseObjectById2 -->
+        <test-method status="PASS" signature="tearDownAfterClass()[pri:0, instance:com.endeca.microservices.connector.api.BrowseObjectById@133473a]" name="tearDownAfterClass" is-config="true" duration-ms="283" started-at="2016-03-30T11:17:24Z" finished-at="2016-03-30T11:17:25Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownAfterClass -->
+      </class> <!-- com.endeca.microservices.connector.api.BrowseObjectById -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

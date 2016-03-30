@@ -61,7 +61,7 @@ public class PutConnectorsByIdNegTest {
 	/**
 	 * check request body NULL to put, err:00105
 	 */
-	@Test(groups = {"Negative"})
+	@Test(groups = {"Negative"}, enabled = false)
 	public void testPutConnectorsByIdNeg2() { 
 		
 		testName="testPutConnectorsByIdNeg2";
@@ -79,7 +79,7 @@ public class PutConnectorsByIdNegTest {
 	/**
 	 * check request with extra nodes to put, err:00105
 	 */
-	@Test(groups = {"Negative"})
+	@Test(groups = {"Negative"}, enabled = false)
 	public void testPutConnectorsByIdNeg3() {  
 		
 		testName="testPutConnectorsByIdNeg3";
@@ -97,7 +97,7 @@ public class PutConnectorsByIdNegTest {
 	/**
 	 * check request with extra parameter to put, err:00105
 	 */
-	@Test(groups = {"Negative"})
+	@Test(groups = {"Negative"}, enabled = false)
 	public void testPutConnectorsByIdNeg4() {  
 		
 		testName="testPutConnectorsByIdNeg4";
@@ -115,7 +115,7 @@ public class PutConnectorsByIdNegTest {
 	/**
 	 * check request with missing  parameter node to put, err:00108
 	 */
-	@Test(groups = {"Negative"})
+	@Test(groups = {"Negative"}, enabled = false)
 	public void testPutConnectorsByIdNeg5() {  
 		
 		testName="testPutConnectorsByIdNeg5";
@@ -133,7 +133,7 @@ public class PutConnectorsByIdNegTest {
 	/**
 	 * check request with missing  parameter "storageServiceUrl" to put, err:00108
 	 */
-	@Test(groups = {"Negative"})
+	@Test(groups = {"Negative"}, enabled = false)
 	public void testPutConnectorsByIdNeg6() {  
 		
 		testName="testPutConnectorsByIdNeg6";
@@ -187,7 +187,7 @@ public class PutConnectorsByIdNegTest {
 	/**
 	 * check request with "connectorType" changed to put, err:00108
 	 */
-	@Test(groups = {"Negative"})
+	@Test(groups = {"Negative"}, enabled = false)
 	public void testPutConnectorsByIdNeg9() {  
 		
 		testName="testPutConnectorsByIdNeg9";
