@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="com.endeca.microservices.connector.api.PutConnectorsByIdNegTest">
+      <class name="com.endeca.microservices.connector.api.BrowseObjectById">
         <methods>
-          <include name="tearDown"/>
-          <include name="setUp"/>
-          <include name="testPutConnectorsByIdNeg9"/>
+          <include name="testBrowseObjectById1"/>
+          <include name="setUpBeforeClass"/>
+          <include name="tearDownAfterClass"/>
         </methods>
-      </class> <!-- com.endeca.microservices.connector.api.PutConnectorsByIdNegTest -->
+      </class> <!-- com.endeca.microservices.connector.api.BrowseObjectById -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
