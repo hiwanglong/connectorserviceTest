@@ -18,7 +18,6 @@ public class PreviewCsvTest {
 	private static String connectorId;
 	private static String token;
 	private static String xmlName = "PreviewCsvTest.xml";
-	private String containerId;
 	
 	
 	private static CommonUtil comUtil = new CommonUtil(client, xmlName, PreviewCsvTest.class);
