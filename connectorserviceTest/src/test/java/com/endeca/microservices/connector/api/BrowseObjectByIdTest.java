@@ -10,18 +10,18 @@ import com.endeca.microservices.connector.util.CommonUtil;
 import com.endeca.microservices.connector.util.Constants;
 import com.sun.jersey.api.client.Client;
 
-public class BrowseObjectById {
+public class BrowseObjectByIdTest {
 	
 	
 	static Client client = Client.create();
 	static String testFile="BrowseObjectByIdTest.xml";
-	static CommonUtil util=new CommonUtil(client, testFile, PostConnectorsAuthTest.class);
-	static String reqUrl, connectorId, token, browseUrl;
+	static CommonUtil util=new CommonUtil(client, testFile, BrowseObjectByIdTest.class);
+	String reqUrl, connectorId, token, browseUrl;
 	String testName;
 	Map<String, String> response;
 	
 	@BeforeClass(alwaysRun = true)
-	public static void setUpBeforeClass() throws Exception {
+	public void setUpBeforeClass() throws Exception {
 		
 		//post connector 
 		String connectorRes=util.executePost(Constants.connectors, "setUpBrowseObjectByIdToConnectorId").get("jsonRes");
@@ -31,10 +31,7 @@ public class BrowseObjectById {
 				
 		//update reqUrl	with connectorId
 		reqUrl=Constants.connectorAuth.replace("{connectorId}",connectorId);
-		
-		//update browseUrl with connectorId
-		browseUrl=Constants.browseByContainerId.replace("{connectorId}",connectorId);
-		
+			
 		//post auth
 		String authRes=util.executePost(reqUrl, "setUpBrowseObjectByIdToAuth").get("jsonRes");
 		
@@ -43,7 +40,7 @@ public class BrowseObjectById {
 	}
 	
 	@AfterClass(alwaysRun = true)
-	public static void tearDownAfterClass() throws Exception {
+	public void tearDownAfterClass() throws Exception {
 		
 		//delete connector
 		String delUrl=Constants.connectorId.replace("{connectorId}",connectorId);
@@ -60,7 +57,7 @@ public class BrowseObjectById {
 		testName="testBrowseObjectById1";
 		
 		//update browserUrl with containerId
-		browseUrl=browseUrl.replace("{containerId}",util.getXmlNode(testName, "CONTAINERID"));
+		browseUrl=reqUrl.replace("auth","containers/"+util.getXmlNode(testName, "CONTAINERID"));
 		
 		//browse(get) object request
 		response=util.executeGet(browseUrl, token);
@@ -81,8 +78,8 @@ public class BrowseObjectById {
 		testName="testBrowseObjectById2";
 		
 		//update browserUrl with containerId
-		browseUrl=browseUrl.replace("{containerId}",util.getXmlNode(testName, "CONTAINERID"));
-		
+		browseUrl=reqUrl.replace("auth","containers/"+util.getXmlNode(testName, "CONTAINERID"));
+	
 		//browse(get) object request
 		response=util.executeGet(browseUrl, token);
 		
