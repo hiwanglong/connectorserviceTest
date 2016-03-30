@@ -81,25 +81,25 @@
 		</REQUESTJSON>
 		<STATUS>200</STATUS>
 		<RESPONSEJSON>
-		{
+		\{
 			  "name" : "obj1.csv",
 			  "id" : "YnJvd3NlQXBpVGVzdERhdGEvb2JqMS5jc3Y=",
 			  "navigable" : false,
 			  "nativePath" : "browseApiTestData/obj1.csv",
-			  "attributes" : {
+			  "attributes" :\{
 			    "fileSize" : "51",
 			    "lastModifiedDate" : "Tue Mar 29 04:03:51 EDT 2016"
 			  },
-			  "links" : [ {
+			  "links" :\[ \{
 			    "rel" : "self",
 			    "href" : ".*"
 			  } ],
-			  "parentContainer" : {
+			  "parentContainer" : \{
 			    "name" : "browseApiTestData",
 			    "id" : "YnJvd3NlQXBpVGVzdERhdGE=",
 			    "navigable" : true,
 			    "nativePath" : "browseApiTestData",
-			    "links" : [ {
+			    "links" :\[ \{
 			      "rel" : "self",
 			      "href" : ".*"
 			    } ]

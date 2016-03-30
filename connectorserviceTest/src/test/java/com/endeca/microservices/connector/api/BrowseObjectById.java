@@ -69,7 +69,6 @@ public class BrowseObjectById {
 		util.checkStatus(response, testName);
 		
 		//check response
-		//util.checkResponse(response, testName);
 		util.checkResponseRegex(response, testName);
 	}
 	
@@ -91,7 +90,7 @@ public class BrowseObjectById {
 		util.checkStatus(response, testName);
 		
 		//check response
-		//util.checkResponse(response, testName);
+		util.checkResponseRegex(response, testName);
 	}
 	
 
