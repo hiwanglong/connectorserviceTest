@@ -3,15 +3,14 @@ package com.endeca.microservices.connector.api;
 import java.util.Map;
 
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.endeca.microservices.connector.util.CommonUtil;
 import com.endeca.microservices.connector.util.Constants;
 import com.sun.jersey.api.client.Client;
 
-
-public class BrowseContainerByIdTest {
-	
+public class PreviewCsvTest {
 	private static Client client = Client.create();;
 	private String reqUrl = Constants.connectors;
 	private String testName;
@@ -19,10 +18,16 @@ public class BrowseContainerByIdTest {
 	private String connectorId;
 	private String containerId;
 	private String token;
-	private String xmlName = "BrowseContainerByIdTest.xml";
+	private String xmlName = "PreviewCsvTest.xml";
 	
 	
 	CommonUtil comUtil = new CommonUtil(client, xmlName, BrowseContainerByIdTest.class);
+	
+	@BeforeClass(alwaysRun = true)
+	public static void setUpBeforeClass() throws Exception {
+		
+		
+	}
 	
 	@AfterMethod(alwaysRun = true)
 	public void tearDown() throws Exception {
@@ -31,23 +36,23 @@ public class BrowseContainerByIdTest {
 	}
 	
 	/**
-	 * browse folder when connector without white and black list
+	 * preview csv file with containerId
 	 */
 	@Test(groups = {"Functional"})
-	public void testBrowseContainerById2() {	
+	public void testProviewCsvByContainerId1() {	
 		//post connector		
-		testName = "browseContainerById2-connector";	
+		testName = "previewCsv-connector";	
 		responseMap = comUtil.executePost(reqUrl,testName);	//create connector and get response					
 		connectorId = comUtil.getConnectorId(responseMap.get("jsonRes")).get(0);	//get connector id
 		
 		//post auth	
-		testName = "browseContainerById2-auth";		
+		testName = "proviewCsvByContainerId1-auth";		
 		reqUrl = Constants.connectorAuth.replace("{connectorId}",connectorId);	//replace connectorId to get url
 		responseMap = comUtil.executePost(reqUrl,testName);				//post auth
 		token = comUtil.getToken(responseMap.get("jsonRes"));			//get token
 		
-		//browse
-		testName = "browseContainerById2-browse";
+		//proview
+		testName = "proviewCsvByContainerId1-proview";
 		containerId = comUtil.getXmlNode(testName, "CONTAINERID");		//get containerId
 		reqUrl = Constants.browseByContainerId.replace("{connectorId}",connectorId).replace("{containerId}",containerId);	//replace connectorId & containerId to get url
 		responseMap = comUtil.executeGet(reqUrl, token);				//execute browse
@@ -56,5 +61,4 @@ public class BrowseContainerByIdTest {
 		comUtil.checkResponseRegex(responseMap, "browseContainerById2-browse");			//check response with REGEX
 		
 	}
-	
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RESULT>	
+	<!-- preview csv file with containerId -->
+	<TEST testname="previewCsv-connector">
+		<REQUESTJSON>
+		{
+			"connectorType": "OracleCloudStorage",
+			"connectorName": "browseContainerById2",
+			"description": "browseContainerById2 desc",
+			"visibility": ["import"],
+			"parameters": {
+				"storageServiceUrl": "https://storage.oraclecorp.com/v1/Storage-dfisher",
+				"username" : "dfisher.Storageadmin",
+				"password" : "welcome1"
+			}
+		}
+		</REQUESTJSON>
+	</TEST>	
+	<TEST testname="previewCsv-auth">
+		<REQUESTJSON>		
+			{
+			    "userAuthParameters": {
+			        "username": "dfisher.Storageadmin",
+			        "password": "welcome1"
+			    }
+			}
+		</REQUESTJSON>
+		<STATUS>200</STATUS>
+		<RESPONSEJSON></RESPONSEJSON>	
+	</TEST>	
+	<TEST testname="previewCsvByContainerId1">
+		<CONTAINERID>YnJvd3NlQXBpVGVzdERhdGE=</CONTAINERID>
+		<STATUS>200</STATUS>		
+		<RESPONSEJSON>
+			
+		</RESPONSEJSON>	
+	</TEST>	
+</RESULT>

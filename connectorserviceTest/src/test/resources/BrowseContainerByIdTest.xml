@@ -16,7 +16,8 @@
 		</REQUESTJSON>
 		<STATUS>204</STATUS>		
 	</TEST>		
-	<TEST testname="browseContainerById2-connector">  <!--browse container-->
+	<!--browse folder when connector without white and black list-->
+	<TEST testname="browseContainerById2-connector">  
 		<REQUESTJSON>
 		{
 			"connectorType": "OracleCloudStorage",
@@ -31,7 +32,7 @@
 		}
 		</REQUESTJSON>
 	</TEST>	
-	<TEST testname="browseContainerById2-auth">  <!--browse container-->
+	<TEST testname="browseContainerById2-auth">
 		<REQUESTJSON>		
 			{
 			    "userAuthParameters": {
@@ -43,7 +44,7 @@
 		<STATUS>200</STATUS>
 		<RESPONSEJSON></RESPONSEJSON>	
 	</TEST>	
-	<TEST testname="browseContainerById2-browse">  <!--browse container-->
+	<TEST testname="browseContainerById2-browse">
 		<CONTAINERID>YnJvd3NlQXBpVGVzdERhdGE=</CONTAINERID>
 		<STATUS>200</STATUS>		
 		<RESPONSEJSON>
