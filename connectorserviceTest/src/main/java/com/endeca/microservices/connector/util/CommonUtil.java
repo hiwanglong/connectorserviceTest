@@ -65,9 +65,23 @@ public class CommonUtil {
 		return getResponseMap(response);
 	}
 	
+	/**
+	 * execute POST API with token
+	 * @param requestUrl	String
+	 * @param testName	String
+	 * @param token	String
+	 * @return	Map<String, String> responseMap status,jsonRes
+	 */
 	public Map<String, String> executePost(String requestUrl,String testName,String token){		
 		
-		return null;
+		webRes = client.resource(requestUrl);
+		logger.info("execute POST "+requestUrl);
+		
+		xmlMap = GetResourceXML.parseXml(xmlName,testName);
+		String reqJson = xmlMap.get("REQUESTJSON");	
+			
+		response =webRes.header("X-Connector-Auth-Token", token).type("application/json").acceptLanguage(language).post(ClientResponse.class, reqJson);
+		return getResponseMap(response);
 	}
 	
 	/**
@@ -105,7 +119,7 @@ public class CommonUtil {
 	
 	
 	/**
-	 * execute GET API
+	 * execute GET API with token
 	 * @param requestUrl	String
 	 * @param token		String
 	 * @return Map<String, String> responseMap status,jsonRes

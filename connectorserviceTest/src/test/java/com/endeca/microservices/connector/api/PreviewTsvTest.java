@@ -3,7 +3,6 @@ package com.endeca.microservices.connector.api;
 import java.util.Map;
 
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -46,7 +45,7 @@ public class PreviewTsvTest {
 	
 	@AfterClass(alwaysRun = true)
 	public static void tearDownAfterClass() throws Exception {
-		
+
 		//delete connector
 		String delUrl=Constants.connectorId.replace("{connectorId}",connectorId);
 		util.executeDelete(delUrl);
