@@ -212,7 +212,8 @@ public class CommonUtil {
 		logger.debug(testName);
 		logger.debug("Actual Response:=====================================================");
 		logger.debug(output);
-		logger.debug("=====================================================================");
+		logger.debug("ExpectedResponse:=====================================================================");
+		logger.debug(expectedResponse);
 				
 		assertEquals(testName+" response and expectation are different",expectedResponse,GetResourceXML.trimAllSpaces(output));
 		
@@ -249,7 +250,8 @@ public class CommonUtil {
 		logger.debug(testName);
 		logger.debug("Actual Node:=====================================================");
 		logger.debug(output);
-		logger.debug("=====================================================================");
+		logger.debug("Expected Node:=====================================================================");
+		logger.debug(nodeElement);
 		
 		assertTrue(testName+" response doesn't contains "+ nodeElement,output.contains(nodeElement));	
 		
@@ -268,7 +270,8 @@ public class CommonUtil {
 		logger.debug(testName);
 		logger.debug("Actual Response:=====================================================");
 		logger.debug(output);
-		logger.debug("=====================================================================");
+		logger.debug("Expected Response REGEX:=====================================================================");
+		logger.debug(expectedResponse);
 				
 		assertTrue(testName+" response and expectation are different",output.matches(expectedResponse));
 		

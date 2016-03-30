@@ -53,7 +53,7 @@ public class BrowseContainerByIdTest {
 		responseMap = comUtil.executeGet(reqUrl, token);				//execute browse
 		
 		comUtil.checkStatus(responseMap, testName);
-		comUtil.checkResponseRegex(responseMap, "browseContainerById2-browse");			//check response with REGEX
+		comUtil.checkResponseRegex(responseMap, testName);			//check response with REGEX
 		
 	}
 	
