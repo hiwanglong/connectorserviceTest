@@ -14,7 +14,7 @@ public class PreviewTsvTest {
 
 	static Client client = Client.create();
 	static String testFile="PreviewTsvTest.xml";
-	static CommonUtil util=new CommonUtil(client, testFile, PostConnectorsAuthTest.class);
+	static CommonUtil util=new CommonUtil(client, testFile, PreviewTsvTest.class);
 	static String reqUrl, connectorId, token, previewUrl;
 	String testName;
 	Map<String, String> response;
@@ -115,16 +115,16 @@ public class PreviewTsvTest {
 	@Test(groups = {"Functional"})
 	public void testPreviewTsv4() {	
 		
-		testName="testPreviewTsv3";
-		
-		//post request with a containerId
-		response=util.executePost(previewUrl, testName, token);
-		
-		//check status
-		util.checkStatus(response, testName);
-				
-		//check response node
-		util.checkResponseNode(response, testName, "DATANODE");
+//		testName="testPreviewTsv4";
+//		
+//		//post request with a containerId
+//		response=util.executePost(previewUrl, testName, token);
+//		
+//		//check status
+//		util.checkStatus(response, testName);
+//				
+//		//check response node
+//		util.checkResponseNode(response, testName, "DATANODE");
 		
 	}
 }
